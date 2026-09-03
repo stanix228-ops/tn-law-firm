@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Кабинет администратора | Адвокатская контора «T&N»</title>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              navy: '#121D28',
+              navyDark: '#0A1118',
+              slate: '#1E293B',
+              gold: '#C49A45',
+              goldHover: '#D8AD54',
+              goldDark: '#9E792E',
+              goldLight: '#F5EEDB',
+              border: '#E2E8F0'
+            }
+          },
+          fontFamily: {
+            cinzel: ['"Cinzel"', 'serif'],
+            sans: ['"Archivo"', '"Plus Jakarta Sans"', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚖️</text></svg>">
+</head>
+<body class="bg-[#f8fafc] text-slate-800 font-sans min-h-screen flex flex-col antialiased">
+
+  <!-- Admin Top Navigation Bar -->
+  <header class="bg-[#121d28] text-white sticky top-0 z-40 border-b border-amber-500/20 shadow-lg">
+    <div class="max-w-[1650px] mx-auto px-4 sm:px-6 lg:px-10 h-16 flex items-center justify-between">
+      
+      <!-- Brand & Title -->
+      <div class="flex items-center gap-4">
+        <a href="index.html" class="flex items-center gap-3 group">
+          <div class="w-9 h-9 rounded-lg bg-[#c49a45] flex items-center justify-center text-white font-bold text-base shadow">
+            ⚖️
+          </div>
+          <div>
+            <div class="font-cinzel text-lg font-bold leading-none tracking-tight">T&N LAW FIRM</div>
+            <div class="text-[10px] text-amber-400 font-bold tracking-widest uppercase mt-0.5">Панель управления сайтом и CRM</div>
+          </div>
+        </a>
+
+        <span class="hidden md:inline-block h-5 w-px bg-slate-700"></span>
+        <span class="hidden md:inline-block text-xs text-slate-400">г. Алматы • ул. Богенбай батыра, 23а</span>
+      </div>
+
+      <!-- Quick Actions Right -->
+      <div class="flex items-center gap-3">
+        <div id="tg-status-badge" class="hidden sm:inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-800 text-slate-300 text-xs font-semibold border border-white/10">
+          <span class="w-2 h-2 rounded-full bg-slate-400"></span> Telegram
+        </div>
+
+        <button onclick="simulateTestLead()" class="bg-white/10 hover:bg-white/20 text-xs text-amber-300 px-3 py-1.5 rounded-lg font-semibold transition flex items-center gap-1.5 border border-amber-500/30">
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
+          <span>+ Тестовая заявка</span>
+        </button>
+
+        <a href="index.html" target="_blank" class="bg-[#c49a45] hover:bg-amber-600 text-xs text-white font-bold px-3.5 py-1.5 rounded-lg transition flex items-center gap-1.5 shadow">
+          <span>Сайт T&N</span>
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+        </a>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- Admin Sub Navigation Tabs Bar -->
+  <div class="bg-[#0a1118] border-b border-slate-800 sticky top-16 z-30 shadow-md">
+    <div class="max-w-[1650px] mx-auto px-4 sm:px-6 lg:px-10 flex items-center gap-2 overflow-x-auto py-2">
+      <button class="nav-tab-btn active px-4 py-2 rounded-lg text-xs font-bold uppercase tracking-wider transition bg-amber-600 text-white flex items-center gap-2 shrink-0" data-tab="overview">
+        <span>📊</span>
+        <span>Обзор и аналитика</span>
+      </button>
+
+      <button class="nav-tab-btn px-4 py-2 rounded-lg text-xs font-bold uppercase tracking-wider transition text-slate-400 hover:bg-slate-800 hover:text-white flex items-center gap-2 shrink-0" data-tab="leads">
+        <span>👥</span>
+        <span>Заявки и CRM</span>
+        <span id="new-leads-badge" class="bg-red-500 text-white text-[10px] px-1.5 py-0.2 rounded-full font-bold hidden">0</span>
+      </button>
+
+      <button class="nav-tab-btn px-4 py-2 rounded-lg text-xs font-bold uppercase tracking-wider transition text-slate-400 hover:bg-slate-800 hover:text-white flex items-center gap-2 shrink-0" data-tab="articles">
+        <span>📝</span>
+        <span>Статьи и Блог (CMS)</span>
+        <span id="articles-total-count" class="bg-amber-500/20 text-amber-300 text-[10px] px-1.5 py-0.2 rounded font-mono font-bold">5</span>
+      </button>
+
+      <button class="nav-tab-btn px-4 py-2 rounded-lg text-xs font-bold uppercase tracking-wider transition text-slate-400 hover:bg-slate-800 hover:text-white flex items-center gap-2 shrink-0" data-tab="settings">
+        <span>⚙️</span>
+        <span>Управление контентом & Счетчики</span>
+      </button>
+
+      <button class="nav-tab-btn px-4 py-2 rounded-lg text-xs font-bold uppercase tracking-wider transition text-slate-400 hover:bg-slate-800 hover:text-white flex items-center gap-2 shrink-0" data-tab="telegram">
+        <span>🤖</span>
+        <span>Telegram Уведомления</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Main Work Area Container -->
+  <main class="flex-1 max-w-[1650px] w-full mx-auto px-4 sm:px-6 lg:px-10 py-8">
+    
+    <!-- ====================================================================
+         TAB 1: OVERVIEW & KPI ANALYTICS
+         ==================================================================== -->
+    <div id="tab-overview" class="tab-content-panel space-y-8">
+      
+      <!-- Welcome Banner -->
+      <div class="bg-gradient-to-r from-[#121d28] to-[#1c2b3a] rounded-2xl p-8 text-white shadow-xl border border-amber-500/30 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6">
+        <div class="space-y-2">
+          <div class="inline-flex items-center gap-2 px-3 py-1 bg-amber-500/20 text-amber-300 text-xs font-bold uppercase tracking-wider rounded border border-amber-500/30">
+            <span>Адвокатский кабинет</span>
+            <span>•</span>
+            <span>Алматы</span>
+          </div>
+          <h1 class="font-cinzel text-3xl sm:text-4xl font-extrabold text-white">
+            Кабинет управления конторой «T&N»
+          </h1>
+          <p class="text-sm text-slate-300 max-w-2xl leading-relaxed">
+            Управляйте потоком обращений доверителей, публикуйте экспертные статьи в стиле James Newman Law, обновляйте контактные данные и выигрышную статистику конторы.
+          </p>
+        </div>
+
+        <div class="flex flex-wrap items-center gap-3">
+          <button onclick="switchTab('articles')" class="bg-[#c49a45] hover:bg-amber-600 text-white text-xs font-bold uppercase tracking-wider px-5 py-3 rounded-lg shadow transition flex items-center gap-2">
+            <span>📝</span>
+            <span>Написать статью</span>
+          </button>
+          <button onclick="switchTab('leads')" class="bg-white/10 hover:bg-white/20 text-white text-xs font-bold uppercase tracking-wider px-5 py-3 rounded-lg border border-white/20 transition flex items-center gap-2">
+            <span>👥</span>
+            <span>Открыть CRM</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- KPI Metric Cards Grid -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-5">
+        
+        <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm hover:shadow-md transition">
+          <div class="flex items-center justify-between text-slate-500 text-xs uppercase font-bold tracking-wider">
+            <span>Всего обращений</span>
+            <span class="text-lg">📁</span>
+          </div>
+          <div id="kpi-total" class="font-cinzel text-3xl font-extrabold text-slate-900 mt-2">0</div>
+          <div class="text-[11px] text-slate-400 mt-1">За все время</div>
+        </div>
+
+        <div class="bg-white p-5 rounded-xl border-l-4 border-emerald-500 border border-slate-200 shadow-sm hover:shadow-md transition">
+          <div class="flex items-center justify-between text-emerald-800 text-xs uppercase font-bold tracking-wider">
+            <span>Новые заявки</span>
+            <span class="text-lg">🟢</span>
+          </div>
+          <div id="kpi-new" class="font-cinzel text-3xl font-extrabold text-emerald-600 mt-2">0</div>
+          <div class="text-[11px] text-emerald-700 mt-1 font-semibold">Требуют звонка</div>
+        </div>
+
+        <div class="bg-white p-5 rounded-xl border-l-4 border-amber-500 border border-slate-200 shadow-sm hover:shadow-md transition">
+          <div class="flex items-center justify-between text-amber-800 text-xs uppercase font-bold tracking-wider">
+            <span>В работе & Консультации</span>
+            <span class="text-lg">🟡</span>
+          </div>
+          <div id="kpi-progress" class="font-cinzel text-3xl font-extrabold text-amber-600 mt-2">0</div>
+          <div class="text-[11px] text-slate-400 mt-1">Назначена встреча</div>
+        </div>
+
+        <div class="bg-white p-5 rounded-xl border-l-4 border-purple-500 border border-slate-200 shadow-sm hover:shadow-md transition">
+          <div class="flex items-center justify-between text-purple-800 text-xs uppercase font-bold tracking-wider">
+            <span>Договоры заключены</span>
+            <span class="text-lg">🟣</span>
+          </div>
+          <div id="kpi-contract" class="font-cinzel text-3xl font-extrabold text-purple-600 mt-2">0</div>
+          <div class="text-[11px] text-purple-700 mt-1 font-semibold">Успешные клиенты</div>
+        </div>
+
+        <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm hover:shadow-md transition">
+          <div class="flex items-center justify-between text-slate-500 text-xs uppercase font-bold tracking-wider">
+            <span>Конверсия в договор</span>
+            <span class="text-lg">📈</span>
+          </div>
+          <div id="kpi-conversion" class="font-cinzel text-3xl font-extrabold text-[#c49a45] mt-2">0%</div>
+          <div class="text-[11px] text-slate-400 mt-1">Эффективность сайта</div>
+        </div>
+
+      </div>
+
+      <!-- Quick Management Tiles -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        
+        <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm space-y-3">
+          <div class="text-2xl text-amber-500">📝</div>
+          <h3 class="font-cinzel text-lg font-bold text-slate-900">Блог и правовые статьи</h3>
+          <p class="text-xs text-slate-500 leading-relaxed">
+            Публикуйте новые советы и кейсы для доверителей. Статьи сразу появляются в базе знаний на сайте.
+          </p>
+          <button onclick="openArticleEditor()" class="text-xs font-bold text-amber-600 hover:text-amber-700 flex items-center gap-1 pt-1">
+            <span>+ Создать статью прямо сейчас</span>
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+          </button>
+        </div>
+
+        <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm space-y-3">
+          <div class="text-2xl text-emerald-500">⚙️</div>
+          <h3 class="font-cinzel text-lg font-bold text-slate-900">Настройки и статистика</h3>
+          <p class="text-xs text-slate-500 leading-relaxed">
+            Изменяйте телефон дежурного адвоката, адрес офиса на Богенбай батыра и цифры выигранных сумм.
+          </p>
+          <button onclick="switchTab('settings')" class="text-xs font-bold text-emerald-600 hover:text-emerald-700 flex items-center gap-1 pt-1">
+            <span>Перейти к настройкам</span>
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+          </button>
+        </div>
+
+        <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm space-y-3">
+          <div class="text-2xl text-blue-500">🤖</div>
+          <h3 class="font-cinzel text-lg font-bold text-slate-900">Telegram Оповещения</h3>
+          <p class="text-xs text-slate-500 leading-relaxed">
+            Мгновенная отправка заявок в Telegram Тамаре и Нурлану для быстрого реагирования 24/7.
+          </p>
+          <button onclick="switchTab('telegram')" class="text-xs font-bold text-blue-600 hover:text-blue-700 flex items-center gap-1 pt-1">
+            <span>Настроить Telegram бота</span>
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+          </button>
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- ====================================================================
+         TAB 2: LEADS & CRM
+         ==================================================================== -->
+    <div id="tab-leads" class="tab-content-panel hidden space-y-6">
+      
+      <!-- Actions Bar -->
+      <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm flex flex-col md:flex-row items-center justify-between gap-4">
+        
+        <!-- Search -->
+        <div class="w-full md:w-80 relative">
+          <input type="text" id="leads-search" placeholder="Поиск по имени, телефону, услуге..." class="w-full pl-9 pr-4 py-2 border border-slate-300 rounded-lg text-xs focus:outline-none focus:border-amber-500">
+          <svg class="w-4 h-4 text-slate-400 absolute left-3 top-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+        </div>
+
+        <!-- Filter Statuses -->
+        <div class="flex flex-wrap items-center gap-1.5 w-full md:w-auto">
+          <button class="status-filter-btn active px-3 py-1.5 rounded-lg text-xs font-bold transition bg-slate-900 text-white" data-status="all">Все</button>
+          <button class="status-filter-btn px-3 py-1.5 rounded-lg text-xs font-semibold transition bg-white text-slate-600 border border-slate-200 hover:bg-slate-50" data-status="new">Новые</button>
+          <button class="status-filter-btn px-3 py-1.5 rounded-lg text-xs font-semibold transition bg-white text-slate-600 border border-slate-200 hover:bg-slate-50" data-status="in_progress">В работе</button>
+          <button class="status-filter-btn px-3 py-1.5 rounded-lg text-xs font-semibold transition bg-white text-slate-600 border border-slate-200 hover:bg-slate-50" data-status="consultation">Консультация</button>
+          <button class="status-filter-btn px-3 py-1.5 rounded-lg text-xs font-semibold transition bg-white text-slate-600 border border-slate-200 hover:bg-slate-50" data-status="contract">Договор</button>
+          <button class="status-filter-btn px-3 py-1.5 rounded-lg text-xs font-semibold transition bg-white text-slate-600 border border-slate-200 hover:bg-slate-50" data-status="rejected">Отказ</button>
+        </div>
+
+        <!-- CSV Export -->
+        <button onclick="exportLeadsCSV()" class="bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold px-4 py-2 rounded-lg shadow transition flex items-center gap-1.5 shrink-0">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+          <span>Экспорт в Excel (CSV)</span>
+        </button>
+
+      </div>
+
+      <!-- Leads Table -->
+      <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden">
+        <div class="overflow-x-auto">
+          <table class="w-full text-left border-collapse">
+            <thead>
+              <tr class="bg-slate-50 text-slate-500 font-bold uppercase text-[11px] tracking-wider border-b border-slate-200">
+                <th class="py-3.5 px-4">ID / Дата</th>
+                <th class="py-3.5 px-4">Доверитель & Телефон</th>
+                <th class="py-3.5 px-4">Направление дела</th>
+                <th class="py-3.5 px-4">Статус</th>
+                <th class="py-3.5 px-4">Заметки адвоката</th>
+                <th class="py-3.5 px-4 text-right">Действия</th>
+              </tr>
+            </thead>
+            <tbody id="leads-table-body" class="divide-y divide-slate-100">
+              <!-- Rendered by renderLeadsTable() -->
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Empty State -->
+        <div id="leads-empty-state" class="py-16 text-center text-slate-400 hidden space-y-2">
+          <div class="text-3xl">📭</div>
+          <div class="font-bold text-slate-700 text-sm">Заявки не найдены</div>
+          <div class="text-xs">Попробуйте изменить параметры поиска или фильтра.</div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ====================================================================
+         TAB 3: ARTICLES CMS (БЛОГ И СТАТЬИ)
+         ==================================================================== -->
+    <div id="tab-articles" class="tab-content-panel hidden space-y-6">
+      
+      <!-- Top Banner with Create Button -->
+      <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div>
+          <h2 class="font-cinzel text-2xl font-bold text-slate-900">Управление статьями и базой знаний</h2>
+          <p class="text-xs text-slate-500 mt-1">
+            Публикуйте экспертные материалы, полезные советы и судебные победы конторы «T&N».
+          </p>
+        </div>
+
+        <button onclick="openArticleEditor()" class="bg-[#121d28] hover:bg-slate-800 text-white text-xs font-bold uppercase tracking-wider px-5 py-2.5 rounded-lg shadow transition flex items-center gap-2 border border-amber-500/30 shrink-0">
+          <span class="text-amber-400 text-base font-bold">+</span>
+          <span>Написать новую статью</span>
+        </button>
+      </div>
+
+      <!-- Articles Table -->
+      <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden">
+        <div class="overflow-x-auto">
+          <table class="w-full text-left border-collapse">
+            <thead>
+              <tr class="bg-slate-50 text-slate-500 font-bold uppercase text-[11px] tracking-wider border-b border-slate-200">
+                <th class="py-3.5 px-4">Статья</th>
+                <th class="py-3.5 px-4">Категория</th>
+                <th class="py-3.5 px-4">Автор</th>
+                <th class="py-3.5 px-4">Краткое описание</th>
+                <th class="py-3.5 px-4 text-right">Действия</th>
+              </tr>
+            </thead>
+            <tbody id="articles-table-body" class="divide-y divide-slate-100">
+              <!-- Rendered by renderArticlesTable() -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ====================================================================
+         TAB 4: SITE SETTINGS & COUNTERS
+         ==================================================================== -->
+    <div id="tab-settings" class="tab-content-panel hidden space-y-6">
+      
+      <form id="site-settings-form" class="space-y-8">
+        
+        <!-- General Info Section -->
+        <div class="bg-white p-8 rounded-xl border border-slate-200 shadow-sm space-y-6">
+          <div class="border-b border-slate-100 pb-4">
+            <h2 class="font-cinzel text-xl font-bold text-slate-900">Основные контакты и реквизиты сайта</h2>
+            <p class="text-xs text-slate-500 mt-1">Отображаются в шапке, футере и карточках контактов.</p>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            
+            <div>
+              <label class="block text-xs font-bold uppercase text-slate-700 mb-1">Название конторы</label>
+              <input type="text" id="setting-firmName" class="w-full border border-slate-300 rounded-lg px-3.5 py-2 text-xs focus:outline-none focus:border-amber-500">
+            </div>
+
+            <div>
+              <label class="block text-xs font-bold uppercase text-slate-700 mb-1">Адрес офиса в Алматы</label>
+              <input type="text" id="setting-address" class="w-full border border-slate-300 rounded-lg px-3.5 py-2 text-xs focus:outline-none focus:border-amber-500">
+            </div>
+
+            <div>
+              <label class="block text-xs font-bold uppercase text-slate-700 mb-1">Режим работы</label>
+              <input type="text" id="setting-schedule" class="w-full border border-slate-300 rounded-lg px-3.5 py-2 text-xs focus:outline-none focus:border-amber-500">
+            </div>
+
+            <div>
+              <label class="block text-xs font-bold uppercase text-slate-700 mb-1">Основной телефон (Дежурный адвокат)</label>
+              <input type="text" id="setting-phone1" class="w-full border border-slate-300 rounded-lg px-3.5 py-2 text-xs font-mono focus:outline-none focus:border-amber-500">
+            </div>
+
+            <div>
+              <label class="block text-xs font-bold uppercase text-slate-700 mb-1">Дополнительный телефон / WhatsApp</label>
+              <input type="text" id="setting-phone2" class="w-full border border-slate-300 rounded-lg px-3.5 py-2 text-xs font-mono focus:outline-none focus:border-amber-500">
+            </div>
+
+            <div>
+              <label class="block text-xs font-bold uppercase text-slate-700 mb-1">Рейтинг 2ГИС</label>
+              <input type="text" id="setting-rating2gis" class="w-full border border-slate-300 rounded-lg px-3.5 py-2 text-xs focus:outline-none focus:border-amber-500">
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Verdicts & Key Counters (James Newman Style Results Bar) -->
+        <div class="bg-white p-8 rounded-xl border border-slate-200 shadow-sm space-y-6">
+          <div class="border-b border-slate-100 pb-4">
+            <h2 class="font-cinzel text-xl font-bold text-slate-900">Счетчики побед и вердиктов (Verdicts & Settlements)</h2>
+            <p class="text-xs text-slate-500 mt-1">Отображаются в темной полосе достижений сразу под главным экраном.</p>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            
+            <div class="bg-slate-50 p-4 rounded-lg border border-slate-200 space-y-3">
+              <span class="text-xs font-bold text-amber-700 uppercase">Показатель 1</span>
+              <div>
+                <label class="block text-[11px] text-slate-500 mb-1">Цифра / Сумма</label>
+                <input type="text" id="setting-stat1_val" class="w-full border border-slate-300 rounded px-3 py-1.5 text-xs font-bold text-slate-800">
+              </div>
+              <div>
+                <label class="block text-[11px] text-slate-500 mb-1">Подпись</label>
+                <input type="text" id="setting-stat1_desc" class="w-full border border-slate-300 rounded px-3 py-1.5 text-xs text-slate-600">
+              </div>
+            </div>
+
+            <div class="bg-slate-50 p-4 rounded-lg border border-slate-200 space-y-3">
+              <span class="text-xs font-bold text-amber-700 uppercase">Показатель 2</span>
+              <div>
+                <label class="block text-[11px] text-slate-500 mb-1">Цифра / Сумма</label>
+                <input type="text" id="setting-stat2_val" class="w-full border border-slate-300 rounded px-3 py-1.5 text-xs font-bold text-slate-800">
+              </div>
+              <div>
+                <label class="block text-[11px] text-slate-500 mb-1">Подпись</label>
+                <input type="text" id="setting-stat2_desc" class="w-full border border-slate-300 rounded px-3 py-1.5 text-xs text-slate-600">
+              </div>
+            </div>
+
+            <div class="bg-slate-50 p-4 rounded-lg border border-slate-200 space-y-3">
+              <span class="text-xs font-bold text-amber-700 uppercase">Показатель 3</span>
+              <div>
+                <label class="block text-[11px] text-slate-500 mb-1">Цифра / Сумма</label>
+                <input type="text" id="setting-stat3_val" class="w-full border border-slate-300 rounded px-3 py-1.5 text-xs font-bold text-slate-800">
+              </div>
+              <div>
+                <label class="block text-[11px] text-slate-500 mb-1">Подпись</label>
+                <input type="text" id="setting-stat3_desc" class="w-full border border-slate-300 rounded px-3 py-1.5 text-xs text-slate-600">
+              </div>
+            </div>
+
+            <div class="bg-slate-50 p-4 rounded-lg border border-slate-200 space-y-3">
+              <span class="text-xs font-bold text-amber-700 uppercase">Показатель 4</span>
+              <div>
+                <label class="block text-[11px] text-slate-500 mb-1">Цифра / Сумма</label>
+                <input type="text" id="setting-stat4_val" class="w-full border border-slate-300 rounded px-3 py-1.5 text-xs font-bold text-slate-800">
+              </div>
+              <div>
+                <label class="block text-[11px] text-slate-500 mb-1">Подпись</label>
+                <input type="text" id="setting-stat4_desc" class="w-full border border-slate-300 rounded px-3 py-1.5 text-xs text-slate-600">
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="flex justify-end">
+          <button type="submit" class="bg-[#121d28] hover:bg-slate-800 text-white text-xs font-bold uppercase tracking-wider px-8 py-3 rounded-lg shadow-lg border border-amber-500/30 transition">
+            Сохранить все настройки
+          </button>
+        </div>
+
+      </form>
+
+    </div>
+
+    <!-- ====================================================================
+         TAB 5: TELEGRAM BOT CONFIG
+         ==================================================================== -->
+    <div id="tab-telegram" class="tab-content-panel hidden space-y-6">
+      
+      <div class="bg-white p-8 rounded-xl border border-slate-200 shadow-sm space-y-6 max-w-3xl">
+        <div class="border-b border-slate-100 pb-4">
+          <div class="flex items-center gap-2 text-2xl text-blue-500">
+            <span>🤖</span>
+            <h2 class="font-cinzel text-xl font-bold text-slate-900">Интеграция с Telegram</h2>
+          </div>
+          <p class="text-xs text-slate-500 mt-1">
+            Новые заявки с сайта будут мгновенно приходить вам в личные сообщения или в закрытую группу адвокатов.
+          </p>
+        </div>
+
+        <div class="space-y-4">
+          <div>
+            <label class="block text-xs font-bold uppercase text-slate-700 mb-1">Bot Token (от @BotFather)</label>
+            <input type="text" id="tg-bot-token" placeholder="Например: 123456789:ABCdefGhIJKlmNoPQRsTUVwxyZ" class="w-full border border-slate-300 rounded-lg px-3.5 py-2.5 text-xs font-mono focus:outline-none focus:border-blue-500">
+          </div>
+
+          <div>
+            <label class="block text-xs font-bold uppercase text-slate-700 mb-1">Chat ID (ID вашего аккаунта или группы)</label>
+            <input type="text" id="tg-chat-id" placeholder="Например: 987654321 или -100123456789" class="w-full border border-slate-300 rounded-lg px-3.5 py-2.5 text-xs font-mono focus:outline-none focus:border-blue-500">
+          </div>
+
+          <!-- Instruction Box -->
+          <div class="bg-blue-50 p-4 rounded-lg text-xs text-blue-900 space-y-2 border border-blue-200">
+            <div class="font-bold">📖 Как настроить за 2 минуты:</div>
+            <ol class="list-decimal list-inside space-y-1 text-slate-700">
+              <li>Откройте бота <strong>@BotFather</strong> в Telegram и отправьте команду <code>/newbot</code>. Скопируйте выданный <strong>API Token</strong>.</li>
+              <li>Откройте бота <strong>@userinfobot</strong> и скопируйте ваш числовой <strong>Id</strong>.</li>
+              <li>Нажмите кнопку «Start» в вашем созданном боте.</li>
+              <li>Вставьте данные в поля выше и нажмите <strong>«Сохранить»</strong>, затем проверьте кнопкой <strong>«Тест»</strong>.</li>
+            </ol>
+          </div>
+
+          <div class="pt-3 flex flex-wrap items-center gap-3">
+            <button onclick="saveTelegramConfig()" class="bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold uppercase tracking-wider px-6 py-2.5 rounded-lg shadow transition">
+              Сохранить настройки Telegram
+            </button>
+            <button onclick="testTelegramNotification()" class="bg-slate-100 hover:bg-slate-200 text-slate-800 text-xs font-bold uppercase tracking-wider px-6 py-2.5 rounded-lg transition border border-slate-300">
+              Отправить тестовое уведомление
+            </button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- ====================================================================
+       ARTICLE EDITOR MODAL (CMS)
+       ==================================================================== -->
+  <div id="article-editor-modal" class="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 hidden">
+    <div class="modal-overlay fixed inset-0 bg-slate-900/80 backdrop-blur-sm opacity-0 transition-opacity duration-300" onclick="closeArticleEditor()"></div>
+    
+    <div class="modal-content relative bg-white rounded-xl shadow-2xl border border-slate-200 z-10 w-full max-w-4xl max-h-[90vh] flex flex-col overflow-hidden scale-95 opacity-0 transition-all duration-300">
+      
+      <!-- Modal Header -->
+      <div class="p-5 border-b border-slate-100 flex items-center justify-between bg-slate-50">
+        <div>
+          <h3 id="article-editor-modal-title" class="font-cinzel text-xl font-bold text-slate-900">Новая правовая статья</h3>
+          <p class="text-xs text-slate-500">Материал сразу появится на сайте конторы «T&N»</p>
+        </div>
+        <button onclick="closeArticleEditor()" class="w-8 h-8 rounded-full bg-white hover:bg-slate-200 text-slate-700 flex items-center justify-center font-bold text-lg border border-slate-200 transition">✕</button>
+      </div>
+
+      <!-- Modal Form Body -->
+      <form id="article-editor-form" class="overflow-y-auto p-6 sm:p-8 space-y-6">
+        
+        <div class="space-y-4">
+          
+          <div>
+            <label class="block text-xs font-bold uppercase text-slate-700 mb-1">Заголовок статьи *</label>
+            <input type="text" id="art-title" required placeholder="Например: Как добиться отмены решения суда в Верховном Суде РК..." class="w-full border border-slate-300 rounded-lg px-3.5 py-2.5 text-sm font-semibold focus:outline-none focus:border-amber-500">
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            <div>
+              <label class="block text-xs font-bold uppercase text-slate-700 mb-1">Категория</label>
+              <select id="art-category" class="w-full border border-slate-300 rounded-lg px-3 py-2 text-xs focus:outline-none focus:border-amber-500">
+                <option value="Уголовное право">Уголовное право</option>
+                <option value="Верховный Суд РК">Верховный Суд РК</option>
+                <option value="Защита бизнеса & СМЭС">Защита бизнеса & СМЭС</option>
+                <option value="Имущество & Семья">Имущество & Семья</option>
+                <option value="Банкротство физлиц">Банкротство физлиц</option>
+              </select>
+            </div>
+
+            <div>
+              <label class="block text-xs font-bold uppercase text-slate-700 mb-1">Идентификатор категории</label>
+              <select id="art-category-id" class="w-full border border-slate-300 rounded-lg px-3 py-2 text-xs focus:outline-none focus:border-amber-500">
+                <option value="criminal">criminal (Уголовное)</option>
+                <option value="supreme">supreme (Верховный Суд)</option>
+                <option value="business">business (Бизнес / СМЭС)</option>
+                <option value="property">property (Имущество / Банкротство)</option>
+              </select>
+            </div>
+
+            <div>
+              <label class="block text-xs font-bold uppercase text-slate-700 mb-1">Время чтения</label>
+              <input type="text" id="art-readtime" value="5 мин чтения" class="w-full border border-slate-300 rounded-lg px-3 py-2 text-xs focus:outline-none focus:border-amber-500">
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-xs font-bold uppercase text-slate-700 mb-1">Автор статьи</label>
+              <select id="art-author" class="w-full border border-slate-300 rounded-lg px-3 py-2 text-xs focus:outline-none focus:border-amber-500">
+                <option value="Адвокат Тамара">Адвокат Тамара (Управляющий партнер)</option>
+                <option value="Адвокат Нурлан">Адвокат Нурлан (Партнер по уголовным делам)</option>
+                <option value="Адвокат конторы «T&N»">Адвокат конторы «T&N»</option>
+              </select>
+            </div>
+
+            <div>
+              <label class="block text-xs font-bold uppercase text-slate-700 mb-1">Регалии автора</label>
+              <input type="text" id="art-author-role" value="Партнер конторы «T&N»" class="w-full border border-slate-300 rounded-lg px-3 py-2 text-xs focus:outline-none focus:border-amber-500">
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-xs font-bold uppercase text-slate-700 mb-1">Обложка статьи (URL или предустановка)</label>
+            <select id="art-image" class="w-full border border-slate-300 rounded-lg px-3 py-2 text-xs focus:outline-none focus:border-amber-500">
+              <option value="assets/images/pa_court.jpg">Зал суда и кодексы (assets/images/pa_court.jpg)</option>
+              <option value="assets/images/pa_business.jpg">Переговоры и бизнес-арбитраж (assets/images/pa_business.jpg)</option>
+              <option value="assets/images/team_group.jpg">Фото партнеров Тамары и Нурлана (assets/images/team_group.jpg)</option>
+              <option value="assets/images/hero.jpg">Панорама Алматы и офис (assets/images/hero.jpg)</option>
+            </select>
+          </div>
+
+          <div>
+            <label class="block text-xs font-bold uppercase text-slate-700 mb-1">Краткий анонс для карточки *</label>
+            <textarea id="art-summary" rows="2" required placeholder="Краткое описание сути статьи (2-3 предложения)..." class="w-full border border-slate-300 rounded-lg p-3 text-xs focus:outline-none focus:border-amber-500"></textarea>
+          </div>
+
+          <div>
+            <div class="flex items-center justify-between mb-1">
+              <label class="block text-xs font-bold uppercase text-slate-700">Полный текст статьи (HTML / Текст) *</label>
+              <div class="flex items-center gap-1">
+                <button type="button" onclick="insertArticleHelperTag('h3')" class="px-2 py-1 bg-slate-100 hover:bg-slate-200 text-[10px] font-bold rounded border border-slate-300">+ H3 Заголовок</button>
+                <button type="button" onclick="insertArticleHelperTag('quote')" class="px-2 py-1 bg-amber-50 hover:bg-amber-100 text-[10px] font-bold text-amber-800 rounded border border-amber-300">+ Закон РК</button>
+                <button type="button" onclick="insertArticleHelperTag('case')" class="px-2 py-1 bg-slate-800 hover:bg-slate-900 text-[10px] font-bold text-amber-300 rounded">+ Кейс победы</button>
+                <button type="button" onclick="insertArticleHelperTag('list')" class="px-2 py-1 bg-slate-100 hover:bg-slate-200 text-[10px] font-bold rounded border border-slate-300">+ Список</button>
+              </div>
+            </div>
+            <textarea id="art-content" rows="8" required placeholder="Основной текст статьи..." class="w-full border border-slate-300 rounded-lg p-3 text-xs font-mono focus:outline-none focus:border-amber-500"></textarea>
+          </div>
+
+        </div>
+
+        <div class="pt-4 border-t border-slate-100 flex items-center justify-end gap-3">
+          <button type="button" onclick="closeArticleEditor()" class="px-5 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold uppercase tracking-wider rounded-lg transition">
+            Отмена
+          </button>
+          <button type="submit" class="px-6 py-2.5 bg-[#121d28] hover:bg-slate-800 text-white text-xs font-bold uppercase tracking-wider rounded-lg shadow transition border border-amber-500/30">
+            Опубликовать статью на сайте
+          </button>
+        </div>
+
+      </form>
+
+    </div>
+  </div>
+
+  <!-- Note Modal -->
+  <div id="note-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 hidden">
+    <div class="modal-overlay fixed inset-0 bg-slate-900/60 backdrop-blur-sm opacity-0 transition-opacity" onclick="closeNoteModal()"></div>
+    <div class="modal-content relative bg-white rounded-xl shadow-2xl border border-slate-200 z-10 w-full max-w-md p-6 space-y-4 scale-95 opacity-0 transition-all">
+      <h3 id="note-lead-title" class="font-bold text-slate-900 text-sm">Заметка по заявке</h3>
+      <form id="lead-note-form" class="space-y-4">
+        <input type="hidden" id="note-lead-id">
+        <textarea id="note-textarea" rows="4" placeholder="Введите внутреннюю информацию по делу..." class="w-full border border-slate-300 rounded-lg p-3 text-xs focus:outline-none focus:border-amber-500"></textarea>
+        <div class="flex justify-end gap-2">
+          <button type="button" onclick="closeNoteModal()" class="px-4 py-2 bg-slate-100 text-xs font-semibold rounded-lg text-slate-600 hover:bg-slate-200">Отмена</button>
+          <button type="submit" class="px-4 py-2 bg-amber-600 text-xs font-bold text-white rounded-lg hover:bg-amber-700">Сохранить</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="js/admin.js"></script>
+</body>
+</html>
