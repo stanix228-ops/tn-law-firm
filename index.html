@@ -45,7 +45,7 @@
   <!-- Leaflet Map CSS -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 
-  <link rel="stylesheet" href="css/style.css?v=12.0">
+  <link rel="stylesheet" href="css/style.css?v=13.0">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚖️</text></svg>">
 </head>
 <body class="bg-[#07080a] text-slate-100 font-body antialiased selection:bg-red-600 selection:text-white">
@@ -118,7 +118,6 @@
     <!-- Mobile Dropdown -->
     <div id="mobile-menu" class="hidden pt-4 pb-2 space-y-2 border-t border-white/10 mt-3 text-sm font-bold uppercase tracking-wider">
       <a href="#manifest" class="block py-2 text-slate-300 hover:text-red-500">Манифест</a>
-      <a href="#video-showcase" class="block py-2 text-slate-300 hover:text-red-500">Видео & Драйв</a>
       <a href="#reality-check" class="block py-2 text-slate-300 hover:text-red-500">Вся правда</a>
       <a href="#cases" class="block py-2 text-slate-300 hover:text-red-500">Кейсы побед</a>
       <a href="#attorneys" class="block py-2 text-slate-300 hover:text-red-500">Адвокат</a>
@@ -150,7 +149,6 @@
         <!-- Navigation Links in a Single Clean Line -->
         <ul class="combat-nav--navigation">
           <li><a href="#manifest">Манифест</a></li>
-          <li><a href="#video-showcase">Видео & Драйв</a></li>
           <li><a href="#reality-check">Жесткая правда</a></li>
           <li><a href="#cases">Реальные кейсы</a></li>
           <li><a href="#attorneys">Адвокат</a></li>
@@ -322,8 +320,8 @@
         <!-- Right: Text on the Right Side of Video (lg:col-span-7) -->
         <div class="lg:col-span-7 space-y-5">
           <div class="inline-flex items-center gap-2 px-3 py-1 bg-red-600/20 text-red-400 rounded text-xs font-black uppercase tracking-widest border border-red-600/40">
-            <span>🎬</span>
-            <span>Энергетика • Кураж • Борьба</span>
+            <span>⚔️</span>
+            <span>Тактика • Напор • Победа</span>
           </div>
 
           <h2 class="font-heading text-3xl sm:text-4xl lg:text-5xl font-black text-white tracking-tight uppercase leading-tight">
@@ -469,7 +467,7 @@
         
         <!-- Left: Video Player with Caption -->
         <div class="lg:col-span-6 space-y-4">
-          <div class="rounded-xl overflow-hidden border-2 border-red-500/70 shadow-2xl shadow-red-950/60 bg-black relative group">
+          <div class="rounded-xl overflow-hidden border-2 border-red-500/70 shadow-2xl shadow-red-950/60 bg-black relative group flex items-center justify-center">
             <video id="case-showcase-video"
                    src="assets/media/case_video.mp4"
                    autoplay 
@@ -478,7 +476,7 @@
                    playsinline 
                    controls
                    preload="auto"
-                   class="w-full h-auto max-h-[340px] aspect-video object-cover cursor-pointer">
+                   class="w-full h-auto max-h-[420px] object-contain bg-black cursor-pointer">
               <source src="assets/media/case_video.mp4" type="video/mp4">
               Ваш браузер не поддерживает видео HTML5.
             </video>
@@ -568,7 +566,10 @@
         
         <!-- Attorney Card 1: Nurlan -->
         <div class="attorney-combat-card group">
-          <img src="assets/media/advocate_1.jpeg" alt="Адвокат Нурлан">
+          <picture>
+            <source srcset="assets/media/advocate_1.webp?v=13.0" type="image/webp">
+            <img src="assets/media/advocate_1.jpeg?v=13.0" alt="Адвокат Нурлан" class="attorney-img-nurlan">
+          </picture>
           <div class="info-box space-y-1.5">
             <div class="text-[10px] font-black text-red-500 uppercase tracking-widest">Партнер по уголовным и экономическим делам</div>
             <h3 class="font-heading text-2xl font-black text-white uppercase">Адвокат Нурлан</h3>
@@ -583,7 +584,7 @@
 
         <!-- Attorney Card 2: Litigation Syndicate -->
         <div class="attorney-combat-card group">
-          <img src="assets/media/advocate_3.jpeg" alt="Судебный синдикат T&N">
+          <img src="assets/media/advocate_3.jpeg?v=13.0" alt="Судебный синдикат T&N" class="attorney-img-team">
           <div class="info-box space-y-1.5">
             <div class="text-[10px] font-black text-red-500 uppercase tracking-widest">Судебный синдикат «T&N»</div>
             <h3 class="font-heading text-2xl font-black text-white uppercase">Команда Литигаторов</h3>
@@ -978,6 +979,6 @@
 
   <!-- Leaflet Map JS -->
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-  <script src="js/app.js?v=12.0"></script>
+  <script src="js/app.js?v=13.0"></script>
 </body>
 </html>
