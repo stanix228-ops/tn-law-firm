@@ -118,58 +118,62 @@
       <a href="#video-showcase" class="block py-2 text-slate-300 hover:text-red-500">Видео & Драйв</a>
       <a href="#reality-check" class="block py-2 text-slate-300 hover:text-red-500">Вся правда</a>
       <a href="#cases" class="block py-2 text-slate-300 hover:text-red-500">Кейсы побед</a>
-      <a href="#attorneys" class="block py-2 text-slate-300 hover:text-red-500">Наши адвокаты</a>
+      <a href="#attorneys" class="block py-2 text-slate-300 hover:text-red-500">Адвокат</a>
       <a href="#materials" class="block py-2 text-slate-300 hover:text-red-500">Материалы</a>
-      <a href="#contact" class="block py-2 text-slate-300 hover:text-red-500">Вступить в бой</a>
+      <a href="#contact" class="block py-2 text-slate-300 hover:text-red-500">Контакты & Карта</a>
     </div>
   </section>
 
-  <!-- Desktop Main Navigation (Aligned in a Single Clean Line) -->
+  <!-- ====================================================================
+       DESKTOP NAVIGATION PANEL (Dedicated Container & Single-Line Links)
+       ==================================================================== -->
   <header class="combat-nav hidden lg:block">
-    <div class="max-w-[1650px] w-full mx-auto px-4 sm:px-6 lg:px-10 combat-nav--inner">
-      
-      <!-- Logo Left -->
-      <a href="#" class="flex items-center gap-3.5 group shrink-0">
-        <div class="w-10 h-10 rounded-lg bg-red-600 text-white flex items-center justify-center text-xl font-black shadow-lg shadow-red-600/50 group-hover:scale-105 transition">
-          ⚖️
-        </div>
-        <div>
-          <div class="font-heading text-xl font-black text-white tracking-wider leading-none">
-            T&N <span class="text-red-500 text-xs font-extrabold tracking-widest block mt-0.5">АДВОКАТСКАЯ КОНТОРА</span>
+    <div class="max-w-[1650px] w-full mx-auto px-4 sm:px-6 lg:px-10">
+      <div class="combat-nav--panel">
+        
+        <!-- Logo Left -->
+        <a href="#" class="flex items-center gap-3.5 group shrink-0">
+          <div class="w-10 h-10 rounded-lg bg-red-600 text-white flex items-center justify-center text-xl font-black shadow-lg shadow-red-600/50 group-hover:scale-105 transition">
+            ⚖️
           </div>
-          <div class="text-[9px] text-slate-400 tracking-widest uppercase mt-0.5">г. Алматы • Реестр адвокатов РК</div>
+          <div>
+            <div class="font-heading text-xl font-black text-white tracking-wider leading-none">
+              T&N <span class="text-red-500 text-xs font-extrabold tracking-widest block mt-0.5">АДВОКАТСКАЯ КОНТОРА</span>
+            </div>
+            <div class="text-[9px] text-slate-400 tracking-widest uppercase mt-0.5">г. Алматы • Реестр адвокатов РК</div>
+          </div>
+        </a>
+
+        <!-- Navigation Links in a Single Clean Line -->
+        <ul class="combat-nav--navigation">
+          <li><a href="#manifest">Манифест</a></li>
+          <li><a href="#video-showcase">Видео & Драйв</a></li>
+          <li><a href="#reality-check">Жесткая правда</a></li>
+          <li><a href="#cases">Реальные кейсы</a></li>
+          <li><a href="#attorneys">Адвокат</a></li>
+          <li><a href="#materials">Материалы</a></li>
+          <li><a href="#contact">Контакты & Карта</a></li>
+        </ul>
+
+        <!-- CTA Buttons Right -->
+        <div class="flex items-center gap-4 shrink-0">
+          <button onclick="openConsultModal('Экстренный вызов адвоката')" class="btn-combat">
+            Вступить в бой 24/7
+          </button>
         </div>
-      </a>
 
-      <!-- Navigation Links Aligned in One Single Line -->
-      <ul class="combat-nav--navigation">
-        <li><a href="#manifest">Манифест</a></li>
-        <li><a href="#video-showcase">Видео & Драйв</a></li>
-        <li><a href="#reality-check">Жесткая правда</a></li>
-        <li><a href="#cases">Реальные кейсы</a></li>
-        <li><a href="#attorneys">Адвокаты</a></li>
-        <li><a href="#materials">Материалы</a></li>
-        <li><a href="#contact">Контакты</a></li>
-      </ul>
-
-      <!-- CTA Buttons Right -->
-      <div class="flex items-center gap-4 shrink-0">
-        <button onclick="openConsultModal('Экстренный вызов адвоката')" class="btn-combat">
-          Вступить в бой 24/7
-        </button>
       </div>
-
     </div>
   </header>
 
   <!-- ====================================================================
-       HERO SECTION (Clean Dark Ambient Background, Photo Right, Text Left)
+       HERO SECTION (Clean Dark Background, Photo Right, Text Left)
        ==================================================================== -->
   <section id="manifest" class="combat-hero">
     <div class="max-w-[1650px] w-full mx-auto px-4 sm:px-6 lg:px-10 combat-hero--inner">
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
         
-        <!-- Left Column: Content & Senior Partner Profiles (lg:col-span-7) -->
+        <!-- Left Column: Content & Senior Partner Profile (lg:col-span-7) -->
         <div class="lg:col-span-7 space-y-6">
           
           <div class="inline-flex items-center gap-2.5 px-3.5 py-1.5 bg-black/80 border border-red-500/70 text-red-400 rounded-md text-xs font-black uppercase tracking-widest shadow-xl">
@@ -188,35 +192,18 @@
             Бескомпромиссная адвокатская защита в судах г. Алматы и Верховном Суде РК. Мы не кормим иллюзиями — мы выявляем процессуальные фатальные бреши в обвинении и заставляем оппонентов отступить.
           </p>
 
-          <!-- Senior Partners Mini-Cards Box -->
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-1">
-            
-            <div class="p-4 bg-black/60 border border-red-500/30 rounded-xl space-y-1.5 backdrop-blur-md">
-              <div class="flex items-center gap-2.5">
-                <img src="assets/media/advocate_2.jpeg" alt="Адвокат Тамара" class="w-9 h-9 rounded-full object-cover border border-amber-500">
-                <div>
-                  <div class="font-heading text-sm font-bold text-white uppercase leading-none">Адвокат Тамара</div>
-                  <div class="text-[10px] text-amber-400 font-bold uppercase tracking-wider mt-0.5">Управляющий партнер</div>
-                </div>
+          <!-- Senior Partner Profile Box -->
+          <div class="p-4 bg-black/60 border border-red-500/40 rounded-xl backdrop-blur-md max-w-xl space-y-2">
+            <div class="flex items-center gap-3">
+              <img src="assets/media/advocate_1.jpeg" alt="Адвокат Нурлан" class="w-11 h-11 rounded-full object-cover border-2 border-red-500">
+              <div>
+                <div class="font-heading text-base font-bold text-white uppercase leading-none">Адвокат Нурлан</div>
+                <div class="text-[11px] text-red-400 font-bold uppercase tracking-wider mt-0.5">Партнер по уголовным и экономическим делам</div>
               </div>
-              <p class="text-[11px] text-slate-400 leading-snug">
-                Кассация в ВС РК, отмена решений судов, спасение бизнеса и многомиллионные экономические споры.
-              </p>
             </div>
-
-            <div class="p-4 bg-black/60 border border-red-500/30 rounded-xl space-y-1.5 backdrop-blur-md">
-              <div class="flex items-center gap-2.5">
-                <img src="assets/media/advocate_1.jpeg" alt="Адвокат Нурлан" class="w-9 h-9 rounded-full object-cover border border-red-500">
-                <div>
-                  <div class="font-heading text-sm font-bold text-white uppercase leading-none">Адвокат Нурлан</div>
-                  <div class="text-[10px] text-red-400 font-bold uppercase tracking-wider mt-0.5">Партнер по уголовным делам</div>
-                </div>
-              </div>
-              <p class="text-[11px] text-slate-400 leading-snug">
-                Экстренный выезд 24/7 на задержания, обыски и допросы в ДП/ИВС. Защита от заказных обвинений.
-              </p>
-            </div>
-
+            <p class="text-xs text-slate-300 leading-relaxed">
+              12+ лет жесткой судебной практики в Алматы и Астане. Экстренный выезд 24/7 на задержания, обыски и допросы. Прекращение заказных уголовных дел, кассация в Верховном Суде РК и защита активов бизнеса.
+            </p>
           </div>
 
           <!-- CTAs -->
@@ -285,66 +272,83 @@
   </section>
 
   <!-- ====================================================================
-       SECTION: LOOPING VIDEO SHOWCASE (with Mute/Unmute sound toggle)
+       SECTION: VIDEO SHOWCASE (Smaller Video on Left, Text on Right)
        ==================================================================== -->
   <section id="video-showcase" class="py-20 bg-[#0a0b0e] border-t-2 border-b-2 border-red-600/40 relative overflow-hidden">
     <div class="max-w-[1650px] mx-auto px-4 sm:px-6 lg:px-10">
       
-      <!-- Section Header -->
-      <div class="text-center max-w-3xl mx-auto mb-10 space-y-3">
-        <div class="inline-flex items-center gap-2 px-3 py-1 bg-red-600/20 text-red-400 rounded text-xs font-black uppercase tracking-widest border border-red-600/40">
-          <span>🎬</span>
-          <span>Энергетика • Кураж • Борьба</span>
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+        
+        <!-- Left: Smaller Video Player with Sound Toggle (lg:col-span-6) -->
+        <div class="lg:col-span-6 space-y-4">
+          <div class="video-showcase-box relative group">
+            
+            <video id="devil-loop-video" autoplay loop playsinline preload="auto" class="w-full h-auto">
+              <source src="assets/media/devil_loop.mp4" type="video/mp4">
+              Ваш браузер не поддерживает видео HTML5.
+            </video>
+
+            <!-- Interactive Sound Toggle Overlay Button -->
+            <div class="video-overlay-control">
+              <button id="sound-toggle-btn" class="btn-sound-toggle">
+                <div class="sound-wave">
+                  <div class="sound-bar"></div>
+                  <div class="sound-bar"></div>
+                  <div class="sound-bar"></div>
+                  <div class="sound-bar"></div>
+                </div>
+                <span id="sound-toggle-label">Включить звук</span>
+              </button>
+            </div>
+
+            <!-- Top Gradient Shadow -->
+            <div class="absolute top-0 inset-x-0 p-3.5 bg-gradient-to-b from-black/80 to-transparent flex items-center justify-between pointer-events-none">
+              <span class="text-xs font-black uppercase tracking-widest text-red-500 flex items-center gap-1.5">
+                <span class="w-2.5 h-2.5 rounded-full bg-red-600 animate-ping"></span>
+                LIVE • АДВОКАТСКАЯ КОНТОРА «T&N»
+              </span>
+            </div>
+
+          </div>
         </div>
-        <h2 class="font-heading text-3xl sm:text-4xl lg:text-5xl font-black text-white tracking-tight uppercase">
-          МЫ НЕ ЖДЕМ ПОЩАДЫ. <span class="text-red-500">МЫ ДИКТУЕМ ПРАВИЛА.</span>
-        </h2>
-        <p class="text-slate-400 text-sm sm:text-base">
-          В суде побеждает не тот, кто вежливее, а тот, кто психологически давит оппонента и ломает сфабрикованные материалы. Включите звук и почувствуйте боевой настрой адвокатов «T&N».
-        </p>
-      </div>
 
-      <!-- Constrained 16:9 Video Box Container -->
-      <div class="max-w-4xl mx-auto">
-        <div class="video-showcase-box relative group">
-          
-          <video id="devil-loop-video" autoplay loop playsinline preload="auto" class="w-full h-auto">
-            <source src="assets/media/devil_loop.mp4" type="video/mp4">
-            Ваш браузер не поддерживает видео HTML5.
-          </video>
+        <!-- Right: Text on the Right Side of Video (lg:col-span-6) -->
+        <div class="lg:col-span-6 space-y-5">
+          <div class="inline-flex items-center gap-2 px-3 py-1 bg-red-600/20 text-red-400 rounded text-xs font-black uppercase tracking-widest border border-red-600/40">
+            <span>🎬</span>
+            <span>Энергетика • Кураж • Борьба</span>
+          </div>
 
-          <!-- Interactive Sound Toggle Overlay Button -->
-          <div class="video-overlay-control">
-            <button id="sound-toggle-btn" class="btn-sound-toggle">
-              <div class="sound-wave">
-                <div class="sound-bar"></div>
-                <div class="sound-bar"></div>
-                <div class="sound-bar"></div>
-                <div class="sound-bar"></div>
-              </div>
-              <span id="sound-toggle-label">Включить звук</span>
+          <h2 class="font-heading text-3xl sm:text-4xl lg:text-5xl font-black text-white tracking-tight uppercase leading-tight">
+            МЫ НЕ ЖДЕМ ПОЩАДЫ. <br><span class="text-red-500">МЫ ДИКТУЕМ ПРАВИЛА.</span>
+          </h2>
+
+          <p class="text-slate-300 text-sm sm:text-base leading-relaxed">
+            В суде побеждает не тот, кто вежливее, а тот, кто психологически давит оппонента и ломает сфабрикованные материалы. Мы заставляем следователей и судей соблюдать закон до запятой.
+          </p>
+
+          <div class="space-y-3 text-xs sm:text-sm text-slate-300">
+            <div class="flex items-start gap-3">
+              <div class="w-6 h-6 rounded bg-red-600/30 text-red-400 flex items-center justify-center font-bold text-xs shrink-0 mt-0.5 border border-red-500/40">✓</div>
+              <div><strong>Психологическое доминирование:</strong> Никаких компромиссов в ущерб доверителю. Мы вскрываем заказной характер дел и выводим оппонентов на чистую воду.</div>
+            </div>
+            <div class="flex items-start gap-3">
+              <div class="w-6 h-6 rounded bg-red-600/30 text-red-400 flex items-center justify-center font-bold text-xs shrink-0 mt-0.5 border border-red-500/40">✓</div>
+              <div><strong>Слом фальшивых доказательств:</strong> Признание протоколов допросов и обысков недопустимыми доказательствами по ст. 112 УПК РК.</div>
+            </div>
+            <div class="flex items-start gap-3">
+              <div class="w-6 h-6 rounded bg-red-600/30 text-red-400 flex items-center justify-center font-bold text-xs shrink-0 mt-0.5 border border-red-500/40">✓</div>
+              <div><strong>Экстренный выезд 24/7:</strong> Прибытие адвоката в любой отдел полиции, ДП или СИЗО г. Алматы за 30–50 минут.</div>
+            </div>
+          </div>
+
+          <div class="pt-2">
+            <button onclick="openConsultModal('Вызов адвоката из блока видео')" class="btn-combat">
+              ⚡ Вызвать адвоката в бой
             </button>
           </div>
-
-          <!-- Top Gradient Shadow -->
-          <div class="absolute top-0 inset-x-0 p-4 bg-gradient-to-b from-black/80 to-transparent flex items-center justify-between pointer-events-none">
-            <span class="text-xs font-black uppercase tracking-widest text-red-500 flex items-center gap-1.5">
-              <span class="w-2.5 h-2.5 rounded-full bg-red-600 animate-ping"></span>
-              LIVE • АДВОКАТСКАЯ КОНТОРА «T&N»
-            </span>
-          </div>
-
         </div>
 
-        <!-- Video Subtitle / Statement -->
-        <div class="mt-5 text-center space-y-1.5">
-          <p class="font-heading text-base sm:text-lg font-bold text-slate-200">
-            «Закон — это меч, и в наших руках он разит без промаха.»
-          </p>
-          <div class="text-[11px] text-slate-500 uppercase tracking-widest">
-            Алматы • Суды всех инстанций • Верховный Суд Республики Казахстан
-          </div>
-        </div>
       </div>
 
     </div>
@@ -485,7 +489,7 @@
             </div>
             <h4 class="font-heading text-base font-bold text-white uppercase">Полная отмена взыскания и разгром оппонентов</h4>
             <p class="text-xs text-slate-400">
-              Суды двух инстанций Алматы взыскали фиктивный долг. Адвокат Тамара довела дело до кассационной коллегии ВС РК и добилась полной отмены неправосудных актов.
+              Суды двух инстанций Алматы взыскали фиктивный долг. Адвокаты «T&N» довели дело до кассационной коллегии ВС РК и добились полной отмены неправосудных актов.
             </p>
           </div>
 
@@ -525,7 +529,7 @@
   </section>
 
   <!-- ====================================================================
-       SECTION: ATTORNEYS ("Хищники правового процесса")
+       SECTION: ATTORNEYS (Senior Partner & Litigation Team)
        ==================================================================== -->
   <section id="attorneys" class="py-20 bg-[#07080a] relative">
     <div class="max-w-[1650px] mx-auto px-4 sm:px-6 lg:px-10 space-y-12">
@@ -543,49 +547,34 @@
         </p>
       </div>
 
-      <!-- 3 Attorney Cards in Balanced Grid -->
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <!-- Attorney Cards in Balanced Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
         
-        <!-- Attorney Card 1 -->
+        <!-- Attorney Card 1: Nurlan -->
         <div class="attorney-combat-card group">
           <img src="assets/media/advocate_1.jpeg" alt="Адвокат Нурлан">
           <div class="info-box space-y-1.5">
-            <div class="text-[10px] font-black text-red-500 uppercase tracking-widest">Партнер по уголовным делам</div>
-            <h3 class="font-heading text-xl font-black text-white uppercase">Адвокат Нурлан</h3>
+            <div class="text-[10px] font-black text-red-500 uppercase tracking-widest">Партнер по уголовным и экономическим делам</div>
+            <h3 class="font-heading text-2xl font-black text-white uppercase">Адвокат Нурлан</h3>
             <p class="text-xs text-slate-300 leading-relaxed">
-              Специалист по жесткому развалу уголовных дел, экстренному выезду на задержания и защите топ-менеджеров от рейдерства 24/7.
+              Специалист по жесткому развалу уголовных дел, экстренному выезду на задержания и защите бизнеса от рейдерства 24/7.
             </p>
-            <button onclick="openConsultModal('Запись к адвокату Нурлану')" class="text-xs font-extrabold uppercase text-amber-400 hover:text-white pt-1.5 flex items-center gap-1 transition">
+            <button onclick="openConsultModal('Запись к адвокату Нурлану')" class="text-xs font-extrabold uppercase text-amber-400 hover:text-white pt-2 flex items-center gap-1 transition">
               <span>Вызвать адвоката →</span>
             </button>
           </div>
         </div>
 
-        <!-- Attorney Card 2 -->
+        <!-- Attorney Card 2: Litigation Syndicate -->
         <div class="attorney-combat-card group">
-          <img src="assets/media/advocate_2.jpeg" alt="Адвокат Тамара">
-          <div class="info-box space-y-1.5">
-            <div class="text-[10px] font-black text-amber-400 uppercase tracking-widest">Управляющий партнер</div>
-            <h3 class="font-heading text-xl font-black text-white uppercase">Адвокат Тамара</h3>
-            <p class="text-xs text-slate-300 leading-relaxed">
-              Судебный литигатор высшей квалификации. Победы в Верховном Суде РК, сложнейшие экономические споры и раздел бизнес-активов.
-            </p>
-            <button onclick="openConsultModal('Запись к адвокату Тамаре')" class="text-xs font-extrabold uppercase text-amber-400 hover:text-white pt-1.5 flex items-center gap-1 transition">
-              <span>Записаться к партнеру →</span>
-            </button>
-          </div>
-        </div>
-
-        <!-- Attorney Card 3 -->
-        <div class="attorney-combat-card group">
-          <img src="assets/media/advocate_3.jpeg" alt="Партнеры конторы T&N">
+          <img src="assets/media/advocate_3.jpeg" alt="Судебный синдикат T&N">
           <div class="info-box space-y-1.5">
             <div class="text-[10px] font-black text-red-500 uppercase tracking-widest">Судебный синдикат «T&N»</div>
-            <h3 class="font-heading text-xl font-black text-white uppercase">Тандем Победы</h3>
+            <h3 class="font-heading text-2xl font-black text-white uppercase">Команда Литигаторов</h3>
             <p class="text-xs text-slate-300 leading-relaxed">
-              Объединенный опыт двух партнеров. Мы разрабатываем многоходовки, которые ставят обвинение и процессуальных противников в тупик.
+              12+ лет практики в судах Алматы и Верховном Суде РК. Разработка многоходовок, которые ставят процессуальных противников в тупик.
             </p>
-            <button onclick="openConsultModal('Комплексная защита двумя адвокатами')" class="text-xs font-extrabold uppercase text-red-400 hover:text-white pt-1.5 flex items-center gap-1 transition">
+            <button onclick="openConsultModal('Комплексная защита конторой T&N')" class="text-xs font-extrabold uppercase text-red-400 hover:text-white pt-2 flex items-center gap-1 transition">
               <span>Комплексная защита →</span>
             </button>
           </div>
@@ -597,15 +586,21 @@
   </section>
 
   <!-- ====================================================================
-       SECTION: MATERIALS ("К материалам" - assets/media/materials_bg.jpeg)
+       SECTION: MATERIALS (Photo Smaller on Top, Text Directly Underneath)
        ==================================================================== -->
   <section id="materials" class="py-20 bg-[#0a0b0e] border-t border-b border-red-600/40 relative">
     <div class="max-w-[1650px] mx-auto px-4 sm:px-6 lg:px-10 space-y-12">
       
-      <!-- Exact Quote Banner required by user -->
-      <div class="materials-quote-box max-w-4xl mx-auto">
-        <img src="assets/media/materials_bg.jpeg" alt="К материалам" class="bg-img">
-        <div class="content space-y-3.5">
+      <!-- Materials Banner Card: Photo smaller on top, text underneath -->
+      <div class="materials-banner-card max-w-3xl mx-auto space-y-5">
+        
+        <!-- Framed smaller photo -->
+        <div class="max-w-md mx-auto rounded-xl overflow-hidden border-2 border-red-500/50 shadow-2xl shadow-red-950/60">
+          <img src="assets/media/materials_bg.jpeg" alt="К материалам" class="w-full h-44 sm:h-52 object-cover">
+        </div>
+
+        <!-- Text directly UNDER the photo -->
+        <div class="space-y-3">
           <div class="inline-block px-3 py-1 bg-red-600/40 border border-red-500 text-red-300 rounded text-xs font-black uppercase tracking-widest">
             ⏱ ВРЕМЯ — ВАШ ГЛАВНЫЙ ВРАГ
           </div>
@@ -616,10 +611,11 @@
             Чем меньше вариантов — тем меньше шансов.»
           </h2>
 
-          <p class="text-xs sm:text-sm text-slate-300 max-w-2xl mx-auto">
+          <p class="text-xs sm:text-sm text-slate-300 max-w-xl mx-auto">
             Изучите наши тактические разборы. Знание своих прав и уязвимостей системы — ваше первое оружие.
           </p>
         </div>
+
       </div>
 
       <!-- Articles Filter Header -->
@@ -647,39 +643,92 @@
         </div>
       </div>
 
-      <!-- Articles Grid Container -->
+      <!-- Articles Grid Container (Custom Themed Cards with Generated Images) -->
       <div id="articles-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        <!-- Rendered by renderArticlesList() in js/app.js -->
+        <!-- Rendered dynamically by renderArticlesList() in js/app.js -->
       </div>
 
     </div>
   </section>
 
   <!-- ====================================================================
-       SECTION: FOOTER & BATTLE CONTACT FORM
+       SECTION: COMBAT FORM & URGENT DISPATCH (Redesigned Inputs)
        ==================================================================== -->
-  <footer id="contact" class="py-20 bg-[#07080a] border-t-2 border-red-600 text-white relative">
-    <div class="max-w-[1650px] mx-auto px-4 sm:px-6 lg:px-10">
+  <section class="py-20 bg-[#07080a] border-t-2 border-red-600/40 relative">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6">
       
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
+      <div class="combat-form-box p-8 sm:p-12 space-y-6">
         
-        <!-- Left: Statement & Requisites -->
-        <div class="lg:col-span-5 space-y-6">
-          <div class="flex items-center gap-3">
-            <div class="w-11 h-11 rounded-lg bg-red-600 text-white flex items-center justify-center text-xl font-black shadow-lg shadow-red-600/50">
-              ⚖️
+        <div class="text-center space-y-1.5">
+          <span class="text-xs font-extrabold uppercase text-red-500 tracking-widest">Не теряйте драгоценное время</span>
+          <h3 class="font-heading text-2xl sm:text-4xl font-black text-white uppercase">
+            ВСТУПИТЬ В БОЙ / СРОЧНЫЙ ВЫЕЗД
+          </h3>
+          <p class="text-xs sm:text-sm text-slate-400">
+            Дежурный адвокат конторы «T&N» выйдет на связь в течение 5–10 минут.
+          </p>
+        </div>
+
+        <form id="devil-main-form" class="space-y-4 pt-2">
+          
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div class="combat-input-group">
+              <label class="block text-xs font-bold uppercase text-slate-300 mb-1.5 tracking-wider">Ваше имя *</label>
+              <input type="text" id="input_devil_name" required placeholder="Как к вам обращаться?" class="devil-input">
             </div>
-            <div>
-              <div class="font-heading text-2xl font-black text-white leading-none">T&N LAW FIRM</div>
-              <div class="text-xs text-red-500 font-extrabold uppercase tracking-widest mt-1">АДВОКАТСКАЯ КОНТОРА • АЛМАТЫ</div>
+
+            <div class="combat-input-group">
+              <label class="block text-xs font-bold uppercase text-slate-300 mb-1.5 tracking-wider">Телефон (WhatsApp) *</label>
+              <input type="tel" id="input_devil_phone" required placeholder="+7 (7XX) XXX-XX-XX" class="devil-input font-bold font-mono">
             </div>
           </div>
 
-          <p class="text-sm text-slate-300 leading-relaxed font-medium">
-            Мы не раздаем пустых надежд. Мы беремся за дело, когда другие опускают руки, и доводим защиту до безоговорочного результата.
-          </p>
+          <div class="combat-input-group">
+            <label class="block text-xs font-bold uppercase text-slate-300 mb-1.5 tracking-wider">Что произошло? (Статья УК / Сумма спора / Обыск / Допрос) *</label>
+            <textarea id="input_devil_message" rows="3" required placeholder="Кратко опишите ситуацию: кто вызывает, какая статья или сумма спора..." class="devil-input"></textarea>
+          </div>
 
-          <div class="space-y-3 text-xs text-slate-300 border-y border-white/10 py-5">
+          <button type="submit" class="btn-combat w-full text-base py-4 shadow-2xl">
+            🔥 ВЫЗВАТЬ АДВОКАТА / НАЧАТЬ ЗАЩИТУ
+          </button>
+
+          <p class="text-[11px] text-slate-500 text-center pt-1">
+            🔒 100% Адвокатская тайна по ст. 9 Закона РК «Об адвокатской деятельности». Ваши данные надежно защищены.
+          </p>
+        </form>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ====================================================================
+       SECTION: CONTACTS & LIVE INTERACTIVE MAP (Exact Address)
+       ==================================================================== -->
+  <footer id="contact" class="py-20 bg-[#0a0d14] border-t-2 border-red-600 text-white relative">
+    <div class="max-w-[1650px] mx-auto px-4 sm:px-6 lg:px-10">
+      
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-stretch">
+        
+        <!-- Left Column: Firm Contacts & Requisites (lg:col-span-5) -->
+        <div class="lg:col-span-5 space-y-6 flex flex-col justify-between">
+          <div class="space-y-4">
+            <div class="flex items-center gap-3">
+              <div class="w-11 h-11 rounded-lg bg-red-600 text-white flex items-center justify-center text-xl font-black shadow-lg shadow-red-600/50">
+                ⚖️
+              </div>
+              <div>
+                <div class="font-heading text-2xl font-black text-white leading-none">T&N LAW FIRM</div>
+                <div class="text-xs text-red-500 font-extrabold uppercase tracking-widest mt-1">АДВОКАТСКАЯ КОНТОРА • АЛМАТЫ</div>
+              </div>
+            </div>
+
+            <p class="text-sm text-slate-300 leading-relaxed font-medium">
+              Мы не раздаем пустых надежд. Мы беремся за дело, когда другие опускают руки, и доводим защиту до безоговорочного результата.
+            </p>
+          </div>
+
+          <div class="space-y-3.5 text-xs text-slate-300 border-y border-white/10 py-5">
             <div>
               <span class="text-slate-500 block uppercase font-bold text-[10px]">Адрес адвокатского кабинета:</span>
               <span class="text-white font-bold text-sm">г. Алматы, Медеуский район, ул. Богенбай батыра, 23а</span>
@@ -702,47 +751,44 @@
           </div>
         </div>
 
-        <!-- Right: Urgent Combat Contact Form -->
-        <div class="lg:col-span-7 bg-[#0d1017] border-2 border-red-500/60 p-6 sm:p-8 rounded-2xl shadow-2xl shadow-red-950/80 space-y-5">
-          
-          <div>
-            <span class="text-xs font-extrabold uppercase text-red-500 tracking-widest">Не теряйте драгоценное время</span>
-            <h3 class="font-heading text-2xl font-black text-white uppercase mt-0.5">
-              ВСТУПИТЬ В БОЙ / СРОЧНЫЙ ВЫЕЗД
-            </h3>
-            <p class="text-xs text-slate-400 mt-0.5">
-              Адвокат Тамара или Нурлан свяжется с вами в течение 5–10 минут.
-            </p>
-          </div>
-
-          <form id="devil-main-form" class="space-y-4">
+        <!-- Right Column: Interactive Map at Bogenbay Batyra 23a (lg:col-span-7) -->
+        <div class="lg:col-span-7">
+          <div class="map-container-box">
             
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div>
-                <label class="block text-xs font-bold uppercase text-slate-300 mb-1">Ваше имя *</label>
-                <input type="text" id="input_devil_name" required placeholder="Как к вам обращаться?" class="devil-input">
+            <div class="p-3.5 bg-[#07080a] border-b border-white/10 flex items-center justify-between text-xs">
+              <div class="flex items-center gap-2">
+                <span class="w-2.5 h-2.5 rounded-full bg-red-500 animate-ping"></span>
+                <span class="font-heading font-bold text-white uppercase">ОФИС: ул. Богенбай батыра, 23а (г. Алматы)</span>
               </div>
+              <a href="https://2gis.kz/almaty/inside/9430047417451853/firm/70000001082633855?m=76.970608%2C43.254842%2F18.89" target="_blank" class="text-[11px] font-bold text-amber-400 hover:text-white uppercase flex items-center gap-1 transition">
+                <span>Открыть в 2ГИС →</span>
+              </a>
+            </div>
 
-              <div>
-                <label class="block text-xs font-bold uppercase text-slate-300 mb-1">Телефон (WhatsApp) *</label>
-                <input type="tel" id="input_devil_phone" required placeholder="+7 (7XX) XXX-XX-XX" class="devil-input font-bold font-mono">
+            <!-- Embedded Interactive Map (OpenStreetMap / 2GIS Location Center) -->
+            <div class="flex-1 w-full relative min-h-[340px]">
+              <iframe 
+                src="https://www.openstreetmap.org/export/embed.html?bbox=76.960608%2C43.249842%2C76.980608%2C43.259842&amp;layer=mapnik&amp;marker=43.254842%2C76.970608" 
+                title="Карта офиса T&N Law" 
+                loading="lazy">
+              </iframe>
+              
+              <!-- Floating Map Location Pin Card -->
+              <div class="absolute bottom-4 left-4 z-10 bg-black/90 border border-red-500/80 p-3 rounded-xl backdrop-blur-md shadow-2xl max-w-xs">
+                <div class="flex items-center gap-2 text-xs font-black text-red-400 uppercase">
+                  <span>📍</span>
+                  <span>Адвокатская контора «T&N»</span>
+                </div>
+                <div class="text-[11px] text-slate-300 mt-1">
+                  ул. Богенбай батыра, 23а (Медеуский р-н)
+                </div>
+                <div class="text-[10px] text-emerald-400 font-bold mt-0.5">
+                  ✓ Парковка для доверителей • Офис 24/7
+                </div>
               </div>
             </div>
 
-            <div>
-              <label class="block text-xs font-bold uppercase text-slate-300 mb-1">Что произошло? (Статья УК / Сумма иска / Обыск) *</label>
-              <textarea id="input_devil_message" rows="3" required placeholder="Кратко опишите ситуацию: кто вызывает, какая статья или сумма спора..." class="devil-input"></textarea>
-            </div>
-
-            <button type="submit" class="btn-combat w-full text-base py-3.5">
-              🔥 ВЫЗВАТЬ АДВОКАТА / НАЧАТЬ ЗАЩИТУ
-            </button>
-
-            <p class="text-[11px] text-slate-500 text-center">
-              🔒 100% Адвокатская тайна по ст. 9 Закона РК «Об адвокатской деятельности». Ваши данные никогда не покинут этот кабинет.
-            </p>
-          </form>
-
+          </div>
         </div>
 
       </div>
@@ -775,7 +821,7 @@
             Категория
           </span>
           <span class="text-xs text-slate-400 flex items-center gap-2">
-            <span id="article-modal-date">Сентябрь 2026</span>
+            <span id="article-modal-date">Февраль 2026</span>
             <span>•</span>
             <span id="article-modal-readtime">6 мин чтения</span>
           </span>
@@ -790,7 +836,7 @@
       <div class="overflow-y-auto p-6 sm:p-8 space-y-5">
         
         <div class="w-full h-56 sm:h-72 rounded-lg overflow-hidden relative shadow-md border border-white/10">
-          <img id="article-modal-banner" src="assets/media/advocate_1.jpeg" alt="Статья" class="w-full h-full object-cover">
+          <img id="article-modal-banner" src="assets/images/article_interrogation.jpg" alt="Статья" class="w-full h-full object-cover">
         </div>
 
         <h1 id="article-modal-title" class="font-heading text-2xl sm:text-3xl font-black text-white leading-tight uppercase">
@@ -817,7 +863,7 @@
             <span>⚔️</span>
             <span>Нужен персональный правовой контрудар по этой теме?</span>
           </div>
-          <p class="text-xs text-slate-300">
+          <p class="text-xs sm:text-sm text-slate-300">
             Оставьте телефон — адвокат свяжется с вами и проведет жесткий аудит ситуации.
           </p>
 

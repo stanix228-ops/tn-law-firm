@@ -58,31 +58,31 @@ h1, h2, h3, h4, .heading, .font-heading {
    TOP SCOREBOARD BAR ("Табло сверху сайта")
    ========================================================================== */
 .top-scoreboard-bar {
-  background: linear-gradient(90deg, #1a0304 0%, #07080a 50%, #1a0304 100%);
+  background: linear-gradient(90deg, #180203 0%, #07080a 50%, #180203 100%);
   border-bottom: 1px solid rgba(255, 30, 39, 0.35);
   box-shadow: 0 2px 15px rgba(0, 0, 0, 0.8);
   font-family: var(--font-body);
 }
 
 /* ==========================================================================
-   NAVIGATION
+   NAVIGATION PANEL (Clean single line inside floating bar)
    ========================================================================== */
 .combat-nav {
   position: sticky;
   top: 0;
   z-index: 100;
-  background-color: rgba(7, 8, 10, 0.95);
+  background: rgba(7, 8, 10, 0.95);
   backdrop-filter: blur(16px);
   border-bottom: 2px solid rgba(255, 30, 39, 0.3);
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.85);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.9);
 }
 
-.combat-nav--inner {
+.combat-nav--panel {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 80px;
-  gap: 24px;
+  height: 76px;
+  gap: 20px;
 }
 
 .combat-nav--navigation {
@@ -91,7 +91,7 @@ h1, h2, h3, h4, .heading, .font-heading {
   justify-content: center;
   flex-direction: row;
   flex-wrap: nowrap;
-  gap: clamp(14px, 1.8vw, 26px);
+  gap: clamp(14px, 1.8vw, 28px);
   list-style: none;
   margin: 0;
   padding: 0;
@@ -202,12 +202,12 @@ h1, h2, h3, h4, .heading, .font-heading {
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  padding: 10px 20px;
+  padding: 8px 18px;
   background: rgba(7, 8, 10, 0.9);
   border: 1px solid var(--color-crimson);
   border-radius: 9999px;
   color: #ffffff;
-  font-size: 0.78rem;
+  font-size: 0.75rem;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.08em;
@@ -253,7 +253,7 @@ h1, h2, h3, h4, .heading, .font-heading {
 }
 
 /* ==========================================================================
-   HERO SECTION (Clean Dark Obsidian with Ambient Aura)
+   HERO SECTION
    ========================================================================== */
 .combat-hero {
   position: relative;
@@ -309,7 +309,7 @@ h1, h2, h3, h4, .heading, .font-heading {
 }
 
 /* ==========================================================================
-   VIDEO SHOWCASE (Constrained 16:9 Player)
+   VIDEO SHOWCASE (Left Video, Right Text)
    ========================================================================== */
 .video-showcase-box {
   position: relative;
@@ -318,24 +318,16 @@ h1, h2, h3, h4, .heading, .font-heading {
   border: 2px solid rgba(255, 30, 39, 0.45);
   box-shadow: 0 15px 50px rgba(0, 0, 0, 0.85), 0 0 30px rgba(255, 30, 39, 0.25);
   background-color: #000000;
-  max-width: 900px;
-  margin: 0 auto;
+  width: 100%;
 }
 
 .video-showcase-box video {
   width: 100%;
   height: auto;
-  max-height: 460px;
+  max-height: 330px;
   aspect-ratio: 16 / 9;
   object-fit: cover;
   display: block;
-}
-
-.video-overlay-control {
-  position: absolute;
-  bottom: 20px;
-  right: 20px;
-  z-index: 10;
 }
 
 /* ==========================================================================
@@ -405,48 +397,75 @@ h1, h2, h3, h4, .heading, .font-heading {
 }
 
 /* ==========================================================================
-   MATERIALS QUOTE BANNER
+   MATERIALS QUOTE BANNER (Photo above, text below)
    ========================================================================== */
-.materials-quote-box {
-  position: relative;
+.materials-banner-card {
   background-color: var(--color-bg-card);
   border: 2px solid rgba(255, 30, 39, 0.45);
-  border-radius: 12px;
-  overflow: hidden;
+  border-radius: 16px;
+  padding: 32px 24px;
   box-shadow: 0 15px 50px rgba(0, 0, 0, 0.8), 0 0 35px rgba(255, 30, 39, 0.2);
-}
-
-.materials-quote-box .bg-img {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  opacity: 0.22;
-  filter: grayscale(0.5) contrast(1.2);
-}
-
-.materials-quote-box .content {
-  position: relative;
-  z-index: 2;
-  padding: 44px 24px;
   text-align: center;
+}
+
+/* ==========================================================================
+   LUXURY COMBAT FORM INPUTS (Redesigned)
+   ========================================================================== */
+.combat-form-box {
+  background: linear-gradient(145deg, #0f131c 0%, #07090e 100%);
+  border: 2px solid rgba(255, 30, 39, 0.5);
+  border-radius: 16px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.9), 0 0 30px rgba(255, 30, 39, 0.2);
+}
+
+.combat-input-group {
+  position: relative;
 }
 
 .devil-input {
   width: 100%;
-  background-color: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.15);
+  background-color: rgba(18, 24, 38, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.14);
   color: #ffffff;
-  padding: 13px 16px;
-  border-radius: 6px;
-  font-size: 0.9rem;
+  padding: 14px 18px;
+  border-radius: 8px;
+  font-size: 0.92rem;
+  font-weight: 500;
   transition: all 0.25s ease;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 .devil-input:focus {
   outline: none;
   border-color: #ff1e27;
   background-color: rgba(255, 30, 39, 0.08);
-  box-shadow: 0 0 15px rgba(255, 30, 39, 0.25);
+  box-shadow: 0 0 18px rgba(255, 30, 39, 0.35), inset 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.devil-input::placeholder {
+  color: #64748b;
+  font-weight: 400;
+}
+
+/* ==========================================================================
+   MAP CONTAINER
+   ========================================================================== */
+.map-container-box {
+  background-color: var(--color-bg-card);
+  border: 2px solid rgba(255, 30, 39, 0.4);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 15px 50px rgba(0, 0, 0, 0.85), 0 0 25px rgba(255, 30, 39, 0.2);
+  height: 100%;
+  min-height: 400px;
+  display: flex;
+  flex-direction: column;
+}
+
+.map-container-box iframe {
+  width: 100%;
+  height: 100%;
+  min-height: 340px;
+  border: none;
+  display: block;
 }
