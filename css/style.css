@@ -365,11 +365,11 @@ h1, h2, h3, h4, .heading, .font-heading {
 }
 
 /* ==========================================================================
-   CASE VIDEO (Top Crop)
+   CASE VIDEO (Centered Framing)
    ========================================================================== */
 #case-showcase-video, .video-top-crop {
   object-fit: cover !important;
-  object-position: center 0% !important; /* Max high capture as requested */
+  object-position: center center !important; /* Centered as requested */
 }
 
 /* ==========================================================================
