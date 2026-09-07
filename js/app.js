@@ -177,7 +177,7 @@ const TN_ARTICLES = [
   }
 ];
 
-// Reliable Article Image Map
+// Reliable Article Image Map (Both WebP and JPG support)
 const TN_ARTICLE_IMAGES = {
   'interrogation-rules': 'assets/images/article_interrogation.jpg',
   'supreme-court-cassation': 'assets/images/article_supreme_court.jpg',
@@ -222,14 +222,19 @@ function renderArticlesList(categoryId = 'all') {
     allArticles.filter(a => a.categoryId === categoryId);
 
   container.innerHTML = filtered.map(article => {
-    const imgSrc = article.image || TN_ARTICLE_IMAGES[article.id] || 'assets/images/article_interrogation.jpg';
+    const baseImg = article.image || TN_ARTICLE_IMAGES[article.id] || 'assets/images/article_interrogation.jpg';
+    const webpImg = baseImg.replace('.jpg', '.webp');
     return `
     <article class="group bg-[#0e1117] border border-red-500/20 hover:border-red-500 rounded-xl overflow-hidden shadow-xl hover:shadow-2xl hover:shadow-red-950/40 transition-all duration-300 flex flex-col">
-      <div class="relative h-56 overflow-hidden bg-slate-900">
-        <img src="${imgSrc}" 
-             alt="${article.title}" 
-             onerror="this.onerror=null; this.src='assets/images/article_interrogation.jpg';"
-             class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-90 group-hover:opacity-100">
+      <div class="relative h-56 overflow-hidden bg-[#07080a]">
+        <picture>
+          <source srcset="${webpImg}?v=6.0" type="image/webp">
+          <img src="${baseImg}?v=6.0" 
+               alt="${article.title}" 
+               loading="lazy"
+               onerror="if(!this.dataset.fallback){this.dataset.fallback='1'; this.src=this.src.includes('assets/images')?this.src.replace('assets/images','assets/media'):'assets/media/materials_bg.jpeg';}"
+               class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-90 group-hover:opacity-100 block">
+        </picture>
         <div class="absolute top-3 left-3 bg-red-600/90 text-white text-[11px] font-extrabold uppercase px-3 py-1 rounded shadow">
           ${article.category}
         </div>
@@ -578,6 +583,29 @@ function closeSuccessModal() {
   }
 }
 
+// Case Video Auto-play & Interaction Controller
+function initCaseVideoController() {
+  const caseVideo = document.getElementById('case-showcase-video');
+  if (!caseVideo) return;
+
+  caseVideo.muted = true;
+  caseVideo.playsInline = true;
+  
+  const tryPlay = () => {
+    const playPromise = caseVideo.play();
+    if (playPromise !== undefined) {
+      playPromise.catch(err => {
+        console.log('Case video autoplay prevented, awaiting user click:', err);
+      });
+    }
+  };
+
+  tryPlay();
+  window.addEventListener('scroll', tryPlay, { once: true });
+  window.addEventListener('touchstart', tryPlay, { once: true });
+  window.addEventListener('click', tryPlay, { once: true });
+}
+
 // Mobile Menu Toggle
 function initMobileMenu() {
   const toggleBtn = document.querySelector('.mobile-header--nav-toggle');
@@ -593,6 +621,7 @@ function initMobileMenu() {
 // DOM Ready
 document.addEventListener('DOMContentLoaded', () => {
   initVideoSoundController();
+  initCaseVideoController();
   initPhoneMasks();
   initArticlesFilter();
   initAllForms();

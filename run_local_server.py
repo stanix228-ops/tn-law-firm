@@ -1,5 +1,6 @@
 import http.server
 import os
+import sys
 
 PORT = 20000
 DIRECTORY = os.path.dirname(os.path.abspath(__file__))
@@ -15,8 +16,13 @@ class Handler(http.server.SimpleHTTPRequestHandler):
         self.send_header('Access-Control-Allow-Origin', '*')
         super().end_headers()
 
+    def log_message(self, format, *args):
+        with open(os.path.join(DIRECTORY, 'server_log.txt'), 'a', encoding='utf-8') as f:
+            f.write(format % args + '\n')
+
 if __name__ == '__main__':
     http.server.ThreadingHTTPServer.allow_reuse_address = True
-    server = http.server.ThreadingHTTPServer(('0.0.0.0', PORT), Handler)
-    print(f'Threading HTTP Server listening on port {PORT}', flush=True)
+    server = http.server.ThreadingHTTPServer(('', PORT), Handler)
+    with open(os.path.join(DIRECTORY, 'server_log.txt'), 'a', encoding='utf-8') as f:
+        f.write('SERVER_STARTED\n')
     server.serve_forever()
