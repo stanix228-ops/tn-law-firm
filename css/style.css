@@ -1,20 +1,20 @@
-@import url('https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Cinzel:wght@400;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Montserrat:ital,wght@0,400;0,600;0,700;0,800;0,900;1,700;1,900&family=Oswald:wght@500;600;700&display=swap');
 
 :root {
-  --color-primary: #121d28;
-  --color-primary-dark: #0a1118;
-  --color-primary-light: #1c2b3a;
-  --color-gold: #c49a45;
-  --color-gold-hover: #d8ad54;
-  --color-gold-dark: #9e792e;
-  --color-gold-light: #f5eedb;
-  --color-bg-light: #ffffff;
-  --color-bg-alt: #f4f6f8;
-  --color-text-main: #2b353e;
-  --color-text-muted: #6c7a87;
-  --color-border: #e2e8f0;
-  --font-heading: 'Cinzel', 'Playfair Display', serif;
-  --font-body: 'Archivo', sans-serif;
+  --color-bg-dark: #07080a;
+  --color-bg-card: #0e1117;
+  --color-bg-card-hover: #161b24;
+  --color-crimson: #ff1e27;
+  --color-crimson-dark: #b30c12;
+  --color-crimson-glow: rgba(255, 30, 39, 0.45);
+  --color-gold: #d4af37;
+  --color-gold-glow: rgba(212, 175, 55, 0.35);
+  --color-text-light: #f8fafc;
+  --color-text-muted: #94a3b8;
+  --color-border-dark: rgba(255, 255, 255, 0.1);
+  --color-border-crimson: rgba(255, 30, 39, 0.4);
+  --font-heading: 'Oswald', 'Montserrat', 'Cinzel', sans-serif;
+  --font-body: 'Montserrat', sans-serif;
 }
 
 * {
@@ -24,882 +24,417 @@
 
 body {
   font-family: var(--font-body);
-  background-color: var(--color-bg-light);
-  color: var(--color-text-main);
+  background-color: var(--color-bg-dark);
+  color: var(--color-text-light);
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
   line-height: 1.6;
 }
 
-h1, h2, h3, h4, .heading, .font-cinzel {
+/* ==========================================================================
+   DEVIL'S ADVOCATE TYPOGRAPHY & GLOWS
+   ========================================================================== */
+h1, h2, h3, h4, .heading, .font-heading {
   font-family: var(--font-heading);
-  letter-spacing: 0.03em;
+  letter-spacing: 0.04em;
   text-transform: uppercase;
 }
 
+.text-gradient-crimson {
+  background: linear-gradient(135deg, #ffffff 0%, #ff6b6b 40%, #ff1e27 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.text-gradient-gold {
+  background: linear-gradient(135deg, #ffffff 0%, #f6d365 40%, #d4af37 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.glow-crimson {
+  text-shadow: 0 0 20px rgba(255, 30, 39, 0.6), 0 0 40px rgba(255, 30, 39, 0.3);
+}
+
+.glow-box-crimson {
+  box-shadow: 0 0 30px rgba(255, 30, 39, 0.25), inset 0 0 15px rgba(255, 30, 39, 0.1);
+}
+
+.glow-box-gold {
+  box-shadow: 0 0 30px rgba(212, 175, 55, 0.2), inset 0 0 15px rgba(212, 175, 55, 0.05);
+}
+
 /* ==========================================================================
-   BUTTONS (James Newman Style)
+   BUTTONS (Aggressive, High-Energy Devil Style)
    ========================================================================== */
-.button, .button--primary {
+.btn-devil {
+  position: relative;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   font-family: var(--font-heading);
-  font-size: 0.82rem;
-  font-weight: 700;
+  font-size: 0.92rem;
+  font-weight: 800;
   text-transform: uppercase;
-  letter-spacing: 0.08em;
-  padding: 12px 24px;
-  background-color: var(--color-gold);
+  letter-spacing: 0.12em;
+  padding: 16px 36px;
+  background: linear-gradient(135deg, #ff1e27 0%, #b30c12 100%);
   color: #ffffff;
-  border: 1px solid var(--color-gold);
-  border-radius: 4px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 6px;
   cursor: pointer;
   transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   text-decoration: none;
-  box-shadow: 0 4px 15px rgba(196, 154, 69, 0.25);
-  white-space: nowrap;
+  box-shadow: 0 4px 25px rgba(255, 30, 39, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.4);
+  overflow: hidden;
 }
 
-.button:hover, .button--primary:hover {
-  background-color: #ffffff;
-  color: var(--color-primary);
-  border-color: var(--color-primary);
+.btn-devil::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transition: left 0.6s ease;
+}
+
+.btn-devil:hover::before {
+  left: 100%;
+}
+
+.btn-devil:hover {
+  background: linear-gradient(135deg, #ff3b42 0%, #d10e15 100%);
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 8px 35px rgba(255, 30, 39, 0.7), inset 0 1px 0 rgba(255, 255, 255, 0.6);
+  color: #ffffff;
+}
+
+.btn-devil-outline {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-heading);
+  font-size: 0.88rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  padding: 14px 30px;
+  background-color: rgba(14, 17, 23, 0.85);
+  color: #ffffff;
+  border: 2px solid var(--color-crimson);
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  backdrop-blur: 8px;
+}
+
+.btn-devil-outline:hover {
+  background-color: var(--color-crimson);
+  color: #ffffff;
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(18, 29, 40, 0.15);
+  box-shadow: 0 0 25px rgba(255, 30, 39, 0.5);
 }
 
-.button--outline-gold {
-  background-color: transparent;
-  color: var(--color-gold);
-  border: 2px solid var(--color-gold);
-}
-
-.button--outline-gold:hover {
-  background-color: var(--color-gold);
+.btn-sound-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 20px;
+  background: rgba(14, 17, 23, 0.85);
+  border: 1px solid var(--color-crimson);
+  border-radius: 9999px;
   color: #ffffff;
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 0 20px rgba(255, 30, 39, 0.3);
 }
 
-.button--dark {
-  background-color: var(--color-primary);
-  color: #ffffff;
-  border-color: var(--color-primary);
+.btn-sound-toggle:hover {
+  background: var(--color-crimson);
+  transform: scale(1.05);
+  box-shadow: 0 0 30px rgba(255, 30, 39, 0.6);
 }
 
-.button--dark:hover {
-  background-color: var(--color-gold);
-  border-color: var(--color-gold);
-  color: #ffffff;
+/* Audio wave animation */
+.sound-wave {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  height: 16px;
+}
+
+.sound-bar {
+  width: 3px;
+  height: 100%;
+  background-color: #ff1e27;
+  border-radius: 2px;
+  animation: wave 1s ease-in-out infinite;
+}
+
+.btn-sound-toggle.playing .sound-bar {
+  background-color: #ffffff;
+}
+
+.sound-bar:nth-child(1) { animation-delay: 0.1s; }
+.sound-bar:nth-child(2) { animation-delay: 0.3s; }
+.sound-bar:nth-child(3) { animation-delay: 0.2s; }
+.sound-bar:nth-child(4) { animation-delay: 0.4s; }
+
+@keyframes wave {
+  0%, 100% { height: 4px; }
+  50% { height: 16px; }
 }
 
 /* ==========================================================================
-   HEADER & NAVIGATION (Wider, Full-Width Responsive Container)
+   NAVIGATION
    ========================================================================== */
-.main-nav {
+.devil-nav {
   position: sticky;
   top: 0;
   z-index: 100;
-  background-color: #ffffff;
-  border-bottom: 2px solid #f0f2f5;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
-  width: 100%;
+  background-color: rgba(7, 8, 10, 0.92);
+  backdrop-filter: blur(14px);
+  border-bottom: 2px solid rgba(255, 30, 39, 0.3);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.8);
 }
 
-.main-nav--inner {
+.devil-nav--inner {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 86px;
-  gap: 24px;
-  width: 100%;
-  max-width: 1650px;
-  margin: 0 auto;
+  height: 84px;
+  gap: 20px;
 }
 
-.main-nav--logo {
-  flex-shrink: 0;
-}
-
-.main-nav--navigation {
+.devil-nav--navigation {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: clamp(14px, 2vw, 32px);
+  gap: clamp(12px, 1.8vw, 28px);
   list-style: none;
   margin: 0;
   padding: 0;
-  flex-shrink: 0;
-  flex-wrap: nowrap;
 }
 
-.main-nav--navigation > li {
-  white-space: nowrap;
-  flex-shrink: 0;
-}
-
-.main-nav--navigation > li > a {
-  font-family: var(--font-body);
-  font-size: clamp(0.78rem, 0.9vw, 0.88rem);
+.devil-nav--navigation > li > a {
+  font-family: var(--font-heading);
+  font-size: 0.85rem;
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.05em;
-  color: var(--color-primary);
+  letter-spacing: 0.08em;
+  color: #cbd5e1;
   text-decoration: none;
-  transition: color 0.2s ease;
+  transition: all 0.2s ease;
+  padding: 6px 0;
   position: relative;
-  padding: 8px 0;
   white-space: nowrap;
-  display: inline-block;
 }
 
-.main-nav--navigation > li > a:hover {
-  color: var(--color-gold);
+.devil-nav--navigation > li > a:hover {
+  color: #ff1e27;
+  text-shadow: 0 0 12px rgba(255, 30, 39, 0.8);
 }
 
-.main-nav--navigation > li > a::after {
+.devil-nav--navigation > li > a::after {
   content: '';
   position: absolute;
   bottom: 0;
   left: 0;
   width: 0%;
   height: 2px;
-  background-color: var(--color-gold);
+  background-color: #ff1e27;
+  box-shadow: 0 0 8px #ff1e27;
   transition: width 0.3s ease;
 }
 
-.main-nav--navigation > li > a:hover::after {
+.devil-nav--navigation > li > a:hover::after {
   width: 100%;
 }
 
-.quick-links-wrapper {
-  flex-shrink: 0;
-}
-
-.main-nav--quick-links .button {
-  padding: 12px 22px;
-  font-size: 0.82rem;
-  white-space: nowrap;
-}
-
 /* ==========================================================================
-   HERO BLOCK
+   HERO SECTION (Devil's Advocate Wallpaper)
    ========================================================================== */
-.hero-block {
+.devil-hero {
   position: relative;
-  min-height: 600px;
+  min-height: 85vh;
   display: flex;
   align-items: center;
-  background-color: var(--color-primary);
+  background-color: #07080a;
   overflow: hidden;
 }
 
-.hero-block--background-image {
+.devil-hero--bg {
   position: absolute;
   inset: 0;
   z-index: 1;
 }
 
-.hero-block--background-image img {
+.devil-hero--bg img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   object-position: center;
-  opacity: 0.45;
+  opacity: 0.65;
+  filter: contrast(1.15) brightness(0.9);
 }
 
-.hero-block--background-image::after {
+.devil-hero--bg::after {
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(90deg, rgba(18, 29, 40, 0.95) 0%, rgba(18, 29, 40, 0.75) 50%, rgba(18, 29, 40, 0.4) 100%);
+  background: radial-gradient(circle at center, rgba(7, 8, 10, 0.4) 0%, rgba(7, 8, 10, 0.85) 75%, #07080a 100%),
+              linear-gradient(180deg, rgba(7, 8, 10, 0.7) 0%, transparent 40%, rgba(7, 8, 10, 0.95) 100%);
 }
 
-.hero-block--inner {
+.devil-hero--inner {
   position: relative;
   z-index: 2;
-  width: 100%;
   padding: 80px 0;
 }
 
-.hero-block--title h1 {
-  font-size: clamp(2.2rem, 5vw, 4rem);
-  font-weight: 800;
-  line-height: 1.15;
-  color: #ffffff;
-  margin-bottom: 12px;
+/* ==========================================================================
+   VIDEO PLAYER SHOWCASE (Loop video with sound toggle)
+   ========================================================================== */
+.video-showcase-box {
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 2px solid rgba(255, 30, 39, 0.4);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8), 0 0 30px rgba(255, 30, 39, 0.25);
+  background-color: #000000;
 }
 
-.hero-block--title .sub-heading {
-  font-family: var(--font-body);
-  font-size: clamp(1rem, 2vw, 1.3rem);
-  font-weight: 300;
-  color: var(--color-gold-light);
-  letter-spacing: 0.05em;
-  margin-bottom: 28px;
+.video-showcase-box video {
+  width: 100%;
+  height: auto;
+  max-height: 600px;
+  object-fit: cover;
+  display: block;
+}
+
+.video-overlay-control {
+  position: absolute;
+  bottom: 24px;
+  right: 24px;
+  z-index: 10;
 }
 
 /* ==========================================================================
-   RESULTS / VERDICTS & SETTLEMENTS SECTION
+   REALITY CHECK CARDS
    ========================================================================== */
-.results-sec {
-  background-color: var(--color-primary);
-  color: #ffffff;
-  padding: 60px 0;
-  border-top: 3px solid var(--color-gold);
-  border-bottom: 3px solid var(--color-gold);
-}
-
-.results-sec .heading {
-  font-size: 1.6rem;
-  color: var(--color-gold);
-  text-align: center;
-  margin-bottom: 40px;
-}
-
-.results-list {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 30px;
-  margin-bottom: 40px;
-  text-align: center;
-}
-
-.result-item {
-  padding: 20px;
-  border: 1px solid rgba(196, 154, 69, 0.3);
-  background-color: rgba(255, 255, 255, 0.03);
-  border-radius: 6px;
+.reality-card {
+  background-color: #0e1117;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-left: 4px solid #ff1e27;
+  border-radius: 8px;
+  padding: 28px;
   transition: all 0.3s ease;
 }
 
-.result-item:hover {
-  border-color: var(--color-gold);
-  background-color: rgba(196, 154, 69, 0.08);
+.reality-card:hover {
   transform: translateY(-4px);
-}
-
-.result-amount {
-  font-family: var(--font-heading);
-  font-size: clamp(1.8rem, 3vw, 2.4rem);
-  font-weight: 800;
-  color: #ffffff;
-  margin-bottom: 6px;
-}
-
-.result-description {
-  font-size: 0.88rem;
-  color: #cbd5e1;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  font-weight: 500;
+  background-color: #141820;
+  border-color: rgba(255, 30, 39, 0.5);
+  box-shadow: 0 10px 30px rgba(255, 30, 39, 0.15);
 }
 
 /* ==========================================================================
-   INTRO SECTION (Two Generations / One Goal)
+   ATTORNEY DEVIL PORTRAITS
    ========================================================================== */
-.intro-sec {
-  padding: 90px 0;
-  background-color: #ffffff;
-}
-
-.intro-sec .heading {
-  font-size: clamp(1.8rem, 3.5vw, 2.6rem);
-  color: var(--color-primary);
-  line-height: 1.2;
-}
-
-.intro-sec .bar {
-  width: 60px;
-  height: 3px;
-  background-color: var(--color-gold);
-  margin: 20px 0;
-}
-
-.intro-sec .content p {
-  color: #475569;
-  font-size: 1.05rem;
-  line-height: 1.8;
-  margin-top: 15px;
-}
-
-/* ==========================================================================
-   BADGES SECTION
-   ========================================================================== */
-.homepage-badges {
-  background-color: var(--color-bg-alt);
-  padding: 40px 0;
-  border-top: 1px solid #e2e8f0;
-  border-bottom: 1px solid #e2e8f0;
-}
-
-.badges-container {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
-  gap: 36px;
-}
-
-.badge-item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  padding: 16px 20px;
-  background-color: #ffffff;
-  border: 1px solid #e2e8f0;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
-  min-width: 140px;
-  transition: all 0.25s ease;
-}
-
-.badge-item:hover {
-  border-color: var(--color-gold);
-  transform: translateY(-2px);
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
-}
-
-.badge-icon {
-  font-size: 2rem;
-  margin-bottom: 8px;
-}
-
-.badge-title {
-  font-family: var(--font-heading);
-  font-size: 0.75rem;
-  font-weight: 700;
-  color: var(--color-primary);
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-}
-
-.badge-subtitle {
-  font-size: 0.7rem;
-  color: var(--color-text-muted);
-}
-
-/* ==========================================================================
-   PRACTICE AREAS SECTION (Signature Newman Layout)
-   ========================================================================== */
-.practice-areas {
-  display: flex;
-  min-height: 650px;
-  background-color: #ffffff;
-  border-bottom: 1px solid #e2e8f0;
-}
-
-.pa-left {
-  flex: 1;
-  padding: 80px 60px;
-  background-color: #ffffff;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
-.pa-left .heading {
-  font-size: clamp(2rem, 3.5vw, 2.8rem);
-  color: var(--color-primary);
-  margin: 16px 0 12px;
-}
-
-.pa-left .content p {
-  color: #64748b;
-  font-size: 1rem;
-  margin-bottom: 30px;
-}
-
-.pa-left .button-container {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 12px;
-}
-
-.pa-btn {
-  padding: 14px 18px;
-  font-family: var(--font-heading);
-  font-size: 0.78rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  background-color: var(--color-bg-alt);
-  color: var(--color-primary);
-  border: 1px solid #cbd5e1;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: all 0.25s ease;
-  text-align: left;
-}
-
-.pa-btn:hover, .pa-btn.active {
-  background-color: var(--color-primary);
-  color: #ffffff;
-  border-color: var(--color-primary);
-  border-left: 4px solid var(--color-gold);
-  transform: translateX(4px);
-}
-
-.pa-right {
-  flex: 1;
+.attorney-devil-card {
   position: relative;
-  min-height: 500px;
-  background-color: var(--color-primary);
+  border-radius: 8px;
   overflow: hidden;
-}
-
-.pa-bg {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: opacity 0.5s ease-in-out;
-  opacity: 0;
-  z-index: 1;
-}
-
-.pa-bg.active {
-  opacity: 1;
-}
-
-.pa-right::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(0deg, rgba(18, 29, 40, 0.92) 0%, rgba(18, 29, 40, 0.6) 60%, rgba(18, 29, 40, 0.3) 100%);
-  z-index: 2;
-}
-
-.pa-content {
-  position: absolute;
-  bottom: 40px;
-  left: 40px;
-  right: 40px;
-  z-index: 3;
-  color: #ffffff;
+  border: 1px solid rgba(255, 30, 39, 0.3);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+  background-color: #0e1117;
   transition: all 0.4s ease;
 }
 
-.pa-content.hide-content {
-  display: none;
-  opacity: 0;
-  transform: translateY(20px);
-}
-
-.pa-content.active {
-  display: block;
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.pa-content .heading {
-  font-size: 1.8rem;
-  color: var(--color-gold);
-  margin: 12px 0 8px;
-}
-
-.pa-content p {
-  font-size: 0.95rem;
-  color: #e2e8f0;
-  margin-bottom: 20px;
-  line-height: 1.6;
-}
-
-@media (max-width: 1024px) {
-  .practice-areas {
-    flex-direction: column;
-  }
-  .pa-left {
-    padding: 60px 24px;
-  }
-  .pa-left .button-container {
-    grid-template-columns: 1fr;
-  }
-  .pa-right {
-    min-height: 450px;
-  }
-}
-
-/* ==========================================================================
-   FIRM GOALS SECTION
-   ========================================================================== */
-.firm-goals-sec {
-  padding: 90px 0;
-  background-color: var(--color-bg-alt);
-}
-
-.cards-intro .heading {
-  font-size: clamp(1.8rem, 3.5vw, 2.5rem);
-  text-align: center;
-  color: var(--color-primary);
-  margin-bottom: 12px;
-}
-
-.cards-intro .heading span {
-  color: var(--color-gold);
-}
-
-.cards-intro p {
-  text-align: center;
-  max-width: 750px;
-  margin: 0 auto 50px;
-  color: #64748b;
-  font-size: 1.05rem;
-}
-
-.cards-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 30px;
-}
-
-.goal-card {
-  background-color: #ffffff;
-  padding: 40px 32px;
-  border: 1px solid #e2e8f0;
-  border-top: 4px solid var(--color-gold);
-  border-radius: 6px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
-  transition: all 0.3s ease;
-}
-
-.goal-card:hover {
+.attorney-devil-card:hover {
   transform: translateY(-6px);
-  box-shadow: 0 12px 30px rgba(18, 29, 40, 0.1);
-  border-top-color: var(--color-primary);
+  border-color: #ff1e27;
+  box-shadow: 0 15px 40px rgba(255, 30, 39, 0.3);
 }
 
-.goal-heading {
-  font-size: 1.35rem;
-  color: var(--color-primary);
-  margin: 16px 0 12px;
-  line-height: 1.3;
-}
-
-.goal-content p {
-  color: #64748b;
-  font-size: 0.95rem;
-  line-height: 1.7;
-}
-
-/* ==========================================================================
-   ATTORNEY BIO SECTION
-   ========================================================================== */
-.attorney-bio-sec {
-  padding: 90px 0;
-  background-color: #ffffff;
-}
-
-.attorney-bio-sec .inner-container {
-  display: grid;
-  grid-template-columns: 1fr 1.2fr;
-  gap: 60px;
-  align-items: center;
-}
-
-@media (max-width: 1024px) {
-  .attorney-bio-sec .inner-container {
-    grid-template-columns: 1fr;
-  }
-}
-
-.attorney-bio-sec .inner-container--left .heading {
-  font-size: clamp(2rem, 3.5vw, 2.8rem);
-  color: var(--color-primary);
-  margin-bottom: 20px;
-}
-
-.attorney-bio-sec .inner-container--left .heading span {
-  color: var(--color-gold);
-}
-
-.attorney-bio-sec .inner-container--left p {
-  color: #475569;
-  font-size: 1.05rem;
-  line-height: 1.8;
-  margin-bottom: 30px;
-}
-
-.attorney-bio-sec .inner-container--right {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 24px;
-}
-
-.attorney-image {
-  position: relative;
-  display: block;
-  border-radius: 6px;
-  overflow: hidden;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-  border: 1px solid #e2e8f0;
-  text-decoration: none;
-}
-
-.attorney-image img {
+.attorney-devil-card img {
   width: 100%;
-  height: 380px;
+  height: 420px;
   object-fit: cover;
   object-position: top;
-  transition: transform 0.5s ease;
+  transition: transform 0.6s ease;
+  filter: contrast(1.05);
 }
 
-.attorney-image:hover img {
-  transform: scale(1.05);
+.attorney-devil-card:hover img {
+  transform: scale(1.06);
 }
 
-.attorney-image .name-container {
+.attorney-devil-card .info-box {
   position: absolute;
   bottom: 0;
   left: 0;
   right: 0;
-  padding: 20px;
-  background: linear-gradient(0deg, rgba(18, 29, 40, 0.95) 0%, rgba(18, 29, 40, 0.7) 70%, transparent 100%);
-  color: #ffffff;
-}
-
-.attorney-image .name {
-  font-family: var(--font-heading);
-  font-size: 1.25rem;
-  font-weight: 700;
-  color: #ffffff;
-}
-
-.attorney-image .title {
-  font-size: 0.8rem;
-  color: var(--color-gold);
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  font-weight: 600;
-}
-
-/* ==========================================================================
-   TESTIMONIALS SECTION
-   ========================================================================== */
-.testimonials-sec {
-  position: relative;
-  padding: 100px 0;
-  background-color: var(--color-primary);
-  color: #ffffff;
-}
-
-.testimonials-sec .triangle {
-  position: absolute;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 0;
-  height: 0;
-  border-left: 30px solid transparent;
-  border-right: 30px solid transparent;
-  border-top: 25px solid #ffffff;
-}
-
-.testimonials-sec .heading-container {
-  text-align: center;
-  margin-bottom: 50px;
-}
-
-.testimonials-sec .heading-container .heading {
-  font-size: clamp(2rem, 3.5vw, 2.8rem);
-  color: #ffffff;
-  margin-top: 14px;
-}
-
-.testimonials-sec .heading-container .heading span {
-  color: var(--color-gold);
-}
-
-.testimonial-card {
-  background-color: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(196, 154, 69, 0.3);
-  padding: 40px;
-  border-radius: 6px;
-  max-width: 800px;
-  margin: 0 auto;
-}
-
-.testimonial-card p {
-  font-size: 1.15rem;
-  font-style: italic;
-  line-height: 1.8;
-  color: #f1f5f9;
-  margin-bottom: 24px;
-}
-
-.reviewer-container {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
-  padding-top: 16px;
-}
-
-.reviewer-name {
-  font-family: var(--font-heading);
-  font-size: 1rem;
-  font-weight: 700;
-  color: var(--color-gold);
-}
-
-/* ==========================================================================
-   BLOG / INSIGHTS SECTION
-   ========================================================================== */
-.blog-posts {
-  padding: 90px 0;
-  background-color: var(--color-bg-alt);
-}
-
-.blog-posts .inner-container {
-  display: grid;
-  grid-template-columns: 320px 1fr;
-  gap: 50px;
-}
-
-@media (max-width: 1024px) {
-  .blog-posts .inner-container {
-    grid-template-columns: 1fr;
-  }
-}
-
-.blog-posts--post {
-  display: flex;
-  gap: 24px;
-  background-color: #ffffff;
   padding: 24px;
-  border: 1px solid #e2e8f0;
-  border-radius: 6px;
-  margin-bottom: 24px;
-  transition: all 0.25s ease;
+  background: linear-gradient(0deg, #07080a 0%, rgba(7, 8, 10, 0.85) 70%, transparent 100%);
+  color: #ffffff;
 }
 
-.blog-posts--post:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
-  border-color: var(--color-gold);
-}
-
-.blog-posts--post--image {
-  width: 200px;
-  height: 130px;
-  flex-shrink: 0;
-  border-radius: 4px;
+/* ==========================================================================
+   MATERIALS QUOTE BANNER
+   ========================================================================== */
+.materials-quote-box {
+  position: relative;
+  background-color: #0e1117;
+  border: 2px solid rgba(255, 30, 39, 0.5);
+  border-radius: 12px;
   overflow: hidden;
+  box-shadow: 0 15px 50px rgba(0, 0, 0, 0.8), 0 0 35px rgba(255, 30, 39, 0.2);
 }
 
-.blog-posts--post--image img {
+.materials-quote-box .bg-img {
+  position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
+  opacity: 0.25;
+  filter: grayscale(0.6) contrast(1.2);
 }
 
-.blog-posts--post--title {
-  font-family: var(--font-heading);
-  font-size: 1.15rem;
-  font-weight: 700;
-  color: var(--color-primary);
-  text-decoration: none;
-  display: block;
-  margin-bottom: 8px;
-}
-
-.blog-posts--post--title:hover {
-  color: var(--color-gold);
-}
-
-.blog-posts--post--copy {
-  font-size: 0.9rem;
-  color: #64748b;
-  line-height: 1.6;
+.materials-quote-box .content {
+  position: relative;
+  z-index: 2;
+  padding: 60px 40px;
+  text-align: center;
 }
 
 /* ==========================================================================
-   FOOTER & EMBEDDED FORM
+   FORM INPUTS
    ========================================================================== */
-.footer {
-  background-color: var(--color-primary);
-  color: #ffffff;
-  padding: 90px 0 50px;
-  border-top: 4px solid var(--color-gold);
-}
-
-.footer .inner-container {
-  display: grid;
-  grid-template-columns: 1fr 1.3fr;
-  gap: 60px;
-}
-
-@media (max-width: 1024px) {
-  .footer .inner-container {
-    grid-template-columns: 1fr;
-  }
-}
-
-.footer .inner-container--left img {
+.devil-input {
   width: 100%;
-  height: 480px;
-  object-fit: cover;
+  background-color: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #ffffff;
+  padding: 14px 18px;
   border-radius: 6px;
-  border: 1px solid rgba(196, 154, 69, 0.3);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  font-size: 0.95rem;
+  transition: all 0.25s ease;
 }
 
-.footer--form .heading {
-  font-size: 1.8rem;
-  color: var(--color-gold);
-  margin-bottom: 24px;
-}
-
-.footer-input {
-  width: 100%;
-  background-color: rgba(255, 255, 255, 0.07);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  color: #ffffff;
-  padding: 12px 16px;
-  border-radius: 4px;
-  font-size: 0.9rem;
-  transition: all 0.2s ease;
-}
-
-.footer-input:focus {
+.devil-input:focus {
   outline: none;
-  border-color: var(--color-gold);
-  background-color: rgba(255, 255, 255, 0.12);
-}
-
-/* ==========================================================================
-   ENDCAP LEGAL BAR
-   ========================================================================== */
-.endcap--container {
-  background-color: var(--color-primary-dark);
-  color: #94a3b8;
-  padding: 24px 0;
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
-  font-size: 0.8rem;
-}
-
-.endcap--content {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 16px;
-}
-
-.endcap--links-list {
-  display: flex;
-  gap: 20px;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-.endcap--links-list a {
-  color: #94a3b8;
-  text-decoration: none;
-}
-
-.endcap--links-list a:hover {
-  color: var(--color-gold);
+  border-color: #ff1e27;
+  background-color: rgba(255, 30, 39, 0.08);
+  box-shadow: 0 0 15px rgba(255, 30, 39, 0.3);
 }
