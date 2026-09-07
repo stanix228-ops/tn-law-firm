@@ -459,7 +459,7 @@ h1, h2, h3, h4, .heading, .font-heading {
 }
 
 /* ==========================================================================
-   MAP CONTAINER (Spacious & Tall)
+   MAP CONTAINER (Dark Interactive Map & Custom Leaflet Controls)
    ========================================================================== */
 .map-container-box {
   background-color: var(--color-bg-card);
@@ -473,10 +473,47 @@ h1, h2, h3, h4, .heading, .font-heading {
   flex-direction: column;
 }
 
-.map-container-box iframe {
+#office-leaflet-map {
   width: 100%;
   height: 100%;
-  min-height: 420px;
-  border: none;
-  display: block;
+  min-height: 460px;
+  background-color: #07080a;
+}
+
+.map-dark-invert {
+  filter: invert(90%) hue-rotate(180deg) brightness(85%) contrast(110%);
+}
+
+.custom-leaflet-marker {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.leaflet-popup-content-wrapper, .leaflet-popup-tip {
+  background: #0e1117 !important;
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.95) !important;
+  border: 1px solid rgba(255, 30, 39, 0.6) !important;
+}
+
+.leaflet-popup-content {
+  margin: 0 !important;
+  line-height: 1.4 !important;
+}
+
+.leaflet-container {
+  background: #07080a !important;
+  font-family: 'Montserrat', sans-serif !important;
+}
+
+.leaflet-bar a {
+  background-color: #0e1117 !important;
+  color: #ffffff !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15) !important;
+}
+
+.leaflet-bar a:hover {
+  background-color: #ff1e27 !important;
+  color: #ffffff !important;
 }

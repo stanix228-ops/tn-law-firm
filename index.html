@@ -42,7 +42,10 @@
     }
   </script>
 
-  <link rel="stylesheet" href="css/style.css?v=11.0">
+  <!-- Leaflet Map CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+
+  <link rel="stylesheet" href="css/style.css?v=12.0">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚖️</text></svg>">
 </head>
 <body class="bg-[#07080a] text-slate-100 font-body antialiased selection:bg-red-600 selection:text-white">
@@ -781,25 +784,31 @@
               </a>
             </div>
 
-            <!-- Embedded Interactive Map (Full Height) -->
-            <div class="flex-1 w-full relative min-h-[420px]">
-              <iframe 
-                src="https://www.openstreetmap.org/export/embed.html?bbox=76.960608%2C43.249842%2C76.980608%2C43.259842&amp;layer=mapnik&amp;marker=43.254842%2C76.970608" 
-                title="Карта офиса T&N Law" 
-                loading="lazy">
-              </iframe>
+            <!-- Embedded Dark Interactive Map (Leaflet + CartoDB Dark Matter) -->
+            <div class="flex-1 w-full relative min-h-[460px] bg-[#07080a]">
+              <!-- Leaflet Map Container -->
+              <div id="office-leaflet-map" class="w-full h-full min-h-[460px] z-0">
+                <!-- Fallback Dark Iframe if JS is disabled -->
+                <iframe 
+                  src="https://www.openstreetmap.org/export/embed.html?bbox=76.960608%2C43.249842%2C76.980608%2C43.259842&amp;layer=mapnik&amp;marker=43.254842%2C76.970608" 
+                  title="Карта офиса T&N Law" 
+                  loading="lazy"
+                  class="map-dark-invert w-full h-full min-h-[460px] border-none">
+                </iframe>
+              </div>
               
               <!-- Floating Map Location Pin Card -->
-              <div class="absolute bottom-4 left-4 z-10 bg-black/90 border border-red-500/80 p-3 rounded-xl backdrop-blur-md shadow-2xl max-w-xs">
+              <div class="absolute bottom-4 left-4 z-[500] bg-black/90 border border-red-500/80 p-3.5 rounded-xl backdrop-blur-md shadow-2xl max-w-xs">
                 <div class="flex items-center gap-2 text-xs font-black text-red-400 uppercase">
                   <span>📍</span>
                   <span>Адвокатская контора «T&N»</span>
                 </div>
-                <div class="text-[11px] text-slate-300 mt-1">
+                <div class="text-xs text-slate-200 font-semibold mt-1">
                   ул. Богенбай батыра, 23а (Медеуский р-н)
                 </div>
-                <div class="text-[10px] text-emerald-400 font-bold mt-0.5">
-                  ✓ Парковка для доверителей • Офис 24/7
+                <div class="text-[10px] text-emerald-400 font-bold mt-1 flex items-center gap-1">
+                  <span>✓</span>
+                  <span>Парковка для доверителей • Офис 24/7</span>
                 </div>
               </div>
             </div>
@@ -967,6 +976,8 @@
     </div>
   </div>
 
-  <script src="js/app.js?v=11.0"></script>
+  <!-- Leaflet Map JS -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="js/app.js?v=12.0"></script>
 </body>
 </html>
