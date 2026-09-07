@@ -50,23 +50,23 @@
   <!-- ====================================================================
        TOP SCOREBOARD BAR ("Табло сверху сайта")
        ==================================================================== -->
-  <div class="top-scoreboard-bar py-2 px-4 sm:px-6 lg:px-10">
+  <div class="top-scoreboard-bar py-2.5 px-4 sm:px-6 lg:px-10">
     <div class="max-w-[1650px] mx-auto flex flex-wrap justify-between items-center gap-3">
       
       <!-- Live Indicators Left -->
-      <div class="flex items-center flex-wrap gap-3 sm:gap-5 text-xs">
-        <div class="inline-flex items-center gap-2 px-2.5 py-0.5 rounded bg-red-600/25 border border-red-500/50 text-red-400 font-black uppercase text-[11px]">
+      <div class="flex items-center flex-wrap gap-3 sm:gap-6 text-xs">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-red-600/25 border border-red-500/50 text-red-400 font-black uppercase text-[11px] tracking-wider">
           <span class="w-2 h-2 rounded-full bg-red-500 animate-ping"></span>
           <span>ДЕЖУРНЫЙ АДВОКАТ: 24/7 НА ЛИНИИ</span>
         </div>
 
-        <div class="hidden sm:flex items-center gap-2 text-slate-300 text-[11px]">
-          <span class="text-amber-400 font-bold">★ 5.0 2ГИС</span>
+        <div class="hidden sm:flex items-center gap-2 text-slate-300 text-xs">
+          <span class="text-amber-400 font-bold">★ 5.0 2ГИС (53 отзыва)</span>
           <span class="text-slate-600">•</span>
           <span class="text-slate-300">г. Алматы, ул. Богенбай батыра, 23а</span>
         </div>
 
-        <div class="hidden xl:flex items-center gap-2 text-[11px]">
+        <div class="hidden xl:flex items-center gap-2 text-xs">
           <span class="text-slate-600">•</span>
           <span class="text-slate-400">ВС РК: <strong class="text-red-400 font-bold">65 000 000 ₸</strong></span>
           <span class="text-slate-600">•</span>
@@ -75,12 +75,12 @@
       </div>
 
       <!-- Quick Actions Right -->
-      <div class="flex items-center gap-4 text-xs">
-        <a href="tel:+77786775119" class="text-red-400 hover:text-white font-black tracking-wider flex items-center gap-1.5 transition">
+      <div class="flex items-center gap-5 text-xs">
+        <a href="tel:+77786775119" class="text-red-400 hover:text-white font-black tracking-wider flex items-center gap-1.5 transition text-xs sm:text-sm">
           <span>🔥</span>
           <span>+7 (778) 677-51-19</span>
         </a>
-        <a href="admin.html" class="px-2.5 py-0.5 rounded bg-amber-500/20 text-amber-400 border border-amber-500/40 font-bold hover:bg-amber-500 hover:text-black transition flex items-center gap-1 text-[11px]">
+        <a href="admin.html" class="px-3 py-1 rounded bg-amber-500/20 text-amber-400 border border-amber-500/40 font-bold hover:bg-amber-500 hover:text-black transition flex items-center gap-1.5 text-xs">
           <span>⚙️</span>
           <span>CRM Кабинет</span>
         </a>
@@ -125,7 +125,7 @@
   </section>
 
   <!-- ====================================================================
-       DESKTOP NAVIGATION PANEL (Dedicated Container & Single-Line Links)
+       DESKTOP NAVIGATION PANEL (Dedicated Solid Navbar Container)
        ==================================================================== -->
   <header class="combat-nav hidden lg:block">
     <div class="max-w-[1650px] w-full mx-auto px-4 sm:px-6 lg:px-10">
@@ -193,15 +193,15 @@
           </p>
 
           <!-- Senior Partner Profile Box -->
-          <div class="p-4 bg-black/60 border border-red-500/40 rounded-xl backdrop-blur-md max-w-xl space-y-2">
-            <div class="flex items-center gap-3">
-              <img src="assets/media/advocate_1.jpeg" alt="Адвокат Нурлан" class="w-11 h-11 rounded-full object-cover border-2 border-red-500">
+          <div class="p-5 bg-[#0e121a] border border-red-500/40 rounded-xl max-w-xl space-y-2 shadow-lg">
+            <div class="flex items-center gap-3.5">
+              <img src="assets/media/advocate_1.jpeg" alt="Адвокат Нурлан" class="w-12 h-12 rounded-full object-cover border-2 border-red-500 shadow">
               <div>
                 <div class="font-heading text-base font-bold text-white uppercase leading-none">Адвокат Нурлан</div>
                 <div class="text-[11px] text-red-400 font-bold uppercase tracking-wider mt-0.5">Партнер по уголовным и экономическим делам</div>
               </div>
             </div>
-            <p class="text-xs text-slate-300 leading-relaxed">
+            <p class="text-xs text-slate-300 leading-relaxed pt-1">
               12+ лет жесткой судебной практики в Алматы и Астане. Экстренный выезд 24/7 на задержания, обыски и допросы. Прекращение заказных уголовных дел, кассация в Верховном Суде РК и защита активов бизнеса.
             </p>
           </div>
@@ -272,15 +272,15 @@
   </section>
 
   <!-- ====================================================================
-       SECTION: VIDEO SHOWCASE (Smaller Video on Left, Text on Right)
+       SECTION: VIDEO SHOWCASE (Compact Video on Left, Text on Right)
        ==================================================================== -->
   <section id="video-showcase" class="py-20 bg-[#0a0b0e] border-t-2 border-b-2 border-red-600/40 relative overflow-hidden">
     <div class="max-w-[1650px] mx-auto px-4 sm:px-6 lg:px-10">
       
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
         
-        <!-- Left: Smaller Video Player with Sound Toggle (lg:col-span-6) -->
-        <div class="lg:col-span-6 space-y-4">
+        <!-- Left: Compact Video Player with Sound Toggle (lg:col-span-5) -->
+        <div class="lg:col-span-5 space-y-3">
           <div class="video-showcase-box relative group">
             
             <video id="devil-loop-video" autoplay loop playsinline preload="auto" class="w-full h-auto">
@@ -302,18 +302,21 @@
             </div>
 
             <!-- Top Gradient Shadow -->
-            <div class="absolute top-0 inset-x-0 p-3.5 bg-gradient-to-b from-black/80 to-transparent flex items-center justify-between pointer-events-none">
+            <div class="absolute top-0 inset-x-0 p-3 bg-gradient-to-b from-black/80 to-transparent flex items-center justify-between pointer-events-none">
               <span class="text-xs font-black uppercase tracking-widest text-red-500 flex items-center gap-1.5">
-                <span class="w-2.5 h-2.5 rounded-full bg-red-600 animate-ping"></span>
-                LIVE • АДВОКАТСКАЯ КОНТОРА «T&N»
+                <span class="w-2 h-2 rounded-full bg-red-600 animate-ping"></span>
+                LIVE • «T&N»
               </span>
             </div>
 
           </div>
+          <div class="text-center text-xs text-slate-500 uppercase tracking-widest">
+            Нажмите кнопку для воспроизведения саундтрека
+          </div>
         </div>
 
-        <!-- Right: Text on the Right Side of Video (lg:col-span-6) -->
-        <div class="lg:col-span-6 space-y-5">
+        <!-- Right: Text on the Right Side of Video (lg:col-span-7) -->
+        <div class="lg:col-span-7 space-y-5">
           <div class="inline-flex items-center gap-2 px-3 py-1 bg-red-600/20 text-red-400 rounded text-xs font-black uppercase tracking-widest border border-red-600/40">
             <span>🎬</span>
             <span>Энергетика • Кураж • Борьба</span>
@@ -463,7 +466,7 @@
         <!-- Left: Video Player with Caption -->
         <div class="lg:col-span-6 space-y-4">
           <div class="rounded-xl overflow-hidden border-2 border-red-500/70 shadow-2xl shadow-red-950/60 bg-black relative">
-            <video autoplay loop muted playsinline class="w-full h-auto max-h-[340px] aspect-video object-cover">
+            <video autoplay loop muted playsinline class="w-full h-auto max-h-[320px] aspect-video object-cover">
               <source src="assets/media/case_video.mp4" type="video/mp4">
             </video>
           </div>
@@ -652,16 +655,16 @@
   </section>
 
   <!-- ====================================================================
-       SECTION: COMBAT FORM & URGENT DISPATCH (Redesigned Inputs)
+       SECTION: APPLICATION FORM (Redesigned Luxury Intake Box)
        ==================================================================== -->
   <section class="py-20 bg-[#07080a] border-t-2 border-red-600/40 relative">
-    <div class="max-w-4xl mx-auto px-4 sm:px-6">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6">
       
-      <div class="combat-form-box p-8 sm:p-12 space-y-6">
+      <div class="combat-form-wrapper space-y-6">
         
         <div class="text-center space-y-1.5">
           <span class="text-xs font-extrabold uppercase text-red-500 tracking-widest">Не теряйте драгоценное время</span>
-          <h3 class="font-heading text-2xl sm:text-4xl font-black text-white uppercase">
+          <h3 class="font-heading text-2xl sm:text-3xl font-black text-white uppercase">
             ВСТУПИТЬ В БОЙ / СРОЧНЫЙ ВЫЕЗД
           </h3>
           <p class="text-xs sm:text-sm text-slate-400">
@@ -669,26 +672,26 @@
           </p>
         </div>
 
-        <form id="devil-main-form" class="space-y-4 pt-2">
+        <form id="devil-main-form" class="space-y-4 pt-1">
           
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <div class="combat-input-group">
-              <label class="block text-xs font-bold uppercase text-slate-300 mb-1.5 tracking-wider">Ваше имя *</label>
-              <input type="text" id="input_devil_name" required placeholder="Как к вам обращаться?" class="devil-input">
+            <div>
+              <label class="form-label">Ваше имя *</label>
+              <input type="text" id="input_devil_name" required placeholder="Как к вам обращаться?" class="form-control-luxury">
             </div>
 
-            <div class="combat-input-group">
-              <label class="block text-xs font-bold uppercase text-slate-300 mb-1.5 tracking-wider">Телефон (WhatsApp) *</label>
-              <input type="tel" id="input_devil_phone" required placeholder="+7 (7XX) XXX-XX-XX" class="devil-input font-bold font-mono">
+            <div>
+              <label class="form-label">Телефон (WhatsApp) *</label>
+              <input type="tel" id="input_devil_phone" required placeholder="+7 (7XX) XXX-XX-XX" class="form-control-luxury font-bold font-mono">
             </div>
           </div>
 
-          <div class="combat-input-group">
-            <label class="block text-xs font-bold uppercase text-slate-300 mb-1.5 tracking-wider">Что произошло? (Статья УК / Сумма спора / Обыск / Допрос) *</label>
-            <textarea id="input_devil_message" rows="3" required placeholder="Кратко опишите ситуацию: кто вызывает, какая статья или сумма спора..." class="devil-input"></textarea>
+          <div>
+            <label class="form-label">Что произошло? (Статья УК / Сумма спора / Обыск / Допрос) *</label>
+            <textarea id="input_devil_message" rows="3" required placeholder="Кратко опишите ситуацию: кто вызывает, какая статья или сумма спора..." class="form-control-luxury"></textarea>
           </div>
 
-          <button type="submit" class="btn-combat w-full text-base py-4 shadow-2xl">
+          <button type="submit" class="btn-combat w-full text-base py-3.5 shadow-2xl">
             🔥 ВЫЗВАТЬ АДВОКАТА / НАЧАТЬ ЗАЩИТУ
           </button>
 
@@ -703,7 +706,7 @@
   </section>
 
   <!-- ====================================================================
-       SECTION: CONTACTS & LIVE INTERACTIVE MAP (Exact Address)
+       SECTION: CONTACTS & SPACIOUS INTERACTIVE MAP
        ==================================================================== -->
   <footer id="contact" class="py-20 bg-[#0a0d14] border-t-2 border-red-600 text-white relative">
     <div class="max-w-[1650px] mx-auto px-4 sm:px-6 lg:px-10">
@@ -751,7 +754,7 @@
           </div>
         </div>
 
-        <!-- Right Column: Interactive Map at Bogenbay Batyra 23a (lg:col-span-7) -->
+        <!-- Right Column: Spacious Interactive Map at Bogenbay Batyra 23a (lg:col-span-7) -->
         <div class="lg:col-span-7">
           <div class="map-container-box">
             
@@ -765,8 +768,8 @@
               </a>
             </div>
 
-            <!-- Embedded Interactive Map (OpenStreetMap / 2GIS Location Center) -->
-            <div class="flex-1 w-full relative min-h-[340px]">
+            <!-- Embedded Interactive Map (Full Height) -->
+            <div class="flex-1 w-full relative min-h-[420px]">
               <iframe 
                 src="https://www.openstreetmap.org/export/embed.html?bbox=76.960608%2C43.249842%2C76.980608%2C43.259842&amp;layer=mapnik&amp;marker=43.254842%2C76.970608" 
                 title="Карта офиса T&N Law" 
@@ -869,8 +872,8 @@
 
           <form id="article-cta-form" class="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-1">
             <input type="hidden" id="article-cta-service" value="Вопрос по материалу">
-            <input type="text" id="article-cta-name" placeholder="Ваше имя" class="devil-input">
-            <input type="tel" id="article-cta-phone" required placeholder="+7 (7XX) XXX-XX-XX" class="devil-input font-bold font-mono">
+            <input type="text" id="article-cta-name" placeholder="Ваше имя" class="form-control-luxury">
+            <input type="tel" id="article-cta-phone" required placeholder="+7 (7XX) XXX-XX-XX" class="form-control-luxury font-bold font-mono">
             <button type="submit" class="btn-combat w-full">
               Задать вопрос
             </button>
@@ -906,17 +909,17 @@
 
         <div>
           <label class="block text-xs font-bold uppercase text-slate-300 mb-1">Номер телефона (WhatsApp) *</label>
-          <input type="tel" id="modal-phone" required placeholder="+7 (7XX) XXX-XX-XX" class="devil-input font-bold font-mono">
+          <input type="tel" id="modal-phone" required placeholder="+7 (7XX) XXX-XX-XX" class="form-control-luxury font-bold font-mono">
         </div>
 
         <div>
           <label class="block text-xs font-bold uppercase text-slate-300 mb-1">Ваше имя</label>
-          <input type="text" id="modal-name" placeholder="Как к вам обращаться?" class="devil-input">
+          <input type="text" id="modal-name" placeholder="Как к вам обращаться?" class="form-control-luxury">
         </div>
 
         <div>
           <label class="block text-xs font-bold uppercase text-slate-300 mb-1">Суть вопроса / Статья УК</label>
-          <textarea id="modal-message" rows="2" placeholder="Опишите кратко..." class="devil-input"></textarea>
+          <textarea id="modal-message" rows="2" placeholder="Опишите кратко..." class="form-control-luxury"></textarea>
         </div>
 
         <button type="submit" class="btn-combat w-full mt-1.5">

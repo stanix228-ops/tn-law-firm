@@ -65,15 +65,15 @@ h1, h2, h3, h4, .heading, .font-heading {
 }
 
 /* ==========================================================================
-   NAVIGATION PANEL (Clean single line inside floating bar)
+   HEADER NAVIGATION (Clean Single Line in Solid Panel)
    ========================================================================== */
 .combat-nav {
   position: sticky;
   top: 0;
   z-index: 100;
-  background: rgba(7, 8, 10, 0.95);
+  background: rgba(7, 8, 10, 0.96);
   backdrop-filter: blur(16px);
-  border-bottom: 2px solid rgba(255, 30, 39, 0.3);
+  border-bottom: 2px solid rgba(255, 30, 39, 0.35);
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.9);
 }
 
@@ -81,7 +81,7 @@ h1, h2, h3, h4, .heading, .font-heading {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 76px;
+  height: 74px;
   gap: 20px;
 }
 
@@ -91,7 +91,7 @@ h1, h2, h3, h4, .heading, .font-heading {
   justify-content: center;
   flex-direction: row;
   flex-wrap: nowrap;
-  gap: clamp(14px, 1.8vw, 28px);
+  gap: clamp(12px, 1.6vw, 24px);
   list-style: none;
   margin: 0;
   padding: 0;
@@ -99,6 +99,7 @@ h1, h2, h3, h4, .heading, .font-heading {
 
 .combat-nav--navigation > li {
   white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .combat-nav--navigation > li > a {
@@ -150,7 +151,7 @@ h1, h2, h3, h4, .heading, .font-heading {
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: 0.1em;
-  padding: 13px 28px;
+  padding: 12px 26px;
   background: linear-gradient(135deg, #ff1e27 0%, #b30c12 100%);
   color: #ffffff;
   border: 1px solid rgba(255, 255, 255, 0.3);
@@ -179,7 +180,7 @@ h1, h2, h3, h4, .heading, .font-heading {
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: 0.1em;
-  padding: 12px 24px;
+  padding: 12px 22px;
   background-color: rgba(13, 16, 23, 0.8);
   color: #ffffff;
   border: 2px solid var(--color-crimson);
@@ -201,13 +202,13 @@ h1, h2, h3, h4, .heading, .font-heading {
 .btn-sound-toggle {
   display: inline-flex;
   align-items: center;
-  gap: 10px;
-  padding: 8px 18px;
+  gap: 8px;
+  padding: 7px 16px;
   background: rgba(7, 8, 10, 0.9);
   border: 1px solid var(--color-crimson);
   border-radius: 9999px;
   color: #ffffff;
-  font-size: 0.75rem;
+  font-size: 0.72rem;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.08em;
@@ -219,7 +220,7 @@ h1, h2, h3, h4, .heading, .font-heading {
 
 .btn-sound-toggle:hover {
   background: var(--color-crimson);
-  transform: scale(1.05);
+  transform: scale(1.04);
   box-shadow: 0 0 30px rgba(255, 30, 39, 0.6);
 }
 
@@ -227,11 +228,11 @@ h1, h2, h3, h4, .heading, .font-heading {
   display: flex;
   align-items: center;
   gap: 3px;
-  height: 14px;
+  height: 12px;
 }
 
 .sound-bar {
-  width: 3px;
+  width: 2.5px;
   height: 100%;
   background-color: #ff1e27;
   border-radius: 2px;
@@ -248,8 +249,8 @@ h1, h2, h3, h4, .heading, .font-heading {
 .sound-bar:nth-child(4) { animation-delay: 0.4s; }
 
 @keyframes wave {
-  0%, 100% { height: 4px; }
-  50% { height: 14px; }
+  0%, 100% { height: 3px; }
+  50% { height: 12px; }
 }
 
 /* ==========================================================================
@@ -269,7 +270,7 @@ h1, h2, h3, h4, .heading, .font-heading {
 .combat-hero--inner {
   position: relative;
   z-index: 2;
-  padding: 50px 0;
+  padding: 45px 0;
 }
 
 .hero-portrait-card {
@@ -309,25 +310,34 @@ h1, h2, h3, h4, .heading, .font-heading {
 }
 
 /* ==========================================================================
-   VIDEO SHOWCASE (Left Video, Right Text)
+   VIDEO SHOWCASE (Compact 16:9 Player on Left, Text on Right)
    ========================================================================== */
 .video-showcase-box {
   position: relative;
   border-radius: 14px;
   overflow: hidden;
-  border: 2px solid rgba(255, 30, 39, 0.45);
-  box-shadow: 0 15px 50px rgba(0, 0, 0, 0.85), 0 0 30px rgba(255, 30, 39, 0.25);
+  border: 2px solid rgba(255, 30, 39, 0.5);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.85), 0 0 25px rgba(255, 30, 39, 0.25);
   background-color: #000000;
+  max-width: 480px;
   width: 100%;
+  margin: 0 auto;
 }
 
 .video-showcase-box video {
   width: 100%;
   height: auto;
-  max-height: 330px;
+  max-height: 270px;
   aspect-ratio: 16 / 9;
   object-fit: cover;
   display: block;
+}
+
+.video-overlay-control {
+  position: absolute;
+  bottom: 12px;
+  right: 12px;
+  z-index: 10;
 }
 
 /* ==========================================================================
@@ -360,7 +370,7 @@ h1, h2, h3, h4, .heading, .font-heading {
   position: relative;
   border-radius: 12px;
   overflow: hidden;
-  border: 1px solid rgba(255, 30, 39, 0.3);
+  border: 1px solid rgba(255, 30, 39, 0.35);
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
   background-color: var(--color-bg-card);
   transition: all 0.3s ease;
@@ -397,7 +407,7 @@ h1, h2, h3, h4, .heading, .font-heading {
 }
 
 /* ==========================================================================
-   MATERIALS QUOTE BANNER (Photo above, text below)
+   MATERIALS QUOTE BANNER
    ========================================================================== */
 .materials-banner-card {
   background-color: var(--color-bg-card);
@@ -409,55 +419,62 @@ h1, h2, h3, h4, .heading, .font-heading {
 }
 
 /* ==========================================================================
-   LUXURY COMBAT FORM INPUTS (Redesigned)
+   LUXURY REDESIGNED APPLICATION FORM
    ========================================================================== */
-.combat-form-box {
-  background: linear-gradient(145deg, #0f131c 0%, #07090e 100%);
+.combat-form-wrapper {
+  background: linear-gradient(145deg, #0e121b 0%, #07090e 100%);
   border: 2px solid rgba(255, 30, 39, 0.5);
-  border-radius: 16px;
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.9), 0 0 30px rgba(255, 30, 39, 0.2);
+  border-radius: 18px;
+  padding: 36px 32px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.9), 0 0 35px rgba(255, 30, 39, 0.25);
 }
 
-.combat-input-group {
-  position: relative;
+.form-label {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #94a3b8;
+  margin-bottom: 6px;
 }
 
-.devil-input {
+.form-control-luxury {
   width: 100%;
-  background-color: rgba(18, 24, 38, 0.85);
-  border: 1px solid rgba(255, 255, 255, 0.14);
+  background-color: #121722;
+  border: 1px solid rgba(255, 255, 255, 0.15);
   color: #ffffff;
-  padding: 14px 18px;
+  padding: 14px 16px;
   border-radius: 8px;
   font-size: 0.92rem;
   font-weight: 500;
-  transition: all 0.25s ease;
-  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.5);
+  transition: all 0.2s ease;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.4);
 }
 
-.devil-input:focus {
+.form-control-luxury:focus {
   outline: none;
   border-color: #ff1e27;
-  background-color: rgba(255, 30, 39, 0.08);
-  box-shadow: 0 0 18px rgba(255, 30, 39, 0.35), inset 0 2px 4px rgba(0, 0, 0, 0.5);
+  background-color: #171d2b;
+  box-shadow: 0 0 16px rgba(255, 30, 39, 0.35), inset 0 2px 4px rgba(0, 0, 0, 0.4);
 }
 
-.devil-input::placeholder {
+.form-control-luxury::placeholder {
   color: #64748b;
   font-weight: 400;
 }
 
 /* ==========================================================================
-   MAP CONTAINER
+   MAP CONTAINER (Spacious & Tall)
    ========================================================================== */
 .map-container-box {
   background-color: var(--color-bg-card);
-  border: 2px solid rgba(255, 30, 39, 0.4);
+  border: 2px solid rgba(255, 30, 39, 0.45);
   border-radius: 16px;
   overflow: hidden;
   box-shadow: 0 15px 50px rgba(0, 0, 0, 0.85), 0 0 25px rgba(255, 30, 39, 0.2);
   height: 100%;
-  min-height: 400px;
+  min-height: 480px;
   display: flex;
   flex-direction: column;
 }
@@ -465,7 +482,7 @@ h1, h2, h3, h4, .heading, .font-heading {
 .map-container-box iframe {
   width: 100%;
   height: 100%;
-  min-height: 340px;
+  min-height: 420px;
   border: none;
   display: block;
 }
