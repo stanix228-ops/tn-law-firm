@@ -143,58 +143,124 @@
   </header>
 
   <!-- ====================================================================
-       HERO SECTION (Main Background: assets/media/hero_bg.jpeg)
+       HERO SECTION (Photo Right, Text & Partner Info Left, Blur Extension)
        ==================================================================== -->
   <section id="manifest" class="combat-hero">
     <div class="combat-hero--bg">
-      <img src="assets/media/hero_bg.jpeg" alt="Адвокатская контора T&N Алматы" loading="eager">
+      <img src="assets/media/hero_wide_composite.jpg" alt="Адвокатская контора T&N Алматы" loading="eager">
     </div>
     
     <div class="max-w-[1650px] w-full mx-auto px-4 sm:px-6 lg:px-10 combat-hero--inner">
-      <div class="max-w-4xl space-y-6">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
         
-        <div class="inline-flex items-center gap-2.5 px-4 py-1.5 bg-black/80 border border-red-500 text-red-400 rounded-md text-xs font-black uppercase tracking-widest shadow-xl">
-          <span class="text-red-500 text-base">🔥</span>
-          <span>Против вас работает система? Мы знаем, как ее сломать</span>
+        <!-- Left Column: Content & Attorneys Profile (lg:col-span-7) -->
+        <div class="lg:col-span-7 space-y-6">
+          
+          <div class="inline-flex items-center gap-2.5 px-4 py-1.5 bg-black/80 border border-red-500/70 text-red-400 rounded-md text-xs font-black uppercase tracking-widest shadow-xl">
+            <span class="w-2 h-2 rounded-full bg-red-500 animate-ping"></span>
+            <span>АДВОКАТСКАЯ КОНТОРА «T&N» • Г. АЛМАТЫ</span>
+          </div>
+
+          <h1 class="font-heading text-4xl sm:text-5xl lg:text-6xl font-black text-white tracking-tight leading-none uppercase">
+            МЫ НЕ ОБЕЩАЕМ ЧУДЕС. <br>
+            <span class="text-gradient-crimson glow-crimson block mt-2 text-3xl sm:text-5xl lg:text-6xl">
+              МЫ ЛОМАЕМ СИСТЕМУ.
+            </span>
+          </h1>
+
+          <p class="text-sm sm:text-base lg:text-lg text-slate-300 font-medium leading-relaxed max-w-2xl">
+            Бескомпромиссная адвокатская защита в судах г. Алматы и Верховном Суде РК. Мы не кормим иллюзиями — мы выявляем процессуальные фатальные бреши в обвинении и заставляем оппонентов отступить.
+          </p>
+
+          <!-- Senior Partners Mini-Cards Box -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
+            
+            <div class="p-4 bg-black/60 border border-red-500/30 rounded-xl space-y-1.5 backdrop-blur-md">
+              <div class="flex items-center gap-2.5">
+                <img src="assets/media/advocate_2.jpeg" alt="Адвокат Тамара" class="w-9 h-9 rounded-full object-cover border border-amber-500">
+                <div>
+                  <div class="font-heading text-sm font-bold text-white uppercase leading-none">Адвокат Тамара</div>
+                  <div class="text-[10px] text-amber-400 font-bold uppercase tracking-wider mt-0.5">Управляющий партнер</div>
+                </div>
+              </div>
+              <p class="text-[11px] text-slate-400 leading-snug">
+                Кассация в ВС РК, отмена решений судов, спасение бизнеса и многомиллионные экономические споры.
+              </p>
+            </div>
+
+            <div class="p-4 bg-black/60 border border-red-500/30 rounded-xl space-y-1.5 backdrop-blur-md">
+              <div class="flex items-center gap-2.5">
+                <img src="assets/media/advocate_1.jpeg" alt="Адвокат Нурлан" class="w-9 h-9 rounded-full object-cover border border-red-500">
+                <div>
+                  <div class="font-heading text-sm font-bold text-white uppercase leading-none">Адвокат Нурлан</div>
+                  <div class="text-[10px] text-red-400 font-bold uppercase tracking-wider mt-0.5">Партнер по уголовным делам</div>
+                </div>
+              </div>
+              <p class="text-[11px] text-slate-400 leading-snug">
+                Экстренный выезд 24/7 на задержания, обыски и допросы в ДП/ИВС. Защита от заказных обвинений.
+              </p>
+            </div>
+
+          </div>
+
+          <!-- CTAs -->
+          <div class="flex flex-wrap items-center gap-4 pt-2">
+            <button onclick="openConsultModal('Срочный вызов с главного экрана')" class="btn-combat text-sm sm:text-base">
+              ⚡ Экстренный вызов адвоката
+            </button>
+            <a href="#video-showcase" class="btn-combat-outline text-sm sm:text-base flex items-center gap-2">
+              <span>🎬 Смотреть видео и кураж</span>
+            </a>
+          </div>
+
+          <!-- Quick Metrics Ribbon -->
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-4 border-t border-white/10 max-w-2xl">
+            <div class="border-l-2 border-red-500 pl-2.5">
+              <div class="font-heading text-xl sm:text-2xl font-black text-white">24/7</div>
+              <div class="text-[10px] text-slate-400 uppercase tracking-wider">Выезд на обыск</div>
+            </div>
+            <div class="border-l-2 border-red-500 pl-2.5">
+              <div class="font-heading text-xl sm:text-2xl font-black text-red-400">65 МЛН ₸</div>
+              <div class="text-[10px] text-slate-400 uppercase tracking-wider">Отменено в ВС РК</div>
+            </div>
+            <div class="border-l-2 border-red-500 pl-2.5">
+              <div class="font-heading text-xl sm:text-2xl font-black text-white">12+ ЛЕТ</div>
+              <div class="text-[10px] text-slate-400 uppercase tracking-wider">Судебная практика</div>
+            </div>
+            <div class="border-l-2 border-red-500 pl-2.5">
+              <div class="font-heading text-xl sm:text-2xl font-black text-amber-400">100%</div>
+              <div class="text-[10px] text-slate-400 uppercase tracking-wider">Адвокатская тайна</div>
+            </div>
+          </div>
+
         </div>
 
-        <h1 class="font-heading text-4xl sm:text-6xl lg:text-7xl font-black text-white tracking-tight leading-none uppercase">
-          АДВОКАТСКАЯ КОНТОРА «T&N» <br>
-          <span class="text-gradient-crimson glow-crimson block mt-2 text-3xl sm:text-5xl lg:text-6xl">
-            МЫ НЕ ОБЕЩАЕМ ЧУДЕС. <br>МЫ ЛОМАЕМ СИСТЕМУ.
-          </span>
-        </h1>
+        <!-- Right Column: Dramatic Hero Photo on Right (lg:col-span-5) -->
+        <div class="lg:col-span-5 flex justify-center lg:justify-end">
+          <div class="hero-portrait-card group relative">
+            
+            <img src="assets/media/hero_bg.jpeg" alt="Адвокатская контора T&N" loading="eager">
 
-        <p class="text-base sm:text-xl text-slate-300 max-w-2xl font-medium leading-relaxed">
-          Хватит верить в сказки конкурентов про «98% побед» и шаблонных юристов. Против вас работает карательная машина или рейдеры. Мы не утешаем — мы находим фатальные бреши в обвинении и заставляем оппонентов отступить.
-        </p>
+            <!-- Floating Top Badge -->
+            <div class="absolute top-4 right-4 z-10 bg-black/85 border border-amber-500/80 px-3 py-1.5 rounded-lg shadow-xl backdrop-blur-md flex items-center gap-1.5 text-amber-400 text-xs font-bold">
+              <span>★ 5.0</span>
+              <span class="text-white text-[11px] uppercase tracking-wider font-semibold">Рейтинг в 2ГИС</span>
+            </div>
 
-        <div class="flex flex-wrap items-center gap-4 pt-4">
-          <button onclick="openConsultModal('Срочный вызов с главного экрана')" class="btn-combat text-sm sm:text-base">
-            ⚡ Экстренный вызов адвоката
-          </button>
-          <a href="#video-showcase" class="btn-combat-outline text-sm sm:text-base flex items-center gap-2">
-            <span>🎬 Смотреть видео и кураж</span>
-          </a>
-        </div>
+            <!-- Floating Bottom Badge -->
+            <div class="absolute bottom-4 inset-x-4 z-10 p-3.5 bg-black/90 border border-red-500/70 rounded-xl backdrop-blur-md shadow-2xl">
+              <div class="flex items-center justify-between text-xs font-black uppercase text-red-400">
+                <span>г. Алматы • Богенбай батыра, 23а</span>
+                <span class="w-2 h-2 rounded-full bg-emerald-500 animate-ping"></span>
+              </div>
+              <div class="font-heading text-sm font-bold text-white mt-1">
+                ЭКСТРЕННАЯ ЗАЩИТА 24/7
+              </div>
+              <div class="text-[11px] text-slate-400 mt-0.5">
+                Выезд адвоката в отдел полиции / суд за 30 минут
+              </div>
+            </div>
 
-        <!-- Quick Hard Metrics -->
-        <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-6 border-t border-white/10 max-w-3xl">
-          <div class="border-l-2 border-red-500 pl-3">
-            <div class="font-heading text-2xl sm:text-3xl font-black text-white">24/7</div>
-            <div class="text-[11px] text-slate-400 uppercase tracking-wider">Выезд на обыск и ИВС</div>
-          </div>
-          <div class="border-l-2 border-red-500 pl-3">
-            <div class="font-heading text-2xl sm:text-3xl font-black text-red-400">65 МЛН ₸</div>
-            <div class="text-[11px] text-slate-400 uppercase tracking-wider">Отменено в ВС РК</div>
-          </div>
-          <div class="border-l-2 border-red-500 pl-3">
-            <div class="font-heading text-2xl sm:text-3xl font-black text-white">12+ ЛЕТ</div>
-            <div class="text-[11px] text-slate-400 uppercase tracking-wider">Практика жесткой защиты</div>
-          </div>
-          <div class="border-l-2 border-red-500 pl-3">
-            <div class="font-heading text-2xl sm:text-3xl font-black text-amber-400">0%</div>
-            <div class="text-[11px] text-slate-400 uppercase tracking-wider">Пустых иллюзий и вранья</div>
           </div>
         </div>
 
