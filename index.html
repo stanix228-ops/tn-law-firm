@@ -42,7 +42,7 @@
     }
   </script>
 
-  <link rel="stylesheet" href="css/style.css?v=3.0">
+  <link rel="stylesheet" href="css/style.css?v=4.0">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚖️</text></svg>">
 </head>
 <body class="bg-[#07080a] text-slate-100 font-body antialiased selection:bg-red-600 selection:text-white">
@@ -167,14 +167,14 @@
   </header>
 
   <!-- ====================================================================
-       HERO SECTION (Clean Dark Background, Photo Right, Text Left)
+       HERO SECTION (Clean Dark Background, Large Photo Right, Text Left)
        ==================================================================== -->
   <section id="manifest" class="combat-hero">
     <div class="max-w-[1650px] w-full mx-auto px-4 sm:px-6 lg:px-10 combat-hero--inner">
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
         
-        <!-- Left Column: Content & Senior Partner Profile (lg:col-span-7) -->
-        <div class="lg:col-span-7 space-y-6">
+        <!-- Left Column: Content & Senior Partner Profile (lg:col-span-7 xl:col-span-6) -->
+        <div class="lg:col-span-7 xl:col-span-6 space-y-6">
           
           <div class="inline-flex items-center gap-2.5 px-3.5 py-1.5 bg-black/80 border border-red-500/70 text-red-400 rounded-md text-xs font-black uppercase tracking-widest shadow-xl">
             <span class="w-2 h-2 rounded-full bg-red-500 animate-ping"></span>
@@ -238,28 +238,28 @@
 
         </div>
 
-        <!-- Right Column: Dramatic Hero Photo on Right (lg:col-span-5) -->
-        <div class="lg:col-span-5 flex justify-center lg:justify-end">
-          <div class="hero-portrait-card group relative">
+        <!-- Right Column: Dramatic Large Hero Photo on Right (lg:col-span-5 xl:col-span-6) -->
+        <div class="lg:col-span-5 xl:col-span-6 flex justify-center lg:justify-end">
+          <div class="hero-portrait-card group relative w-full">
             
             <img src="assets/media/hero_bg.jpeg" alt="Адвокатская контора T&N" loading="eager">
 
             <!-- Floating Top Badge -->
-            <div class="absolute top-4 right-4 z-10 bg-black/85 border border-amber-500/80 px-3 py-1.5 rounded-lg shadow-xl backdrop-blur-md flex items-center gap-1.5 text-amber-400 text-xs font-bold">
+            <div class="absolute top-4 right-4 z-10 bg-black/85 border border-amber-500/80 px-3.5 py-2 rounded-lg shadow-xl backdrop-blur-md flex items-center gap-2 text-amber-400 text-xs font-bold">
               <span>★ 5.0</span>
-              <span class="text-white text-[11px] uppercase tracking-wider font-semibold">Рейтинг в 2ГИС</span>
+              <span class="text-white text-xs uppercase tracking-wider font-semibold">Рейтинг в 2ГИС</span>
             </div>
 
             <!-- Floating Bottom Badge -->
-            <div class="absolute bottom-4 inset-x-4 z-10 p-3.5 bg-black/90 border border-red-500/70 rounded-xl backdrop-blur-md shadow-2xl">
+            <div class="absolute bottom-5 inset-x-5 z-10 p-4 bg-black/90 border border-red-500/80 rounded-xl backdrop-blur-md shadow-2xl">
               <div class="flex items-center justify-between text-xs font-black uppercase text-red-400">
                 <span>г. Алматы • Богенбай батыра, 23а</span>
-                <span class="w-2 h-2 rounded-full bg-emerald-500 animate-ping"></span>
+                <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-ping"></span>
               </div>
-              <div class="font-heading text-sm font-bold text-white mt-1">
+              <div class="font-heading text-base font-bold text-white mt-1">
                 ЭКСТРЕННАЯ ЗАЩИТА 24/7
               </div>
-              <div class="text-[11px] text-slate-400 mt-0.5">
+              <div class="text-xs text-slate-400 mt-0.5">
                 Выезд адвоката в отдел полиции / суд за 30 минут
               </div>
             </div>
@@ -272,18 +272,18 @@
   </section>
 
   <!-- ====================================================================
-       SECTION: VIDEO SHOWCASE (Compact Video on Left, Text on Right)
+       SECTION: VIDEO SHOWCASE (Vertical 9:16 Video on Left, Text on Right)
        ==================================================================== -->
   <section id="video-showcase" class="py-20 bg-[#0a0b0e] border-t-2 border-b-2 border-red-600/40 relative overflow-hidden">
     <div class="max-w-[1650px] mx-auto px-4 sm:px-6 lg:px-10">
       
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
         
-        <!-- Left: Compact Video Player with Sound Toggle (lg:col-span-5) -->
-        <div class="lg:col-span-5 space-y-3">
-          <div class="video-showcase-box relative group">
+        <!-- Left: Vertical 9:16 Video Player with Sound Toggle (lg:col-span-5) -->
+        <div class="lg:col-span-5 space-y-3 flex flex-col items-center">
+          <div class="video-showcase-box relative group w-full">
             
-            <video id="devil-loop-video" autoplay loop playsinline preload="auto" class="w-full h-auto">
+            <video id="devil-loop-video" autoplay loop playsinline preload="auto">
               <source src="assets/media/devil_loop.mp4" type="video/mp4">
               Ваш браузер не поддерживает видео HTML5.
             </video>
@@ -305,12 +305,12 @@
             <div class="absolute top-0 inset-x-0 p-3 bg-gradient-to-b from-black/80 to-transparent flex items-center justify-between pointer-events-none">
               <span class="text-xs font-black uppercase tracking-widest text-red-500 flex items-center gap-1.5">
                 <span class="w-2 h-2 rounded-full bg-red-600 animate-ping"></span>
-                LIVE • «T&N»
+                LIVE • «T&N» 9:16
               </span>
             </div>
 
           </div>
-          <div class="text-center text-xs text-slate-500 uppercase tracking-widest">
+          <div class="text-center text-xs text-slate-500 uppercase tracking-widest pt-1">
             Нажмите кнопку для воспроизведения саундтрека
           </div>
         </div>
@@ -589,22 +589,22 @@
   </section>
 
   <!-- ====================================================================
-       SECTION: MATERIALS (Photo Smaller on Top, Text Directly Underneath)
+       SECTION: MATERIALS (Large Photo with Caption Directly Underneath)
        ==================================================================== -->
   <section id="materials" class="py-20 bg-[#0a0b0e] border-t border-b border-red-600/40 relative">
     <div class="max-w-[1650px] mx-auto px-4 sm:px-6 lg:px-10 space-y-12">
       
-      <!-- Materials Banner Card: Photo smaller on top, text underneath -->
-      <div class="materials-banner-card max-w-3xl mx-auto space-y-5">
+      <!-- Materials Banner: Large photo with caption directly underneath, no outer frames -->
+      <div class="materials-banner-wrapper max-w-4xl mx-auto space-y-6 text-center">
         
-        <!-- Framed smaller photo -->
-        <div class="max-w-md mx-auto rounded-xl overflow-hidden border-2 border-red-500/50 shadow-2xl shadow-red-950/60">
-          <img src="assets/media/materials_bg.jpeg" alt="К материалам" class="w-full h-44 sm:h-52 object-cover">
+        <!-- Big photo without bounding box frame -->
+        <div class="overflow-hidden rounded-2xl shadow-2xl shadow-black/90">
+          <img src="assets/media/materials_bg.jpeg" alt="Тактические материалы адвокатской конторы T&N" class="w-full h-72 sm:h-96 md:h-[420px] object-cover hover:scale-105 transition-transform duration-700">
         </div>
 
         <!-- Text directly UNDER the photo -->
-        <div class="space-y-3">
-          <div class="inline-block px-3 py-1 bg-red-600/40 border border-red-500 text-red-300 rounded text-xs font-black uppercase tracking-widest">
+        <div class="space-y-3 pt-2">
+          <div class="inline-block px-4 py-1.5 bg-red-600/30 border border-red-500/70 text-red-400 rounded-md text-xs font-black uppercase tracking-widest">
             ⏱ ВРЕМЯ — ВАШ ГЛАВНЫЙ ВРАГ
           </div>
           
@@ -614,7 +614,7 @@
             Чем меньше вариантов — тем меньше шансов.»
           </h2>
 
-          <p class="text-xs sm:text-sm text-slate-300 max-w-xl mx-auto">
+          <p class="text-xs sm:text-sm md:text-base text-slate-300 max-w-2xl mx-auto leading-relaxed">
             Изучите наши тактические разборы. Знание своих прав и уязвимостей системы — ваше первое оружие.
           </p>
         </div>
@@ -954,6 +954,6 @@
     </div>
   </div>
 
-  <script src="js/app.js?v=3.0"></script>
+  <script src="js/app.js?v=4.0"></script>
 </body>
 </html>
