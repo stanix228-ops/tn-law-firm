@@ -177,13 +177,35 @@ const TN_ARTICLES = [
   }
 ];
 
-// Helper to fetch live articles
+// Reliable Article Image Map
+const TN_ARTICLE_IMAGES = {
+  'interrogation-rules': 'assets/images/article_interrogation.jpg',
+  'supreme-court-cassation': 'assets/images/article_supreme_court.jpg',
+  'business-raiding-defense': 'assets/images/article_business_debt.jpg',
+  'property-division-defense': 'assets/images/article_property_asset.jpg',
+  'bankruptcy-individuals-rk': 'assets/images/article_bankruptcy.jpg'
+};
+
+// Helper to fetch live articles with guaranteed fresh image paths
 function getActiveArticles() {
   const local = localStorage.getItem('tn_law_articles');
   if (local) {
     try {
       const parsed = JSON.parse(local);
-      if (Array.isArray(parsed) && parsed.length > 0) return parsed;
+      if (Array.isArray(parsed) && parsed.length > 0) {
+        // Sync & heal image paths from verified assets
+        const healed = parsed.map(art => {
+          if (TN_ARTICLE_IMAGES[art.id]) {
+            art.image = TN_ARTICLE_IMAGES[art.id];
+          }
+          if (!art.image || art.image.includes('placeholder') || art.image.includes('undefined')) {
+            art.image = TN_ARTICLE_IMAGES[art.id] || 'assets/images/article_interrogation.jpg';
+          }
+          return art;
+        });
+        localStorage.setItem('tn_law_articles', JSON.stringify(healed));
+        return healed;
+      }
     } catch (e) {}
   }
   return TN_ARTICLES;
@@ -199,10 +221,15 @@ function renderArticlesList(categoryId = 'all') {
     allArticles : 
     allArticles.filter(a => a.categoryId === categoryId);
 
-  container.innerHTML = filtered.map(article => `
+  container.innerHTML = filtered.map(article => {
+    const imgSrc = article.image || TN_ARTICLE_IMAGES[article.id] || 'assets/images/article_interrogation.jpg';
+    return `
     <article class="group bg-[#0e1117] border border-red-500/20 hover:border-red-500 rounded-xl overflow-hidden shadow-xl hover:shadow-2xl hover:shadow-red-950/40 transition-all duration-300 flex flex-col">
       <div class="relative h-56 overflow-hidden bg-slate-900">
-        <img src="${article.image || 'assets/media/advocate_1.jpeg'}" alt="${article.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-80 group-hover:opacity-100">
+        <img src="${imgSrc}" 
+             alt="${article.title}" 
+             onerror="this.onerror=null; this.src='assets/images/article_interrogation.jpg';"
+             class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-90 group-hover:opacity-100">
         <div class="absolute top-3 left-3 bg-red-600/90 text-white text-[11px] font-extrabold uppercase px-3 py-1 rounded shadow">
           ${article.category}
         </div>
@@ -235,7 +262,7 @@ function renderArticlesList(categoryId = 'all') {
         </div>
       </div>
     </article>
-  `).join('');
+  `}).join('');
 }
 
 function initArticlesFilter() {
@@ -280,7 +307,11 @@ function openArticleModal(articleId) {
   if (authorNameEl) authorNameEl.innerText = article.author || 'Адвокат';
   if (authorRoleEl) authorRoleEl.innerText = article.authorRole || 'Партнер конторы «T&N»';
   if (authorPhotoEl) authorPhotoEl.src = article.authorPhoto || 'assets/media/advocate_1.jpeg';
-  if (bannerImgEl) bannerImgEl.src = article.image || 'assets/media/advocate_1.jpeg';
+  if (bannerImgEl) {
+    const bannerSrc = article.image || TN_ARTICLE_IMAGES[article.id] || 'assets/images/article_interrogation.jpg';
+    bannerImgEl.onerror = function() { this.onerror = null; this.src = 'assets/images/article_interrogation.jpg'; };
+    bannerImgEl.src = bannerSrc;
+  }
   if (contentEl) contentEl.innerHTML = article.content || '';
   if (ctaServiceInput) ctaServiceInput.value = `Разбор по статье: ${article.title}`;
 
