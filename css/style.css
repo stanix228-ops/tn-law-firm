@@ -1,19 +1,17 @@
-@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Montserrat:ital,wght@0,400;0,600;0,700;0,800;0,900;1,700;1,900&family=Oswald:wght@500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@700;800;900&family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,700;1,900&family=Oswald:wght@500;600;700&display=swap');
 
 :root {
   --color-bg-dark: #07080a;
-  --color-bg-card: #0e1117;
-  --color-bg-card-hover: #161b24;
+  --color-bg-card: #0d1017;
+  --color-bg-card-hover: #131822;
   --color-crimson: #ff1e27;
   --color-crimson-dark: #b30c12;
-  --color-crimson-glow: rgba(255, 30, 39, 0.45);
   --color-gold: #d4af37;
-  --color-gold-glow: rgba(212, 175, 55, 0.35);
   --color-text-light: #f8fafc;
   --color-text-muted: #94a3b8;
   --color-border-dark: rgba(255, 255, 255, 0.1);
-  --color-border-crimson: rgba(255, 30, 39, 0.4);
-  --font-heading: 'Oswald', 'Montserrat', 'Cinzel', sans-serif;
+  --color-border-crimson: rgba(255, 30, 39, 0.45);
+  --font-heading: 'Oswald', 'Montserrat', sans-serif;
   --font-body: 'Montserrat', sans-serif;
 }
 
@@ -32,7 +30,7 @@ body {
 }
 
 /* ==========================================================================
-   DEVIL'S ADVOCATE TYPOGRAPHY & GLOWS
+   TYPOGRAPHY & ACCENTS
    ========================================================================== */
 h1, h2, h3, h4, .heading, .font-heading {
   font-family: var(--font-heading);
@@ -41,13 +39,13 @@ h1, h2, h3, h4, .heading, .font-heading {
 }
 
 .text-gradient-crimson {
-  background: linear-gradient(135deg, #ffffff 0%, #ff6b6b 40%, #ff1e27 100%);
+  background: linear-gradient(135deg, #ffffff 0%, #ff6b6b 35%, #ff1e27 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
 .text-gradient-gold {
-  background: linear-gradient(135deg, #ffffff 0%, #f6d365 40%, #d4af37 100%);
+  background: linear-gradient(135deg, #ffffff 0%, #f6d365 35%, #d4af37 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -56,28 +54,20 @@ h1, h2, h3, h4, .heading, .font-heading {
   text-shadow: 0 0 20px rgba(255, 30, 39, 0.6), 0 0 40px rgba(255, 30, 39, 0.3);
 }
 
-.glow-box-crimson {
-  box-shadow: 0 0 30px rgba(255, 30, 39, 0.25), inset 0 0 15px rgba(255, 30, 39, 0.1);
-}
-
-.glow-box-gold {
-  box-shadow: 0 0 30px rgba(212, 175, 55, 0.2), inset 0 0 15px rgba(212, 175, 55, 0.05);
-}
-
 /* ==========================================================================
-   BUTTONS (Aggressive, High-Energy Devil Style)
+   BUTTONS
    ========================================================================== */
-.btn-devil {
+.btn-combat {
   position: relative;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   font-family: var(--font-heading);
-  font-size: 0.92rem;
+  font-size: 0.88rem;
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: 0.12em;
-  padding: 16px 36px;
+  padding: 15px 32px;
   background: linear-gradient(135deg, #ff1e27 0%, #b30c12 100%);
   color: #ffffff;
   border: 1px solid rgba(255, 255, 255, 0.3);
@@ -85,33 +75,18 @@ h1, h2, h3, h4, .heading, .font-heading {
   cursor: pointer;
   transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   text-decoration: none;
-  box-shadow: 0 4px 25px rgba(255, 30, 39, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.4);
-  overflow: hidden;
+  box-shadow: 0 4px 25px rgba(255, 30, 39, 0.45);
+  white-space: nowrap;
 }
 
-.btn-devil::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-  transition: left 0.6s ease;
-}
-
-.btn-devil:hover::before {
-  left: 100%;
-}
-
-.btn-devil:hover {
+.btn-combat:hover {
   background: linear-gradient(135deg, #ff3b42 0%, #d10e15 100%);
-  transform: translateY(-3px) scale(1.02);
-  box-shadow: 0 8px 35px rgba(255, 30, 39, 0.7), inset 0 1px 0 rgba(255, 255, 255, 0.6);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 35px rgba(255, 30, 39, 0.7);
   color: #ffffff;
 }
 
-.btn-devil-outline {
+.btn-combat-outline {
   position: relative;
   display: inline-flex;
   align-items: center;
@@ -121,18 +96,19 @@ h1, h2, h3, h4, .heading, .font-heading {
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: 0.1em;
-  padding: 14px 30px;
-  background-color: rgba(14, 17, 23, 0.85);
+  padding: 14px 28px;
+  background-color: rgba(13, 16, 23, 0.8);
   color: #ffffff;
   border: 2px solid var(--color-crimson);
   border-radius: 6px;
   cursor: pointer;
   transition: all 0.3s ease;
   text-decoration: none;
-  backdrop-blur: 8px;
+  backdrop-filter: blur(8px);
+  white-space: nowrap;
 }
 
-.btn-devil-outline:hover {
+.btn-combat-outline:hover {
   background-color: var(--color-crimson);
   color: #ffffff;
   transform: translateY(-2px);
@@ -143,12 +119,12 @@ h1, h2, h3, h4, .heading, .font-heading {
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  padding: 10px 20px;
-  background: rgba(14, 17, 23, 0.85);
+  padding: 10px 22px;
+  background: rgba(7, 8, 10, 0.9);
   border: 1px solid var(--color-crimson);
   border-radius: 9999px;
   color: #ffffff;
-  font-size: 0.8rem;
+  font-size: 0.78rem;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.08em;
@@ -164,12 +140,11 @@ h1, h2, h3, h4, .heading, .font-heading {
   box-shadow: 0 0 30px rgba(255, 30, 39, 0.6);
 }
 
-/* Audio wave animation */
 .sound-wave {
   display: flex;
   align-items: center;
   gap: 3px;
-  height: 16px;
+  height: 14px;
 }
 
 .sound-bar {
@@ -191,23 +166,23 @@ h1, h2, h3, h4, .heading, .font-heading {
 
 @keyframes wave {
   0%, 100% { height: 4px; }
-  50% { height: 16px; }
+  50% { height: 14px; }
 }
 
 /* ==========================================================================
    NAVIGATION
    ========================================================================== */
-.devil-nav {
+.combat-nav {
   position: sticky;
   top: 0;
   z-index: 100;
-  background-color: rgba(7, 8, 10, 0.92);
+  background-color: rgba(7, 8, 10, 0.94);
   backdrop-filter: blur(14px);
   border-bottom: 2px solid rgba(255, 30, 39, 0.3);
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.8);
 }
 
-.devil-nav--inner {
+.combat-nav--inner {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -215,19 +190,19 @@ h1, h2, h3, h4, .heading, .font-heading {
   gap: 20px;
 }
 
-.devil-nav--navigation {
+.combat-nav--navigation {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: clamp(12px, 1.8vw, 28px);
+  gap: clamp(14px, 1.8vw, 28px);
   list-style: none;
   margin: 0;
   padding: 0;
 }
 
-.devil-nav--navigation > li > a {
+.combat-nav--navigation > li > a {
   font-family: var(--font-heading);
-  font-size: 0.85rem;
+  font-size: 0.82rem;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.08em;
@@ -239,12 +214,12 @@ h1, h2, h3, h4, .heading, .font-heading {
   white-space: nowrap;
 }
 
-.devil-nav--navigation > li > a:hover {
+.combat-nav--navigation > li > a:hover {
   color: #ff1e27;
   text-shadow: 0 0 12px rgba(255, 30, 39, 0.8);
 }
 
-.devil-nav--navigation > li > a::after {
+.combat-nav--navigation > li > a::after {
   content: '';
   position: absolute;
   bottom: 0;
@@ -256,54 +231,73 @@ h1, h2, h3, h4, .heading, .font-heading {
   transition: width 0.3s ease;
 }
 
-.devil-nav--navigation > li > a:hover::after {
+.combat-nav--navigation > li > a:hover::after {
   width: 100%;
 }
 
 /* ==========================================================================
-   HERO SECTION (Devil's Advocate Wallpaper)
+   HERO SECTION
    ========================================================================== */
-.devil-hero {
+.combat-hero {
   position: relative;
-  min-height: 85vh;
+  min-height: 88vh;
   display: flex;
   align-items: center;
   background-color: #07080a;
   overflow: hidden;
 }
 
-.devil-hero--bg {
+.combat-hero--bg {
   position: absolute;
   inset: 0;
   z-index: 1;
 }
 
-.devil-hero--bg img {
+.combat-hero--bg img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   object-position: center;
-  opacity: 0.65;
+  opacity: 0.55;
   filter: contrast(1.15) brightness(0.9);
 }
 
-.devil-hero--bg::after {
+.combat-hero--bg::after {
   content: '';
   position: absolute;
   inset: 0;
-  background: radial-gradient(circle at center, rgba(7, 8, 10, 0.4) 0%, rgba(7, 8, 10, 0.85) 75%, #07080a 100%),
-              linear-gradient(180deg, rgba(7, 8, 10, 0.7) 0%, transparent 40%, rgba(7, 8, 10, 0.95) 100%);
+  background: radial-gradient(circle at center, rgba(7, 8, 10, 0.3) 0%, rgba(7, 8, 10, 0.85) 75%, #07080a 100%),
+              linear-gradient(180deg, rgba(7, 8, 10, 0.7) 0%, transparent 40%, rgba(7, 8, 10, 0.98) 100%);
 }
 
-.devil-hero--inner {
+.combat-hero--inner {
   position: relative;
   z-index: 2;
-  padding: 80px 0;
+  padding: 80px 0 60px;
 }
 
 /* ==========================================================================
-   VIDEO PLAYER SHOWCASE (Loop video with sound toggle)
+   CARDS & SHOWCASE
    ========================================================================== */
+.reality-card {
+  background-color: var(--color-bg-card);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-left: 4px solid #ff1e27;
+  border-radius: 10px;
+  padding: 28px;
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.reality-card:hover {
+  transform: translateY(-4px);
+  background-color: var(--color-bg-card-hover);
+  border-color: rgba(255, 30, 39, 0.5);
+  box-shadow: 0 10px 30px rgba(255, 30, 39, 0.15);
+}
+
 .video-showcase-box {
   position: relative;
   border-radius: 12px;
@@ -316,86 +310,54 @@ h1, h2, h3, h4, .heading, .font-heading {
 .video-showcase-box video {
   width: 100%;
   height: auto;
-  max-height: 600px;
+  max-height: 560px;
   object-fit: cover;
   display: block;
 }
 
-.video-overlay-control {
-  position: absolute;
-  bottom: 24px;
-  right: 24px;
-  z-index: 10;
-}
-
-/* ==========================================================================
-   REALITY CHECK CARDS
-   ========================================================================== */
-.reality-card {
-  background-color: #0e1117;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-left: 4px solid #ff1e27;
-  border-radius: 8px;
-  padding: 28px;
-  transition: all 0.3s ease;
-}
-
-.reality-card:hover {
-  transform: translateY(-4px);
-  background-color: #141820;
-  border-color: rgba(255, 30, 39, 0.5);
-  box-shadow: 0 10px 30px rgba(255, 30, 39, 0.15);
-}
-
-/* ==========================================================================
-   ATTORNEY DEVIL PORTRAITS
-   ========================================================================== */
-.attorney-devil-card {
+.attorney-combat-card {
   position: relative;
-  border-radius: 8px;
+  border-radius: 10px;
   overflow: hidden;
   border: 1px solid rgba(255, 30, 39, 0.3);
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
-  background-color: #0e1117;
-  transition: all 0.4s ease;
+  background-color: var(--color-bg-card);
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
 }
 
-.attorney-devil-card:hover {
-  transform: translateY(-6px);
+.attorney-combat-card:hover {
+  transform: translateY(-5px);
   border-color: #ff1e27;
   box-shadow: 0 15px 40px rgba(255, 30, 39, 0.3);
 }
 
-.attorney-devil-card img {
+.attorney-combat-card img {
   width: 100%;
-  height: 420px;
+  height: 380px;
   object-fit: cover;
   object-position: top;
-  transition: transform 0.6s ease;
-  filter: contrast(1.05);
+  transition: transform 0.5s ease;
 }
 
-.attorney-devil-card:hover img {
-  transform: scale(1.06);
+.attorney-combat-card:hover img {
+  transform: scale(1.05);
 }
 
-.attorney-devil-card .info-box {
+.attorney-combat-card .info-box {
   position: absolute;
   bottom: 0;
   left: 0;
   right: 0;
-  padding: 24px;
-  background: linear-gradient(0deg, #07080a 0%, rgba(7, 8, 10, 0.85) 70%, transparent 100%);
-  color: #ffffff;
+  padding: 22px;
+  background: linear-gradient(0deg, #07080a 0%, rgba(7, 8, 10, 0.88) 70%, transparent 100%);
 }
 
-/* ==========================================================================
-   MATERIALS QUOTE BANNER
-   ========================================================================== */
 .materials-quote-box {
   position: relative;
-  background-color: #0e1117;
-  border: 2px solid rgba(255, 30, 39, 0.5);
+  background-color: var(--color-bg-card);
+  border: 2px solid rgba(255, 30, 39, 0.45);
   border-radius: 12px;
   overflow: hidden;
   box-shadow: 0 15px 50px rgba(0, 0, 0, 0.8), 0 0 35px rgba(255, 30, 39, 0.2);
@@ -408,27 +370,24 @@ h1, h2, h3, h4, .heading, .font-heading {
   height: 100%;
   object-fit: cover;
   opacity: 0.25;
-  filter: grayscale(0.6) contrast(1.2);
+  filter: grayscale(0.5) contrast(1.2);
 }
 
 .materials-quote-box .content {
   position: relative;
   z-index: 2;
-  padding: 60px 40px;
+  padding: 50px 30px;
   text-align: center;
 }
 
-/* ==========================================================================
-   FORM INPUTS
-   ========================================================================== */
 .devil-input {
   width: 100%;
   background-color: rgba(255, 255, 255, 0.05);
   border: 1px solid rgba(255, 255, 255, 0.15);
   color: #ffffff;
-  padding: 14px 18px;
+  padding: 13px 16px;
   border-radius: 6px;
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   transition: all 0.25s ease;
 }
 
@@ -436,5 +395,5 @@ h1, h2, h3, h4, .heading, .font-heading {
   outline: none;
   border-color: #ff1e27;
   background-color: rgba(255, 30, 39, 0.08);
-  box-shadow: 0 0 15px rgba(255, 30, 39, 0.3);
+  box-shadow: 0 0 15px rgba(255, 30, 39, 0.25);
 }
