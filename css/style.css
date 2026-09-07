@@ -274,30 +274,30 @@ h1, h2, h3, h4, .heading, .font-heading {
 
 .hero-portrait-card {
   position: relative;
-  max-width: 520px;
+  max-width: 580px;
   width: 100%;
-  border-radius: 24px;
+  border-radius: 28px;
   overflow: hidden;
   border: none !important;
-  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.95);
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.98);
   background-color: transparent;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .hero-portrait-card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 30px 70px rgba(0, 0, 0, 1);
+  box-shadow: 0 35px 95px rgba(0, 0, 0, 1);
   border: none !important;
 }
 
 .hero-portrait-card img {
   width: 100%;
-  height: 640px;
-  max-height: 680px;
+  height: 720px;
+  max-height: 760px;
   object-fit: cover;
   object-position: center top;
   display: block;
-  border-radius: 24px;
+  border-radius: 28px;
   border: none !important;
 }
 
@@ -305,7 +305,7 @@ h1, h2, h3, h4, .heading, .font-heading {
   content: '';
   position: absolute;
   inset: 0;
-  border-radius: 24px;
+  border-radius: 28px;
   background: linear-gradient(180deg, transparent 65%, rgba(7, 8, 10, 0.92) 92%, #07080a 100%);
   pointer-events-none;
 }
@@ -365,37 +365,46 @@ h1, h2, h3, h4, .heading, .font-heading {
 }
 
 /* ==========================================================================
-   ATTORNEYS CARDS
+   CASE VIDEO (Top Crop)
+   ========================================================================== */
+#case-showcase-video, .video-top-crop {
+  object-fit: cover !important;
+  object-position: center 0% !important; /* Max high capture as requested */
+}
+
+/* ==========================================================================
+   ATTORNEYS CARDS (Centering face of Advocate Nurlan)
    ========================================================================== */
 .attorney-combat-card {
   position: relative;
-  border-radius: 12px;
+  border-radius: 16px;
   overflow: hidden;
   border: 1px solid rgba(255, 30, 39, 0.35);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.7);
   background-color: var(--color-bg-card);
   transition: all 0.3s ease;
   display: flex;
   flex-direction: column;
-  height: 100%;
+  min-height: 500px;
 }
 
 .attorney-combat-card:hover {
   transform: translateY(-5px);
   border-color: #ff1e27;
-  box-shadow: 0 15px 40px rgba(255, 30, 39, 0.3);
+  box-shadow: 0 20px 50px rgba(255, 30, 39, 0.35);
 }
 
 .attorney-combat-card img {
   width: 100%;
-  height: 340px;
+  height: 500px;
   object-fit: cover;
-  object-position: top;
+  object-position: center 10%; /* Perfectly centers the face in the view */
   transition: transform 0.5s ease;
+  display: block;
 }
 
 .attorney-combat-card:hover img {
-  transform: scale(1.04);
+  transform: scale(1.03);
 }
 
 .attorney-combat-card .info-box {
@@ -403,8 +412,8 @@ h1, h2, h3, h4, .heading, .font-heading {
   bottom: 0;
   left: 0;
   right: 0;
-  padding: 20px;
-  background: linear-gradient(0deg, #07080a 0%, rgba(7, 8, 10, 0.9) 70%, transparent 100%);
+  padding: 24px;
+  background: linear-gradient(0deg, #07080a 0%, rgba(7, 8, 10, 0.95) 75%, transparent 100%);
 }
 
 /* ==========================================================================

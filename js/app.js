@@ -178,6 +178,7 @@ const TN_ARTICLES = [
 ];
 
 // Reliable Article Image Map (Both WebP and JPG support)
+const TN_ARTICLES_VERSION = 'v8.0';
 const TN_ARTICLE_IMAGES = {
   'interrogation-rules': 'assets/images/article_interrogation.jpg',
   'supreme-court-cassation': 'assets/images/article_supreme_court.jpg',
@@ -186,13 +187,15 @@ const TN_ARTICLE_IMAGES = {
   'bankruptcy-individuals-rk': 'assets/images/article_bankruptcy.jpg'
 };
 
-// Helper to fetch live articles with guaranteed fresh image paths
+// Helper to fetch live articles with guaranteed fresh image paths & full list
 function getActiveArticles() {
+  const version = localStorage.getItem('tn_law_articles_version');
   const local = localStorage.getItem('tn_law_articles');
-  if (local) {
+  
+  if (version === TN_ARTICLES_VERSION && local) {
     try {
       const parsed = JSON.parse(local);
-      if (Array.isArray(parsed) && parsed.length > 0) {
+      if (Array.isArray(parsed) && parsed.length >= TN_ARTICLES.length) {
         // Sync & heal image paths from verified assets
         const healed = parsed.map(art => {
           if (TN_ARTICLE_IMAGES[art.id]) {
@@ -208,6 +211,12 @@ function getActiveArticles() {
       }
     } catch (e) {}
   }
+
+  // If missing, outdated, or corrupted: store full default articles
+  try {
+    localStorage.setItem('tn_law_articles', JSON.stringify(TN_ARTICLES));
+    localStorage.setItem('tn_law_articles_version', TN_ARTICLES_VERSION);
+  } catch (e) {}
   return TN_ARTICLES;
 }
 
