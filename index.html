@@ -42,7 +42,7 @@
     }
   </script>
 
-  <link rel="stylesheet" href="css/style.css?v=10.0">
+  <link rel="stylesheet" href="css/style.css?v=11.0">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚖️</text></svg>">
 </head>
 <body class="bg-[#07080a] text-slate-100 font-body antialiased selection:bg-red-600 selection:text-white">
@@ -614,8 +614,11 @@
       <div class="materials-banner-wrapper max-w-4xl mx-auto space-y-6 text-center">
         
         <!-- Big photo without bounding box frame -->
-        <div class="overflow-hidden rounded-2xl shadow-2xl shadow-black/90">
-          <img src="assets/media/materials_bg.jpeg" alt="Тактические материалы адвокатской конторы T&N" class="w-full h-72 sm:h-96 md:h-[420px] object-cover hover:scale-105 transition-transform duration-700">
+        <div class="overflow-hidden rounded-2xl shadow-2xl shadow-black/90 border border-white/10">
+          <picture>
+            <source srcset="assets/media/materials_bg.webp?v=11.0" type="image/webp">
+            <img src="assets/media/materials_bg.jpeg?v=11.0" alt="Тактические материалы адвокатской конторы T&N" class="w-full h-72 sm:h-96 md:h-[440px] object-cover hover:scale-105 transition-transform duration-700 block">
+          </picture>
         </div>
 
         <!-- Text directly UNDER the photo -->
@@ -970,6 +973,6 @@
     </div>
   </div>
 
-  <script src="js/app.js?v=10.0"></script>
+  <script src="js/app.js?v=11.0"></script>
 </body>
 </html>

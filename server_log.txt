@@ -116,3 +116,20 @@ code 404, message File not found
 "GET /assets/images/article_interrogation.webp?v=6.0 HTTP/1.1" 200 -
 "GET /assets/images/article_property_asset.webp?v=6.0 HTTP/1.1" 200 -
 "GET /assets/images/article_bankruptcy.webp?v=6.0 HTTP/1.1" 200 -
+"GET / HTTP/1.1" 200 -
+"GET /css/style.css?v=10.0 HTTP/1.1" 200 -
+"GET /assets/media/hero_wide_panoramic.webp?v=10.0 HTTP/1.1" 200 -
+"GET /assets/media/advocate_1.jpeg HTTP/1.1" 200 -
+"GET /assets/media/advocate_3.jpeg HTTP/1.1" 200 -
+"GET /assets/media/materials_bg.jpeg HTTP/1.1" 200 -
+"GET /js/app.js?v=10.0 HTTP/1.1" 200 -
+"GET /assets/images/article_interrogation.jpg HTTP/1.1" 200 -
+"GET /assets/media/devil_loop.mp4 HTTP/1.1" 200 -
+"GET /assets/media/case_video.mp4 HTTP/1.1" 200 -
+"GET /assets/images/article_bankruptcy.webp?v=6.0 HTTP/1.1" 200 -
+ -
+"GET /assets/images/article_interrogation.webp?v=6.0 HTTP/1.1" 200 -
+"GET /assets/images/article_business_debt.webp?v=6.0 HTTP/1.1" 200 -
+"GET /css/style.css?v=10.0 HTTP/1.1" 200 -
+code 404, message File not found
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 -
