@@ -42,7 +42,7 @@
     }
   </script>
 
-  <link rel="stylesheet" href="css/style.css?v=8.1">
+  <link rel="stylesheet" href="css/style.css?v=9.0">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚖️</text></svg>">
 </head>
 <body class="bg-[#07080a] text-slate-100 font-body antialiased selection:bg-red-600 selection:text-white">
@@ -167,33 +167,47 @@
   </header>
 
   <!-- ====================================================================
-       HERO SECTION (Clean Deep Dark, Large Frameless Photo Right, Text Left)
+       HERO SECTION (Panoramic Widescreen: Lawyer Right, Blurred Court Left with Text)
        ==================================================================== -->
-  <section id="manifest" class="combat-hero">
-    <div class="max-w-[1650px] w-full mx-auto px-4 sm:px-6 lg:px-10 combat-hero--inner">
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
+  <section id="manifest" class="combat-hero-wide relative overflow-hidden py-14 lg:py-20">
+    
+    <!-- Panoramic Background Image with Dynamic Fallback -->
+    <div class="combat-hero-wide--backdrop">
+      <picture>
+        <source srcset="assets/media/hero_wide_panoramic.webp?v=9.0" type="image/webp">
+        <img src="assets/media/hero_wide_panoramic.jpg?v=9.0" 
+             alt="Адвокатская контора T&N" 
+             loading="eager"
+             onerror="this.onerror=null; this.src='assets/media/hero_bg.jpeg';">
+      </picture>
+      <div class="hero-wide-gradient-mask"></div>
+    </div>
+
+    <!-- Content Container -->
+    <div class="max-w-[1650px] w-full mx-auto px-4 sm:px-6 lg:px-10 relative z-10">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center min-h-[580px] lg:min-h-[660px]">
         
-        <!-- Left Column: Content & Senior Partner Profile (lg:col-span-7 xl:col-span-6) -->
-        <div class="lg:col-span-7 xl:col-span-6 space-y-6">
+        <!-- Left Column: Content & Senior Partner Profile (lg:col-span-7 xl:col-span-7) -->
+        <div class="lg:col-span-7 xl:col-span-7 space-y-6">
           
-          <div class="inline-flex items-center gap-2.5 px-3.5 py-1.5 bg-[#0e121a] border border-white/15 text-slate-200 rounded-lg text-xs font-black uppercase tracking-widest shadow-xl">
+          <div class="inline-flex items-center gap-2.5 px-3.5 py-1.5 bg-[#0e121a]/90 backdrop-blur-md border border-white/15 text-slate-200 rounded-lg text-xs font-black uppercase tracking-widest shadow-xl">
             <span class="w-2 h-2 rounded-full bg-red-500 animate-ping"></span>
             <span>АДВОКАТСКАЯ КОНТОРА «T&N» • Г. АЛМАТЫ</span>
           </div>
 
-          <h1 class="font-heading text-4xl sm:text-5xl lg:text-6xl font-black text-white tracking-tight leading-none uppercase">
+          <h1 class="font-heading text-4xl sm:text-5xl lg:text-6xl font-black text-white tracking-tight leading-none uppercase drop-shadow-2xl">
             МЫ НЕ ОБЕЩАЕМ ЧУДЕС. <br>
             <span class="text-gradient-crimson block mt-2 text-3xl sm:text-5xl lg:text-6xl">
               МЫ ЛОМАЕМ СИСТЕМУ.
             </span>
           </h1>
 
-          <p class="text-sm sm:text-base lg:text-lg text-slate-300 font-medium leading-relaxed max-w-2xl">
+          <p class="text-sm sm:text-base lg:text-lg text-slate-200 font-medium leading-relaxed max-w-2xl drop-shadow">
             Бескомпромиссная адвокатская защита в судах г. Алматы и Верховном Суде РК. Мы не кормим иллюзиями — мы выявляем процессуальные фатальные бреши в обвинении и заставляем оппонентов отступить.
           </p>
 
           <!-- Senior Partner Profile Box -->
-          <div class="p-5 bg-[#0e121a] border border-white/15 rounded-2xl max-w-xl space-y-2 shadow-xl">
+          <div class="p-5 bg-[#0e121a]/85 backdrop-blur-md border border-white/15 rounded-2xl max-w-xl space-y-2 shadow-2xl">
             <div class="flex items-center gap-3.5">
               <img src="assets/media/advocate_1.jpeg" alt="Адвокат Нурлан" class="w-12 h-12 rounded-full object-cover border-2 border-red-500 shadow">
               <div>
@@ -208,60 +222,56 @@
 
           <!-- CTAs -->
           <div class="flex flex-wrap items-center gap-4 pt-1">
-            <button onclick="openConsultModal('Срочный вызов с главного экрана')" class="btn-combat text-sm sm:text-base">
+            <button onclick="openConsultModal('Срочный вызов с главного экрана')" class="btn-combat text-sm sm:text-base shadow-2xl">
               ⚡ Экстренный вызов адвоката
             </button>
           </div>
 
           <!-- Quick Metrics Ribbon -->
-          <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-4 border-t border-white/10 max-w-2xl">
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-4 border-t border-white/15 max-w-2xl">
             <div class="border-l-2 border-red-500 pl-2.5">
               <div class="font-heading text-xl sm:text-2xl font-black text-white">24/7</div>
-              <div class="text-[10px] text-slate-400 uppercase tracking-wider">Выезд на обыск</div>
+              <div class="text-[10px] text-slate-300 uppercase tracking-wider">Выезд на обыск</div>
             </div>
             <div class="border-l-2 border-red-500 pl-2.5">
               <div class="font-heading text-xl sm:text-2xl font-black text-red-400">65 МЛН ₸</div>
-              <div class="text-[10px] text-slate-400 uppercase tracking-wider">Отменено в ВС РК</div>
+              <div class="text-[10px] text-slate-300 uppercase tracking-wider">Отменено в ВС РК</div>
             </div>
             <div class="border-l-2 border-red-500 pl-2.5">
               <div class="font-heading text-xl sm:text-2xl font-black text-white">12+ ЛЕТ</div>
-              <div class="text-[10px] text-slate-400 uppercase tracking-wider">Судебная практика</div>
+              <div class="text-[10px] text-slate-300 uppercase tracking-wider">Судебная практика</div>
             </div>
             <div class="border-l-2 border-red-500 pl-2.5">
               <div class="font-heading text-xl sm:text-2xl font-black text-amber-400">100%</div>
-              <div class="text-[10px] text-slate-400 uppercase tracking-wider">Адвокатская тайна</div>
+              <div class="text-[10px] text-slate-300 uppercase tracking-wider">Адвокатская тайна</div>
             </div>
           </div>
 
         </div>
 
-        <!-- Right Column: Dramatic Large Frameless Hero Photo on Right (lg:col-span-5 xl:col-span-6) -->
-        <div class="lg:col-span-5 xl:col-span-6 flex justify-center lg:justify-end">
-          <div class="hero-portrait-card group relative w-full">
-            
-            <img src="assets/media/hero_bg.jpeg" alt="Адвокатская контора T&N" loading="eager" class="w-full h-full object-cover">
-
-            <!-- Floating Top Badge -->
-            <div class="absolute top-4 right-4 z-10 bg-black/90 border border-white/15 px-3.5 py-2 rounded-xl shadow-2xl backdrop-blur-md flex items-center gap-2 text-amber-400 text-xs font-bold">
-              <span>★ 5.0</span>
-              <span class="text-white text-xs uppercase tracking-wider font-semibold">Рейтинг в 2ГИС</span>
-            </div>
-
-            <!-- Floating Bottom Badge -->
-            <div class="absolute bottom-5 inset-x-5 z-10 p-4 bg-black/90 border border-white/15 rounded-2xl backdrop-blur-md shadow-2xl">
-              <div class="flex items-center justify-between text-xs font-black uppercase text-red-400">
-                <span>г. Алматы • Богенбай батыра, 23а</span>
-                <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-ping"></span>
-              </div>
-              <div class="font-heading text-base font-bold text-white mt-1">
-                ЭКСТРЕННАЯ ЗАЩИТА 24/7
-              </div>
-              <div class="text-xs text-slate-400 mt-0.5">
-                Выезд адвоката в отдел полиции / суд за 30 минут
-              </div>
-            </div>
-
+        <!-- Right Column: Interactive Floating Badges (lg:col-span-5 xl:col-span-5) -->
+        <div class="lg:col-span-5 xl:col-span-5 flex flex-col justify-between py-4 lg:py-8 lg:min-h-[600px] pointer-events-none space-y-6 lg:space-y-0">
+          
+          <!-- Floating Top Badge -->
+          <div class="self-start lg:self-end pointer-events-auto bg-black/85 border border-white/15 px-4 py-2.5 rounded-xl shadow-2xl backdrop-blur-md flex items-center gap-2 text-amber-400 text-xs font-bold">
+            <span>★ 5.0</span>
+            <span class="text-white text-xs uppercase tracking-wider font-semibold">Рейтинг в 2ГИС</span>
           </div>
+
+          <!-- Floating Bottom Badge -->
+          <div class="self-start lg:self-end w-full max-w-sm pointer-events-auto p-4 bg-black/90 border border-white/15 rounded-2xl backdrop-blur-md shadow-2xl space-y-1">
+            <div class="flex items-center justify-between text-xs font-black uppercase text-red-400">
+              <span>г. Алматы • Богенбай батыра, 23а</span>
+              <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-ping"></span>
+            </div>
+            <div class="font-heading text-base font-bold text-white">
+              ЭКСТРЕННАЯ ЗАЩИТА 24/7
+            </div>
+            <div class="text-xs text-slate-300">
+              Выезд адвоката в отдел полиции / суд за 30 минут
+            </div>
+          </div>
+
         </div>
 
       </div>
@@ -960,6 +970,6 @@
     </div>
   </div>
 
-  <script src="js/app.js?v=8.0"></script>
+  <script src="js/app.js?v=9.0"></script>
 </body>
 </html>
