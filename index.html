@@ -47,25 +47,45 @@
 </head>
 <body class="bg-[#07080a] text-slate-100 font-body antialiased selection:bg-red-600 selection:text-white">
 
-  <!-- Top Urgent Alert Bar -->
-  <div class="bg-gradient-to-r from-red-950 via-black to-red-950 text-white text-xs py-2.5 px-4 border-b border-red-600/40">
+  <!-- ====================================================================
+       TOP SCOREBOARD BAR ("Табло сверху сайта")
+       ==================================================================== -->
+  <div class="top-scoreboard-bar py-2 px-4 sm:px-6 lg:px-10">
     <div class="max-w-[1650px] mx-auto flex flex-wrap justify-between items-center gap-3">
-      <div class="flex items-center gap-3">
-        <span class="inline-flex items-center gap-2 px-2.5 py-0.5 rounded bg-red-600/30 text-red-400 font-extrabold uppercase text-[11px] border border-red-500/50">
+      
+      <!-- Live Indicators Left -->
+      <div class="flex items-center flex-wrap gap-3 sm:gap-5 text-xs">
+        <div class="inline-flex items-center gap-2 px-2.5 py-0.5 rounded bg-red-600/25 border border-red-500/50 text-red-400 font-black uppercase text-[11px]">
           <span class="w-2 h-2 rounded-full bg-red-500 animate-ping"></span>
-          24/7 Экстренный выезд на обыск и задержание
-        </span>
-        <span class="text-slate-300 hidden md:inline">г. Алматы, ул. Богенбай батыра, 23а • Работаем по всему Казахстану</span>
+          <span>ДЕЖУРНЫЙ АДВОКАТ: 24/7 НА ЛИНИИ</span>
+        </div>
+
+        <div class="hidden sm:flex items-center gap-2 text-slate-300 text-[11px]">
+          <span class="text-amber-400 font-bold">★ 5.0 2ГИС</span>
+          <span class="text-slate-600">•</span>
+          <span class="text-slate-300">г. Алматы, ул. Богенбай батыра, 23а</span>
+        </div>
+
+        <div class="hidden xl:flex items-center gap-2 text-[11px]">
+          <span class="text-slate-600">•</span>
+          <span class="text-slate-400">ВС РК: <strong class="text-red-400 font-bold">65 000 000 ₸</strong></span>
+          <span class="text-slate-600">•</span>
+          <span class="text-slate-400">СМЭС: <strong class="text-amber-400 font-bold">48 500 000 ₸</strong></span>
+        </div>
       </div>
-      <div class="flex items-center gap-5 text-xs">
-        <a href="tel:+77786775119" class="text-red-400 hover:text-white font-extrabold transition tracking-wider">
-          🔥 ГОРЯЧАЯ ЛИНИЯ: +7 (778) 677-51-19
+
+      <!-- Quick Actions Right -->
+      <div class="flex items-center gap-4 text-xs">
+        <a href="tel:+77786775119" class="text-red-400 hover:text-white font-black tracking-wider flex items-center gap-1.5 transition">
+          <span>🔥</span>
+          <span>+7 (778) 677-51-19</span>
         </a>
-        <a href="admin.html" class="text-amber-400 hover:text-amber-300 transition font-bold pl-3 border-l border-white/20 flex items-center gap-1.5">
+        <a href="admin.html" class="px-2.5 py-0.5 rounded bg-amber-500/20 text-amber-400 border border-amber-500/40 font-bold hover:bg-amber-500 hover:text-black transition flex items-center gap-1 text-[11px]">
           <span>⚙️</span>
-          <span>Кабинет CRM</span>
+          <span>CRM Кабинет</span>
         </a>
       </div>
+
     </div>
   </div>
 
@@ -104,24 +124,24 @@
     </div>
   </section>
 
-  <!-- Desktop Main Navigation -->
+  <!-- Desktop Main Navigation (Aligned in a Single Clean Line) -->
   <header class="combat-nav hidden lg:block">
     <div class="max-w-[1650px] w-full mx-auto px-4 sm:px-6 lg:px-10 combat-nav--inner">
       
       <!-- Logo Left -->
       <a href="#" class="flex items-center gap-3.5 group shrink-0">
-        <div class="w-11 h-11 rounded-lg bg-red-600 text-white flex items-center justify-center text-xl font-black shadow-lg shadow-red-600/50 group-hover:scale-105 transition">
+        <div class="w-10 h-10 rounded-lg bg-red-600 text-white flex items-center justify-center text-xl font-black shadow-lg shadow-red-600/50 group-hover:scale-105 transition">
           ⚖️
         </div>
         <div>
-          <div class="font-heading text-2xl font-black text-white tracking-wider leading-none">
-            T&N <span class="text-red-500 text-sm font-extrabold tracking-widest block mt-0.5">АДВОКАТСКАЯ КОНТОРА</span>
+          <div class="font-heading text-xl font-black text-white tracking-wider leading-none">
+            T&N <span class="text-red-500 text-xs font-extrabold tracking-widest block mt-0.5">АДВОКАТСКАЯ КОНТОРА</span>
           </div>
-          <div class="text-[10px] text-slate-400 tracking-widest uppercase mt-0.5">г. Алматы • Реестр адвокатов РК</div>
+          <div class="text-[9px] text-slate-400 tracking-widest uppercase mt-0.5">г. Алматы • Реестр адвокатов РК</div>
         </div>
       </a>
 
-      <!-- Navigation Links -->
+      <!-- Navigation Links Aligned in One Single Line -->
       <ul class="combat-nav--navigation">
         <li><a href="#manifest">Манифест</a></li>
         <li><a href="#video-showcase">Видео & Драйв</a></li>
@@ -143,20 +163,16 @@
   </header>
 
   <!-- ====================================================================
-       HERO SECTION (Photo Right, Text & Partner Info Left, Blur Extension)
+       HERO SECTION (Clean Dark Ambient Background, Photo Right, Text Left)
        ==================================================================== -->
   <section id="manifest" class="combat-hero">
-    <div class="combat-hero--bg">
-      <img src="assets/media/hero_wide_composite.jpg" alt="Адвокатская контора T&N Алматы" loading="eager">
-    </div>
-    
     <div class="max-w-[1650px] w-full mx-auto px-4 sm:px-6 lg:px-10 combat-hero--inner">
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
         
-        <!-- Left Column: Content & Attorneys Profile (lg:col-span-7) -->
+        <!-- Left Column: Content & Senior Partner Profiles (lg:col-span-7) -->
         <div class="lg:col-span-7 space-y-6">
           
-          <div class="inline-flex items-center gap-2.5 px-4 py-1.5 bg-black/80 border border-red-500/70 text-red-400 rounded-md text-xs font-black uppercase tracking-widest shadow-xl">
+          <div class="inline-flex items-center gap-2.5 px-3.5 py-1.5 bg-black/80 border border-red-500/70 text-red-400 rounded-md text-xs font-black uppercase tracking-widest shadow-xl">
             <span class="w-2 h-2 rounded-full bg-red-500 animate-ping"></span>
             <span>АДВОКАТСКАЯ КОНТОРА «T&N» • Г. АЛМАТЫ</span>
           </div>
@@ -173,7 +189,7 @@
           </p>
 
           <!-- Senior Partners Mini-Cards Box -->
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-1">
             
             <div class="p-4 bg-black/60 border border-red-500/30 rounded-xl space-y-1.5 backdrop-blur-md">
               <div class="flex items-center gap-2.5">
@@ -204,7 +220,7 @@
           </div>
 
           <!-- CTAs -->
-          <div class="flex flex-wrap items-center gap-4 pt-2">
+          <div class="flex flex-wrap items-center gap-4 pt-1">
             <button onclick="openConsultModal('Срочный вызов с главного экрана')" class="btn-combat text-sm sm:text-base">
               ⚡ Экстренный вызов адвоката
             </button>
@@ -271,16 +287,16 @@
   <!-- ====================================================================
        SECTION: LOOPING VIDEO SHOWCASE (with Mute/Unmute sound toggle)
        ==================================================================== -->
-  <section id="video-showcase" class="py-24 bg-[#0a0b0e] border-t-2 border-b-2 border-red-600/40 relative overflow-hidden">
+  <section id="video-showcase" class="py-20 bg-[#0a0b0e] border-t-2 border-b-2 border-red-600/40 relative overflow-hidden">
     <div class="max-w-[1650px] mx-auto px-4 sm:px-6 lg:px-10">
       
       <!-- Section Header -->
-      <div class="text-center max-w-3xl mx-auto mb-12 space-y-3">
+      <div class="text-center max-w-3xl mx-auto mb-10 space-y-3">
         <div class="inline-flex items-center gap-2 px-3 py-1 bg-red-600/20 text-red-400 rounded text-xs font-black uppercase tracking-widest border border-red-600/40">
           <span>🎬</span>
           <span>Энергетика • Кураж • Борьба</span>
         </div>
-        <h2 class="font-heading text-3xl sm:text-5xl font-black text-white tracking-tight uppercase">
+        <h2 class="font-heading text-3xl sm:text-4xl lg:text-5xl font-black text-white tracking-tight uppercase">
           МЫ НЕ ЖДЕМ ПОЩАДЫ. <span class="text-red-500">МЫ ДИКТУЕМ ПРАВИЛА.</span>
         </h2>
         <p class="text-slate-400 text-sm sm:text-base">
@@ -288,8 +304,8 @@
         </p>
       </div>
 
-      <!-- Video Box Container -->
-      <div class="max-w-5xl mx-auto">
+      <!-- Constrained 16:9 Video Box Container -->
+      <div class="max-w-4xl mx-auto">
         <div class="video-showcase-box relative group">
           
           <video id="devil-loop-video" autoplay loop playsinline preload="auto" class="w-full h-auto">
@@ -321,11 +337,11 @@
         </div>
 
         <!-- Video Subtitle / Statement -->
-        <div class="mt-6 text-center space-y-2">
-          <p class="font-heading text-lg sm:text-xl font-bold text-slate-200">
+        <div class="mt-5 text-center space-y-1.5">
+          <p class="font-heading text-base sm:text-lg font-bold text-slate-200">
             «Закон — это меч, и в наших руках он разит без промаха.»
           </p>
-          <div class="text-xs text-slate-500 uppercase tracking-widest">
+          <div class="text-[11px] text-slate-500 uppercase tracking-widest">
             Алматы • Суды всех инстанций • Верховный Суд Республики Казахстан
           </div>
         </div>
@@ -337,16 +353,16 @@
   <!-- ====================================================================
        SECTION: REALITY CHECK (Вся правда против вранья конкурентов)
        ==================================================================== -->
-  <section id="reality-check" class="py-24 bg-[#07080a] relative">
-    <div class="max-w-[1650px] mx-auto px-4 sm:px-6 lg:px-10 space-y-16">
+  <section id="reality-check" class="py-20 bg-[#07080a] relative">
+    <div class="max-w-[1650px] mx-auto px-4 sm:px-6 lg:px-10 space-y-12">
       
-      <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-6 border-b border-white/10 pb-8">
-        <div class="space-y-3 max-w-3xl">
+      <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-6 border-b border-white/10 pb-6">
+        <div class="space-y-2 max-w-3xl">
           <div class="inline-flex items-center gap-2 px-3 py-1 bg-red-500/10 text-red-400 text-xs font-black uppercase tracking-widest rounded border border-red-500/20">
             <span>⚔️</span>
             <span>Реалити-чек</span>
           </div>
-          <h2 class="font-heading text-3xl sm:text-5xl font-black text-white uppercase tracking-tight">
+          <h2 class="font-heading text-3xl sm:text-4xl lg:text-5xl font-black text-white uppercase tracking-tight">
             ЧТО ВАМ ВРУТ ДРУГИЕ ЮРИСТЫ <br>
             <span class="text-gradient-crimson">И КАК ВСЕ УСТРОЕНО НА САМОМ ДЕЛЕ</span>
           </h2>
@@ -357,7 +373,7 @@
       </div>
 
       <!-- Reality Cards Grid -->
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
         
         <!-- Card 1 -->
         <div class="reality-card space-y-4">
@@ -424,45 +440,45 @@
   <!-- ====================================================================
        SECTION: CASE VIDEO & VICTORIES ("И это не единичный кейс")
        ==================================================================== -->
-  <section id="cases" class="py-24 bg-[#0d1017] border-t border-b border-red-600/30">
-    <div class="max-w-[1650px] mx-auto px-4 sm:px-6 lg:px-10 space-y-16">
+  <section id="cases" class="py-20 bg-[#0d1017] border-t border-b border-red-600/30">
+    <div class="max-w-[1650px] mx-auto px-4 sm:px-6 lg:px-10 space-y-12">
       
-      <div class="text-center max-w-3xl mx-auto space-y-3">
+      <div class="text-center max-w-3xl mx-auto space-y-2">
         <div class="inline-flex items-center gap-2 px-3 py-1 bg-amber-500/20 text-amber-400 rounded text-xs font-black uppercase tracking-widest border border-amber-500/30">
           <span>🏆</span>
           <span>Факты против демагогии</span>
         </div>
-        <h2 class="font-heading text-3xl sm:text-5xl font-black text-white uppercase tracking-tight">
+        <h2 class="font-heading text-3xl sm:text-4xl lg:text-5xl font-black text-white uppercase tracking-tight">
           РЕАЛЬНЫЕ БОИ В СУДАХ И <span class="text-red-500">РЕЗУЛЬТАТЫ</span>
         </h2>
       </div>
 
       <!-- Case Video Container -->
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
         
         <!-- Left: Video Player with Caption -->
-        <div class="lg:col-span-7 space-y-4">
-          <div class="rounded-xl overflow-hidden border-2 border-red-500 shadow-2xl shadow-red-950/60 bg-black relative">
-            <video autoplay loop muted playsinline class="w-full h-auto max-h-[500px] object-cover">
+        <div class="lg:col-span-6 space-y-4">
+          <div class="rounded-xl overflow-hidden border-2 border-red-500/70 shadow-2xl shadow-red-950/60 bg-black relative">
+            <video autoplay loop muted playsinline class="w-full h-auto max-h-[340px] aspect-video object-cover">
               <source src="assets/media/case_video.mp4" type="video/mp4">
             </video>
           </div>
 
           <!-- Explicit Caption required by user -->
           <div class="p-4 bg-red-950/40 border-l-4 border-red-500 rounded text-slate-200">
-            <div class="font-heading text-lg sm:text-xl font-bold text-white uppercase">
+            <div class="font-heading text-base sm:text-lg font-bold text-white uppercase">
               «И ЭТО НЕ ЕДИНИЧНЫЙ КЕЙС.»
             </div>
-            <p class="text-xs sm:text-sm text-slate-300 mt-1">
+            <p class="text-xs text-slate-300 mt-1">
               Мы вырываем победы в процессах, от которых отказываются другие юристы, признавая их «безнадежными».
             </p>
           </div>
         </div>
 
         <!-- Right: Real Victorious Cases -->
-        <div class="lg:col-span-5 space-y-4">
+        <div class="lg:col-span-6 space-y-3.5">
           
-          <div class="p-5 bg-black/60 border border-white/10 rounded-xl space-y-2 hover:border-red-500 transition">
+          <div class="p-4 bg-black/60 border border-white/10 rounded-xl space-y-1.5 hover:border-red-500 transition">
             <div class="flex items-center justify-between text-xs font-black text-red-400 uppercase">
               <span>Верховный Суд РК (г. Астана)</span>
               <span>65 000 000 ₸</span>
@@ -473,7 +489,7 @@
             </p>
           </div>
 
-          <div class="p-5 bg-black/60 border border-white/10 rounded-xl space-y-2 hover:border-red-500 transition">
+          <div class="p-4 bg-black/60 border border-white/10 rounded-xl space-y-1.5 hover:border-red-500 transition">
             <div class="flex items-center justify-between text-xs font-black text-amber-400 uppercase">
               <span>СМЭС г. Алматы</span>
               <span>48 500 000 ₸</span>
@@ -484,7 +500,7 @@
             </p>
           </div>
 
-          <div class="p-5 bg-black/60 border border-white/10 rounded-xl space-y-2 hover:border-red-500 transition">
+          <div class="p-4 bg-black/60 border border-white/10 rounded-xl space-y-1.5 hover:border-red-500 transition">
             <div class="flex items-center justify-between text-xs font-black text-red-500 uppercase">
               <span>Уголовная защита (ст. 189, 190 УК РК)</span>
               <span>Прекращение дела</span>
@@ -495,7 +511,7 @@
             </p>
           </div>
 
-          <div class="pt-2">
+          <div class="pt-1">
             <button onclick="openConsultModal('Разбор перспектив дела')" class="btn-combat w-full text-center">
               Оценить шансы вашего дела в бою
             </button>
@@ -511,15 +527,15 @@
   <!-- ====================================================================
        SECTION: ATTORNEYS ("Хищники правового процесса")
        ==================================================================== -->
-  <section id="attorneys" class="py-24 bg-[#07080a] relative">
-    <div class="max-w-[1650px] mx-auto px-4 sm:px-6 lg:px-10 space-y-16">
+  <section id="attorneys" class="py-20 bg-[#07080a] relative">
+    <div class="max-w-[1650px] mx-auto px-4 sm:px-6 lg:px-10 space-y-12">
       
-      <div class="text-center max-w-3xl mx-auto space-y-3">
+      <div class="text-center max-w-3xl mx-auto space-y-2">
         <div class="inline-flex items-center gap-2 px-3 py-1 bg-red-600/20 text-red-400 rounded text-xs font-black uppercase tracking-widest border border-red-600/30">
           <span>⚖️</span>
           <span>Команда жесткой защиты</span>
         </div>
-        <h2 class="font-heading text-3xl sm:text-5xl font-black text-white uppercase tracking-tight">
+        <h2 class="font-heading text-3xl sm:text-4xl lg:text-5xl font-black text-white uppercase tracking-tight">
           АДВОКАТЫ КОНТОРЫ <span class="text-red-500">«T&N»</span>
         </h2>
         <p class="text-slate-400 text-sm sm:text-base">
@@ -527,19 +543,19 @@
         </p>
       </div>
 
-      <!-- 3 Attorney Cards using newly provided photos -->
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <!-- 3 Attorney Cards in Balanced Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
         
         <!-- Attorney Card 1 -->
         <div class="attorney-combat-card group">
           <img src="assets/media/advocate_1.jpeg" alt="Адвокат Нурлан">
           <div class="info-box space-y-1.5">
-            <div class="text-xs font-black text-red-500 uppercase tracking-widest">Партнер по уголовным делам</div>
-            <h3 class="font-heading text-2xl font-black text-white uppercase">Адвокат Нурлан</h3>
+            <div class="text-[10px] font-black text-red-500 uppercase tracking-widest">Партнер по уголовным делам</div>
+            <h3 class="font-heading text-xl font-black text-white uppercase">Адвокат Нурлан</h3>
             <p class="text-xs text-slate-300 leading-relaxed">
               Специалист по жесткому развалу уголовных дел, экстренному выезду на задержания и защите топ-менеджеров от рейдерства 24/7.
             </p>
-            <button onclick="openConsultModal('Запись к адвокату Нурлану')" class="text-xs font-extrabold uppercase text-amber-400 hover:text-white pt-2 flex items-center gap-1 transition">
+            <button onclick="openConsultModal('Запись к адвокату Нурлану')" class="text-xs font-extrabold uppercase text-amber-400 hover:text-white pt-1.5 flex items-center gap-1 transition">
               <span>Вызвать адвоката →</span>
             </button>
           </div>
@@ -549,12 +565,12 @@
         <div class="attorney-combat-card group">
           <img src="assets/media/advocate_2.jpeg" alt="Адвокат Тамара">
           <div class="info-box space-y-1.5">
-            <div class="text-xs font-black text-amber-400 uppercase tracking-widest">Управляющий партнер</div>
-            <h3 class="font-heading text-2xl font-black text-white uppercase">Адвокат Тамара</h3>
+            <div class="text-[10px] font-black text-amber-400 uppercase tracking-widest">Управляющий партнер</div>
+            <h3 class="font-heading text-xl font-black text-white uppercase">Адвокат Тамара</h3>
             <p class="text-xs text-slate-300 leading-relaxed">
               Судебный литигатор высшей квалификации. Победы в Верховном Суде РК, сложнейшие экономические споры и раздел бизнес-активов.
             </p>
-            <button onclick="openConsultModal('Запись к адвокату Тамаре')" class="text-xs font-extrabold uppercase text-amber-400 hover:text-white pt-2 flex items-center gap-1 transition">
+            <button onclick="openConsultModal('Запись к адвокату Тамаре')" class="text-xs font-extrabold uppercase text-amber-400 hover:text-white pt-1.5 flex items-center gap-1 transition">
               <span>Записаться к партнеру →</span>
             </button>
           </div>
@@ -564,12 +580,12 @@
         <div class="attorney-combat-card group">
           <img src="assets/media/advocate_3.jpeg" alt="Партнеры конторы T&N">
           <div class="info-box space-y-1.5">
-            <div class="text-xs font-black text-red-500 uppercase tracking-widest">Судебный синдикат «T&N»</div>
-            <h3 class="font-heading text-2xl font-black text-white uppercase">Тандем Победы</h3>
+            <div class="text-[10px] font-black text-red-500 uppercase tracking-widest">Судебный синдикат «T&N»</div>
+            <h3 class="font-heading text-xl font-black text-white uppercase">Тандем Победы</h3>
             <p class="text-xs text-slate-300 leading-relaxed">
               Объединенный опыт двух партнеров. Мы разрабатываем многоходовки, которые ставят обвинение и процессуальных противников в тупик.
             </p>
-            <button onclick="openConsultModal('Комплексная защита двумя адвокатами')" class="text-xs font-extrabold uppercase text-red-400 hover:text-white pt-2 flex items-center gap-1 transition">
+            <button onclick="openConsultModal('Комплексная защита двумя адвокатами')" class="text-xs font-extrabold uppercase text-red-400 hover:text-white pt-1.5 flex items-center gap-1 transition">
               <span>Комплексная защита →</span>
             </button>
           </div>
@@ -583,18 +599,18 @@
   <!-- ====================================================================
        SECTION: MATERIALS ("К материалам" - assets/media/materials_bg.jpeg)
        ==================================================================== -->
-  <section id="materials" class="py-24 bg-[#0a0b0e] border-t border-b border-red-600/40 relative">
-    <div class="max-w-[1650px] mx-auto px-4 sm:px-6 lg:px-10 space-y-16">
+  <section id="materials" class="py-20 bg-[#0a0b0e] border-t border-b border-red-600/40 relative">
+    <div class="max-w-[1650px] mx-auto px-4 sm:px-6 lg:px-10 space-y-12">
       
       <!-- Exact Quote Banner required by user -->
-      <div class="materials-quote-box">
+      <div class="materials-quote-box max-w-4xl mx-auto">
         <img src="assets/media/materials_bg.jpeg" alt="К материалам" class="bg-img">
-        <div class="content space-y-4 max-w-4xl mx-auto">
+        <div class="content space-y-3.5">
           <div class="inline-block px-3 py-1 bg-red-600/40 border border-red-500 text-red-300 rounded text-xs font-black uppercase tracking-widest">
             ⏱ ВРЕМЯ — ВАШ ГЛАВНЫЙ ВРАГ
           </div>
           
-          <h2 class="font-heading text-2xl sm:text-4xl lg:text-5xl font-black text-white uppercase leading-tight glow-crimson">
+          <h2 class="font-heading text-2xl sm:text-3xl lg:text-4xl font-black text-white uppercase leading-snug glow-crimson">
             «Чем дольше раздумываешь — тем меньше времени.<br>
             Чем меньше времени — тем меньше вариантов.<br>
             Чем меньше вариантов — тем меньше шансов.»
@@ -616,23 +632,23 @@
         </div>
 
         <div class="flex flex-wrap items-center gap-2">
-          <button class="article-filter-btn active px-4 py-2 rounded text-xs font-bold uppercase tracking-wider transition bg-red-600 text-white border border-red-600" data-category="all">
+          <button class="article-filter-btn active px-3.5 py-1.5 rounded text-xs font-bold uppercase tracking-wider transition bg-red-600 text-white border border-red-600" data-category="all">
             Все статьи
           </button>
-          <button class="article-filter-btn px-4 py-2 rounded text-xs font-bold uppercase tracking-wider transition bg-black/60 text-slate-400 hover:text-white border border-white/10" data-category="criminal">
+          <button class="article-filter-btn px-3.5 py-1.5 rounded text-xs font-bold uppercase tracking-wider transition bg-black/60 text-slate-400 hover:text-white border border-white/10" data-category="criminal">
             Уголовные дела
           </button>
-          <button class="article-filter-btn px-4 py-2 rounded text-xs font-bold uppercase tracking-wider transition bg-black/60 text-slate-400 hover:text-white border border-white/10" data-category="supreme">
+          <button class="article-filter-btn px-3.5 py-1.5 rounded text-xs font-bold uppercase tracking-wider transition bg-black/60 text-slate-400 hover:text-white border border-white/10" data-category="supreme">
             Верховный Суд РК
           </button>
-          <button class="article-filter-btn px-4 py-2 rounded text-xs font-bold uppercase tracking-wider transition bg-black/60 text-slate-400 hover:text-white border border-white/10" data-category="business">
+          <button class="article-filter-btn px-3.5 py-1.5 rounded text-xs font-bold uppercase tracking-wider transition bg-black/60 text-slate-400 hover:text-white border border-white/10" data-category="business">
             Защита бизнеса
           </button>
         </div>
       </div>
 
       <!-- Articles Grid Container -->
-      <div id="articles-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div id="articles-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         <!-- Rendered by renderArticlesList() in js/app.js -->
       </div>
 
@@ -642,19 +658,19 @@
   <!-- ====================================================================
        SECTION: FOOTER & BATTLE CONTACT FORM
        ==================================================================== -->
-  <footer id="contact" class="py-24 bg-[#07080a] border-t-2 border-red-600 text-white relative">
+  <footer id="contact" class="py-20 bg-[#07080a] border-t-2 border-red-600 text-white relative">
     <div class="max-w-[1650px] mx-auto px-4 sm:px-6 lg:px-10">
       
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
         
         <!-- Left: Statement & Requisites -->
         <div class="lg:col-span-5 space-y-6">
           <div class="flex items-center gap-3">
-            <div class="w-12 h-12 rounded-lg bg-red-600 text-white flex items-center justify-center text-2xl font-black shadow-lg shadow-red-600/50">
+            <div class="w-11 h-11 rounded-lg bg-red-600 text-white flex items-center justify-center text-xl font-black shadow-lg shadow-red-600/50">
               ⚖️
             </div>
             <div>
-              <div class="font-heading text-3xl font-black text-white leading-none">T&N LAW FIRM</div>
+              <div class="font-heading text-2xl font-black text-white leading-none">T&N LAW FIRM</div>
               <div class="text-xs text-red-500 font-extrabold uppercase tracking-widest mt-1">АДВОКАТСКАЯ КОНТОРА • АЛМАТЫ</div>
             </div>
           </div>
@@ -687,14 +703,14 @@
         </div>
 
         <!-- Right: Urgent Combat Contact Form -->
-        <div class="lg:col-span-7 bg-[#0d1017] border-2 border-red-500/60 p-8 sm:p-10 rounded-2xl shadow-2xl shadow-red-950/80 space-y-6">
+        <div class="lg:col-span-7 bg-[#0d1017] border-2 border-red-500/60 p-6 sm:p-8 rounded-2xl shadow-2xl shadow-red-950/80 space-y-5">
           
           <div>
             <span class="text-xs font-extrabold uppercase text-red-500 tracking-widest">Не теряйте драгоценное время</span>
-            <h3 class="font-heading text-2xl sm:text-3xl font-black text-white uppercase mt-1">
+            <h3 class="font-heading text-2xl font-black text-white uppercase mt-0.5">
               ВСТУПИТЬ В БОЙ / СРОЧНЫЙ ВЫЕЗД
             </h3>
-            <p class="text-xs text-slate-400 mt-1">
+            <p class="text-xs text-slate-400 mt-0.5">
               Адвокат Тамара или Нурлан свяжется с вами в течение 5–10 минут.
             </p>
           </div>
@@ -718,7 +734,7 @@
               <textarea id="input_devil_message" rows="3" required placeholder="Кратко опишите ситуацию: кто вызывает, какая статья или сумма спора..." class="devil-input"></textarea>
             </div>
 
-            <button type="submit" class="btn-combat w-full text-base py-4">
+            <button type="submit" class="btn-combat w-full text-base py-3.5">
               🔥 ВЫЗВАТЬ АДВОКАТА / НАЧАТЬ ЗАЩИТУ
             </button>
 
@@ -732,7 +748,7 @@
       </div>
 
       <!-- Copyright Bar -->
-      <div class="border-t border-white/10 mt-16 pt-6 flex flex-wrap justify-between items-center gap-4 text-xs text-slate-500">
+      <div class="border-t border-white/10 mt-12 pt-5 flex flex-wrap justify-between items-center gap-4 text-xs text-slate-500">
         <div>© 2026 Адвокатская контора «T&N». Все права защищены. Бескомпромиссная защита.</div>
         <div class="flex items-center gap-4">
           <a href="admin.html" class="text-amber-400 hover:text-white transition font-bold">Панель администратора CRM</a>
@@ -753,7 +769,7 @@
     <div class="modal-content relative bg-[#0e1117] text-white rounded-xl shadow-2xl border-2 border-red-500 z-10 w-full max-w-4xl max-h-[90vh] flex flex-col overflow-hidden scale-95 opacity-0 transition-all duration-300">
       
       <!-- Top Bar -->
-      <div class="p-4 sm:p-6 border-b border-white/10 flex items-center justify-between bg-[#07080a] sticky top-0 z-20">
+      <div class="p-4 sm:p-5 border-b border-white/10 flex items-center justify-between bg-[#07080a] sticky top-0 z-20">
         <div class="flex items-center gap-3">
           <span id="article-modal-category" class="bg-red-600 text-white text-xs font-black uppercase tracking-wider px-3 py-1 rounded">
             Категория
@@ -771,19 +787,19 @@
       </div>
 
       <!-- Scrollable Body -->
-      <div class="overflow-y-auto p-6 sm:p-10 space-y-6">
+      <div class="overflow-y-auto p-6 sm:p-8 space-y-5">
         
-        <div class="w-full h-64 sm:h-80 rounded-lg overflow-hidden relative shadow-md border border-white/10">
+        <div class="w-full h-56 sm:h-72 rounded-lg overflow-hidden relative shadow-md border border-white/10">
           <img id="article-modal-banner" src="assets/media/advocate_1.jpeg" alt="Статья" class="w-full h-full object-cover">
         </div>
 
-        <h1 id="article-modal-title" class="font-heading text-2xl sm:text-3xl lg:text-4xl font-black text-white leading-tight uppercase">
+        <h1 id="article-modal-title" class="font-heading text-2xl sm:text-3xl font-black text-white leading-tight uppercase">
           Заголовок материала
         </h1>
 
         <!-- Author Card -->
-        <div class="flex items-center gap-4 py-4 border-y border-white/10 bg-black/40 rounded-lg px-4">
-          <img id="article-modal-author-photo" src="assets/media/advocate_1.jpeg" alt="Автор" class="w-12 h-12 rounded-full object-cover border-2 border-red-500">
+        <div class="flex items-center gap-3.5 py-3 border-y border-white/10 bg-black/40 rounded-lg px-4">
+          <img id="article-modal-author-photo" src="assets/media/advocate_1.jpeg" alt="Автор" class="w-11 h-11 rounded-full object-cover border-2 border-red-500">
           <div>
             <div id="article-modal-author-name" class="font-bold text-white text-sm sm:text-base">Адвокат Нурлан</div>
             <div id="article-modal-author-role" class="text-xs text-red-400 font-semibold">Партнер конторы «T&N»</div>
@@ -791,21 +807,21 @@
         </div>
 
         <!-- Content -->
-        <div id="article-modal-content" class="text-slate-300 leading-relaxed space-y-4 text-base">
+        <div id="article-modal-content" class="text-slate-300 leading-relaxed space-y-4 text-sm sm:text-base">
           <!-- Injected by JS -->
         </div>
 
         <!-- End of Article CTA Box -->
-        <div class="mt-10 bg-gradient-to-r from-red-950/80 to-black rounded-xl p-6 sm:p-8 border-2 border-red-500 space-y-4">
-          <div class="flex items-center gap-3 text-white font-heading text-lg sm:text-xl font-black uppercase">
+        <div class="mt-8 bg-gradient-to-r from-red-950/80 to-black rounded-xl p-5 sm:p-6 border-2 border-red-500 space-y-3">
+          <div class="flex items-center gap-3 text-white font-heading text-base sm:text-lg font-black uppercase">
             <span>⚔️</span>
             <span>Нужен персональный правовой контрудар по этой теме?</span>
           </div>
-          <p class="text-xs sm:text-sm text-slate-300">
+          <p class="text-xs text-slate-300">
             Оставьте телефон — адвокат свяжется с вами и проведет жесткий аудит ситуации.
           </p>
 
-          <form id="article-cta-form" class="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2">
+          <form id="article-cta-form" class="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-1">
             <input type="hidden" id="article-cta-service" value="Вопрос по материалу">
             <input type="text" id="article-cta-name" placeholder="Ваше имя" class="devil-input">
             <input type="tel" id="article-cta-phone" required placeholder="+7 (7XX) XXX-XX-XX" class="devil-input font-bold font-mono">
@@ -824,19 +840,19 @@
   <div id="consultation-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 hidden">
     <div class="modal-overlay fixed inset-0 bg-black/85 backdrop-blur-sm opacity-0 transition-opacity" onclick="closeConsultModal()"></div>
     
-    <div class="modal-content relative bg-[#0e1117] text-white rounded-xl p-8 max-w-lg w-full shadow-2xl border-2 border-red-500 z-10 scale-95 opacity-0 transition-all">
+    <div class="modal-content relative bg-[#0e1117] text-white rounded-xl p-6 sm:p-8 max-w-lg w-full shadow-2xl border-2 border-red-500 z-10 scale-95 opacity-0 transition-all">
       
       <button onclick="closeConsultModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white text-xl font-bold">
         ✕
       </button>
 
-      <div class="space-y-1 mb-6">
+      <div class="space-y-1 mb-5">
         <div class="text-xs font-black uppercase tracking-widest text-red-500">Экстренная помощь</div>
-        <h3 class="font-heading text-2xl font-black text-white uppercase">СРОЧНЫЙ ВЫЗОВ АДВОКАТА</h3>
+        <h3 class="font-heading text-xl sm:text-2xl font-black text-white uppercase">СРОЧНЫЙ ВЫЗОВ АДВОКАТА</h3>
         <p class="text-xs text-slate-400">Адвокат выйдет на связь в течение 5–10 минут</p>
       </div>
 
-      <form id="modal-consult-form" class="space-y-4">
+      <form id="modal-consult-form" class="space-y-3.5">
         <div>
           <label class="block text-xs font-bold uppercase text-slate-400 mb-1">Направление</label>
           <input type="text" id="modal-service" readonly class="w-full bg-black/60 border border-white/10 px-3.5 py-2 rounded text-sm font-bold text-red-400">
@@ -857,7 +873,7 @@
           <textarea id="modal-message" rows="2" placeholder="Опишите кратко..." class="devil-input"></textarea>
         </div>
 
-        <button type="submit" class="btn-combat w-full mt-2">
+        <button type="submit" class="btn-combat w-full mt-1.5">
           🔥 НАЧАТЬ ЗАЩИТУ ПРЯМО СЕЙЧАС
         </button>
       </form>
