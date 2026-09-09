@@ -45,7 +45,7 @@
   <!-- Leaflet Map CSS -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 
-  <link rel="stylesheet" href="css/style.css?v=13.0">
+  <link rel="stylesheet" href="css/style.css?v=14.0">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚖️</text></svg>">
 </head>
 <body class="bg-[#07080a] text-slate-100 font-body antialiased selection:bg-red-600 selection:text-white">
@@ -286,7 +286,7 @@
           <div class="video-showcase-box relative group w-full">
             
             <video id="devil-loop-video" autoplay loop playsinline preload="auto">
-              <source src="assets/media/devil_loop.mp4" type="video/mp4">
+              <source src="assets/media/devil_loop.mp4?v=14.0" type="video/mp4">
               Ваш браузер не поддерживает видео HTML5.
             </video>
 
@@ -463,38 +463,38 @@
       </div>
 
       <!-- Case Video Container -->
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
         
-        <!-- Left: Video Player with Caption -->
-        <div class="lg:col-span-6 space-y-4">
-          <div class="rounded-xl overflow-hidden border-2 border-red-500/70 shadow-2xl shadow-red-950/60 bg-black relative group flex items-center justify-center">
+        <!-- Left: Vertical Case Video Player with Caption (lg:col-span-5) -->
+        <div class="lg:col-span-5 space-y-4 flex flex-col items-center">
+          <div class="case-video-box relative group w-full">
             <video id="case-showcase-video"
-                   src="assets/media/case_video.mp4"
+                   src="assets/media/case_video.mp4?v=14.0"
                    autoplay 
                    loop 
                    muted 
                    playsinline 
                    controls
                    preload="auto"
-                   class="w-full h-auto max-h-[420px] object-contain bg-black cursor-pointer">
-              <source src="assets/media/case_video.mp4" type="video/mp4">
+                   class="cursor-pointer">
+              <source src="assets/media/case_video.mp4?v=14.0" type="video/mp4">
               Ваш браузер не поддерживает видео HTML5.
             </video>
           </div>
 
           <!-- Explicit Caption required by user -->
-          <div class="p-4 bg-red-950/40 border-l-4 border-red-500 rounded text-slate-200">
+          <div class="w-full p-4 bg-red-950/40 border-l-4 border-red-500 rounded-xl text-slate-200 shadow-xl">
             <div class="font-heading text-base sm:text-lg font-bold text-white uppercase">
               «И ЭТО НЕ ЕДИНИЧНЫЙ КЕЙС.»
             </div>
-            <p class="text-xs text-slate-300 mt-1">
+            <p class="text-xs text-slate-300 mt-1 leading-relaxed">
               Мы вырываем победы в процессах, от которых отказываются другие юристы, признавая их «безнадежными».
             </p>
           </div>
         </div>
 
-        <!-- Right: Real Victorious Cases -->
-        <div class="lg:col-span-6 space-y-3.5">
+        <!-- Right: Real Victorious Cases (lg:col-span-7) -->
+        <div class="lg:col-span-7 space-y-3.5">
           
           <div class="p-4 bg-black/60 border border-white/10 rounded-xl space-y-1.5 hover:border-red-500 transition">
             <div class="flex items-center justify-between text-xs font-black text-red-400 uppercase">
@@ -561,17 +561,17 @@
         </p>
       </div>
 
-      <!-- Attorney Cards in Balanced Grid -->
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+      <!-- Attorney Cards in Balanced 3-Column Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
         
         <!-- Attorney Card 1: Nurlan -->
         <div class="attorney-combat-card group">
           <picture>
-            <source srcset="assets/media/advocate_1.webp?v=13.0" type="image/webp">
-            <img src="assets/media/advocate_1.jpeg?v=13.0" alt="Адвокат Нурлан" class="attorney-img-nurlan">
+            <source srcset="assets/media/advocate_1.webp?v=14.0" type="image/webp">
+            <img src="assets/media/advocate_1.jpeg?v=14.0" alt="Адвокат Нурлан" class="attorney-img-nurlan">
           </picture>
           <div class="info-box space-y-1.5">
-            <div class="text-[10px] font-black text-red-500 uppercase tracking-widest">Партнер по уголовным и экономическим делам</div>
+            <div class="text-[10px] font-black text-red-500 uppercase tracking-widest">Старший партнер • Уголовная защита</div>
             <h3 class="font-heading text-2xl font-black text-white uppercase">Адвокат Нурлан</h3>
             <p class="text-xs text-slate-300 leading-relaxed">
               Специалист по жесткому развалу уголовных дел, экстренному выезду на задержания и защите бизнеса от рейдерства 24/7.
@@ -582,14 +582,35 @@
           </div>
         </div>
 
-        <!-- Attorney Card 2: Litigation Syndicate -->
+        <!-- Attorney Card 2: Partner Photo 2 -->
         <div class="attorney-combat-card group">
-          <img src="assets/media/advocate_3.jpeg?v=13.0" alt="Судебный синдикат T&N" class="attorney-img-team">
+          <picture>
+            <source srcset="assets/media/advocate_2.webp?v=14.0" type="image/webp">
+            <img src="assets/media/advocate_2.jpeg?v=14.0" alt="Партнер судебной практики" class="attorney-img-partner">
+          </picture>
+          <div class="info-box space-y-1.5">
+            <div class="text-[10px] font-black text-amber-400 uppercase tracking-widest">Партнер • Верховный Суд РК</div>
+            <h3 class="font-heading text-2xl font-black text-white uppercase">Судебная практика</h3>
+            <p class="text-xs text-slate-300 leading-relaxed">
+              Кассационная коллегия ВС РК, экономический арбитраж и сохранение многомиллионных активов бизнеса.
+            </p>
+            <button onclick="openConsultModal('Запись по спорам в ВС РК')" class="text-xs font-extrabold uppercase text-amber-400 hover:text-white pt-2 flex items-center gap-1 transition">
+              <span>Консультация партнера →</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Attorney Card 3: Litigation Syndicate Photo 1 -->
+        <div class="attorney-combat-card group">
+          <picture>
+            <source srcset="assets/media/advocate_3.webp?v=14.0" type="image/webp">
+            <img src="assets/media/advocate_3.jpeg?v=14.0" alt="Судебный синдикат T&N" class="attorney-img-team">
+          </picture>
           <div class="info-box space-y-1.5">
             <div class="text-[10px] font-black text-red-500 uppercase tracking-widest">Судебный синдикат «T&N»</div>
             <h3 class="font-heading text-2xl font-black text-white uppercase">Команда Литигаторов</h3>
             <p class="text-xs text-slate-300 leading-relaxed">
-              12+ лет практики в судах Алматы и Верховном Суде РК. Разработка многоходовок, которые ставят процессуальных противников в тупик.
+              12+ лет практики в судах Алматы. Разработка тактических многоходовок, которые ставят процессуальных оппонентов в тупик.
             </p>
             <button onclick="openConsultModal('Комплексная защита конторой T&N')" class="text-xs font-extrabold uppercase text-red-400 hover:text-white pt-2 flex items-center gap-1 transition">
               <span>Комплексная защита →</span>
@@ -979,6 +1000,6 @@
 
   <!-- Leaflet Map JS -->
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-  <script src="js/app.js?v=13.0"></script>
+  <script src="js/app.js?v=14.0"></script>
 </body>
 </html>
