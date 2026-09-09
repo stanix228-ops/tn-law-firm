@@ -352,23 +352,24 @@ h1, h2, h3, h4, .heading, .font-heading {
 }
 
 /* ==========================================================================
-   CASE VIDEO (Matching Vertical Showcase Proportions)
+   CASE & PRINCIPLES VIDEOS (Matching Vertical Showcase Proportions)
    ========================================================================== */
-.case-video-box {
+.case-video-box, .principles-video-box {
   position: relative;
   border-radius: 20px;
   overflow: hidden;
   border: 2px solid rgba(255, 30, 39, 0.6);
   box-shadow: 0 25px 60px rgba(0, 0, 0, 0.95), 0 0 40px rgba(255, 30, 39, 0.35);
   background-color: #000000;
-  max-width: 440px;
+  max-width: 460px;
   width: 100%;
   margin: 0 auto;
 }
 
-.case-video-box video, #case-showcase-video {
+.case-video-box video, #case-showcase-video,
+.principles-video-box video, #principles-video {
   width: 100%;
-  height: 540px;
+  height: auto;
   max-height: 580px;
   object-fit: cover !important;
   object-position: center center !important;
@@ -488,7 +489,7 @@ h1, h2, h3, h4, .heading, .font-heading {
 }
 
 /* ==========================================================================
-   2GIS MAP CONTAINER (Pure Dark Luxury 2GIS Without Watermarks)
+   YANDEX / 2GIS MAP CONTAINER (Pure Dark Luxury Theme)
    ========================================================================== */
 .map-container-box {
   background-color: var(--color-bg-card);
@@ -502,22 +503,30 @@ h1, h2, h3, h4, .heading, .font-heading {
   flex-direction: column;
 }
 
-#office-2gis-map, #office-leaflet-map {
+#office-yandex-map, #office-2gis-map, #office-leaflet-map {
   width: 100%;
   height: 100%;
   min-height: 460px;
   background-color: #07080a !important;
 }
 
-/* 2GIS Dark Map Layer Inversion */
+/* Yandex & 2GIS Dark Map Layer Inversion */
+#office-yandex-map [class*="ground-pane"],
+#office-yandex-map [class*="places-pane"] > canvas,
 #office-2gis-map .dg-pane,
 #office-2gis-map .leaflet-tile-pane,
 #office-2gis-map .leaflet-layer,
+.map-yandex-dark,
 .map-dark-invert {
-  filter: invert(92%) hue-rotate(180deg) brightness(85%) contrast(115%) !important;
+  filter: invert(90%) hue-rotate(180deg) brightness(85%) contrast(115%) !important;
 }
 
 /* Protect Markers, Popups, Controls from inversion */
+#office-yandex-map [class*="controls__pane"],
+#office-yandex-map [class*="balloon__layout"],
+#office-yandex-map [class*="balloon__content"],
+#office-yandex-map [class*="user-selection-none"],
+#office-yandex-map [class*="events-pane"],
 #office-2gis-map .dg-marker-pane,
 #office-2gis-map .leaflet-marker-pane,
 #office-2gis-map .dg-popup-pane,
@@ -529,7 +538,7 @@ h1, h2, h3, h4, .heading, .font-heading {
   filter: none !important;
 }
 
-/* Hide ALL Watermarks & Attribution Bars */
+/* Clean up attribution and watermark bars */
 .leaflet-control-attribution,
 .dg-control-attribution,
 .leaflet-attribution-flag,

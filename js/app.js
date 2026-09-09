@@ -592,27 +592,31 @@ function closeSuccessModal() {
   }
 }
 
-// Case Video Auto-play & Interaction Controller
-function initCaseVideoController() {
-  const caseVideo = document.getElementById('case-showcase-video');
-  if (!caseVideo) return;
-
-  caseVideo.muted = true;
-  caseVideo.playsInline = true;
+// Video Auto-play & Interaction Controller (Hero, Case, Principles)
+function initAllVideosController() {
+  const videoIds = ['case-showcase-video', 'principles-video'];
   
-  const tryPlay = () => {
-    const playPromise = caseVideo.play();
-    if (playPromise !== undefined) {
-      playPromise.catch(err => {
-        console.log('Case video autoplay prevented, awaiting user click:', err);
-      });
-    }
-  };
+  videoIds.forEach(id => {
+    const video = document.getElementById(id);
+    if (!video) return;
 
-  tryPlay();
-  window.addEventListener('scroll', tryPlay, { once: true });
-  window.addEventListener('touchstart', tryPlay, { once: true });
-  window.addEventListener('click', tryPlay, { once: true });
+    video.muted = true;
+    video.playsInline = true;
+    
+    const tryPlay = () => {
+      const playPromise = video.play();
+      if (playPromise !== undefined) {
+        playPromise.catch(err => {
+          console.log(`Autoplay paused for ${id}:`, err);
+        });
+      }
+    };
+
+    tryPlay();
+    window.addEventListener('scroll', tryPlay, { once: true });
+    window.addEventListener('touchstart', tryPlay, { once: true });
+    window.addEventListener('click', tryPlay, { once: true });
+  });
 }
 
 // Mobile Menu Toggle
@@ -627,105 +631,47 @@ function initMobileMenu() {
   }
 }
 
-// Official 2GIS Dark Map Controller (Pure Black Theme, Zero Watermarks)
-function init2GisDarkMap() {
-  const container = document.getElementById('office-2gis-map');
+// Office Dark Map Controller (Yandex Maps / Interactive Dark Map)
+function initOfficeMap() {
+  const container = document.getElementById('office-yandex-map');
   if (!container) return;
 
   const lat = 43.254842;
   const lng = 76.970608;
 
-  const renderPopup = () => `
-    <div style="color: #ffffff; background: #0e1117; padding: 10px 14px; border-radius: 8px; font-family: 'Montserrat', sans-serif;">
-      <div style="font-weight: 900; font-size: 13px; color: #ff1e27; text-transform: uppercase; margin-bottom: 2px;">
-        ⚖️ Контора «T&N»
-      </div>
-      <div style="font-size: 12px; color: #f1f5f9; font-weight: 700;">
-        ул. Богенбай батыра, 23а
-      </div>
-      <div style="font-size: 11px; color: #94a3b8; margin-top: 2px;">
-        г. Алматы • Медеуский район
-      </div>
-      <div style="margin-top: 6px;">
-        <a href="https://2gis.kz/almaty/inside/9430047417451853/firm/70000001082633855?m=76.970608%2C43.254842%2F18.89" target="_blank" style="color: #fbbf24; font-size: 11px; font-weight: 800; text-decoration: underline;">
-          Открыть в 2ГИС →
-        </a>
-      </div>
-    </div>
-  `;
-
-  // 1. Try 2GIS Official JS API
-  if (typeof DG !== 'undefined' && DG.then) {
-    DG.then(function () {
+  // 1. Try Yandex Maps JS API 2.1
+  if (typeof ymaps !== 'undefined' && ymaps.ready) {
+    ymaps.ready(function () {
+      // Clear fallback iframe if API is ready
       container.innerHTML = '';
-      const map = DG.map('office-2gis-map', {
+      const map = new ymaps.Map('office-yandex-map', {
         center: [lat, lng],
         zoom: 17,
-        scrollWheelZoom: false,
-        fullscreenControl: false,
-        attributionControl: false
+        controls: ['zoomControl']
       });
 
-      const customPinIcon = DG.divIcon({
-        className: 'custom-2gis-marker',
-        html: `
-          <div class="relative flex items-center justify-center w-8 h-8">
-            <span class="absolute w-8 h-8 rounded-full bg-red-600/60 animate-ping"></span>
-            <span class="relative w-7 h-7 rounded-full bg-red-600 border-2 border-white shadow-2xl flex items-center justify-center text-xs font-black text-white">⚖️</span>
-          </div>
-        `,
-        iconSize: [32, 32],
-        iconAnchor: [16, 16],
-        popupAnchor: [0, -16]
+      const placemark = new ymaps.Placemark([lat, lng], {
+        hintContent: 'Адвокатская контора «T&N»',
+        balloonContentHeader: '<div style="font-family:\'Montserrat\',sans-serif;font-weight:900;color:#ff1e27;text-transform:uppercase;font-size:14px;">⚖️ Адвокатская контора «T&N»</div>',
+        balloonContentBody: '<div style="font-family:\'Montserrat\',sans-serif;font-size:13px;color:#1e293b;font-weight:700;line-height:1.4;margin-top:4px;">г. Алматы, ул. Богенбай батыра, 23а<br><span style="color:#16a34a;font-size:11px;">✓ Офис 24/7 • Парковка для доверителей</span></div>',
+        balloonContentFooter: '<div style="margin-top:8px;"><a href="https://yandex.kz/maps/?text=43.254842,76.970608" target="_blank" style="color:#d97706;font-weight:800;font-size:11px;text-decoration:underline;">Построить маршрут в Яндекс Картах →</a></div>'
+      }, {
+        preset: 'islands#redDotIconWithCaption',
+        iconCaption: 'Контора «T&N»'
       });
 
-      const marker = DG.marker([lat, lng], { icon: customPinIcon }).addTo(map);
-      marker.bindPopup(renderPopup()).openPopup();
+      map.geoObjects.add(placemark);
+      map.behaviors.disable('scrollZoom');
     });
     return;
-  }
-
-  // 2. Leaflet Dark fallback with attributionControl: false (zero watermarks)
-  if (typeof L !== 'undefined') {
-    try {
-      container.innerHTML = '';
-      const map = L.map('office-2gis-map', {
-        center: [lat, lng],
-        zoom: 17,
-        zoomControl: true,
-        scrollWheelZoom: false,
-        attributionControl: false
-      });
-
-      L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
-        subdomains: 'abcd',
-        maxZoom: 19
-      }).addTo(map);
-
-      const customPinIcon = L.divIcon({
-        className: 'custom-leaflet-marker',
-        html: `
-          <div class="relative flex items-center justify-center w-8 h-8">
-            <span class="absolute w-8 h-8 rounded-full bg-red-600/60 animate-ping"></span>
-            <span class="relative w-7 h-7 rounded-full bg-red-600 border-2 border-white shadow-2xl flex items-center justify-center text-xs font-black text-white">⚖️</span>
-          </div>
-        `,
-        iconSize: [32, 32],
-        iconAnchor: [16, 16],
-        popupAnchor: [0, -16]
-      });
-
-      const marker = L.marker([lat, lng], { icon: customPinIcon }).addTo(map);
-      marker.bindPopup(renderPopup()).openPopup();
-    } catch (e) {}
   }
 }
 
 // DOM Ready
 document.addEventListener('DOMContentLoaded', () => {
   initVideoSoundController();
-  initCaseVideoController();
-  init2GisDarkMap();
+  initAllVideosController();
+  initOfficeMap();
   initPhoneMasks();
   initArticlesFilter();
   initAllForms();

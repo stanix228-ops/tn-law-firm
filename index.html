@@ -42,11 +42,10 @@
     }
   </script>
 
-  <!-- Leaflet & 2GIS Maps API -->
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-  <script src="https://maps.api.2gis.ru/2.0/loader.js?pkg=full"></script>
+  <!-- Yandex Maps & Leaflet API -->
+  <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"></script>
 
-  <link rel="stylesheet" href="css/style.css?v=15.0">
+  <link rel="stylesheet" href="css/style.css?v=16.0">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚖️</text></svg>">
 </head>
 <body class="bg-[#07080a] text-slate-100 font-body antialiased selection:bg-red-600 selection:text-white">
@@ -121,7 +120,8 @@
       <a href="#manifest" class="block py-2 text-slate-300 hover:text-red-500">Манифест</a>
       <a href="#reality-check" class="block py-2 text-slate-300 hover:text-red-500">Вся правда</a>
       <a href="#cases" class="block py-2 text-slate-300 hover:text-red-500">Кейсы побед</a>
-      <a href="#attorneys" class="block py-2 text-slate-300 hover:text-red-500">Адвокат</a>
+      <a href="#principles" class="block py-2 text-slate-300 hover:text-red-500">Принципы</a>
+      <a href="#attorneys" class="block py-2 text-slate-300 hover:text-red-500">Адвокаты</a>
       <a href="#materials" class="block py-2 text-slate-300 hover:text-red-500">Материалы</a>
       <a href="#contact" class="block py-2 text-slate-300 hover:text-red-500">Контакты & Карта</a>
     </div>
@@ -152,7 +152,8 @@
           <li><a href="#manifest">Манифест</a></li>
           <li><a href="#reality-check">Жесткая правда</a></li>
           <li><a href="#cases">Реальные кейсы</a></li>
-          <li><a href="#attorneys">Адвокат</a></li>
+          <li><a href="#principles">Принципы</a></li>
+          <li><a href="#attorneys">Адвокаты</a></li>
           <li><a href="#materials">Материалы</a></li>
           <li><a href="#contact">Контакты & Карта</a></li>
         </ul>
@@ -470,7 +471,7 @@
         <div class="lg:col-span-5 space-y-4 flex flex-col items-center">
           <div class="case-video-box relative group w-full">
             <video id="case-showcase-video"
-                   src="assets/media/case_video.mp4?v=14.0"
+                   src="assets/media/0909_1.mp4?v=16.0"
                    autoplay 
                    loop 
                    muted 
@@ -478,7 +479,7 @@
                    controls
                    preload="auto"
                    class="cursor-pointer">
-              <source src="assets/media/case_video.mp4?v=14.0" type="video/mp4">
+              <source src="assets/media/0909_1.mp4?v=16.0" type="video/mp4">
               Ваш браузер не поддерживает видео HTML5.
             </video>
           </div>
@@ -533,6 +534,175 @@
           <div class="pt-1">
             <button onclick="openConsultModal('Разбор перспектив дела')" class="btn-combat w-full text-center">
               Оценить шансы вашего дела в бою
+            </button>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ====================================================================
+       SECTION: LAWYER PRINCIPLES & PHILOSOPHY (Video 0909(2) Left + 7 Principles Right)
+       ==================================================================== -->
+  <section id="principles" class="py-20 bg-[#07080a] border-b border-red-600/30 relative">
+    <div class="max-w-[1650px] mx-auto px-4 sm:px-6 lg:px-10 space-y-12">
+      
+      <!-- Section Header -->
+      <div class="text-center max-w-3xl mx-auto space-y-2">
+        <div class="inline-flex items-center gap-2 px-3 py-1 bg-red-600/20 text-red-400 rounded text-xs font-black uppercase tracking-widest border border-red-600/30">
+          <span>⚖️</span>
+          <span>Принципы бескомпромиссной защиты</span>
+        </div>
+        <h2 class="font-heading text-2xl sm:text-3xl lg:text-4xl font-black text-white uppercase tracking-tight">
+          Почему я работаю именно так и чего вы можете ожидать, <span class="text-red-500">обращаясь ко мне как к адвокату?</span>
+        </h2>
+      </div>
+
+      <!-- Main Two-Column Layout: Video Left, Principles Right -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
+        
+        <!-- Left: Vertical Video 0909(2) by Natural Size (lg:col-span-5) -->
+        <div class="lg:col-span-5 space-y-4 flex flex-col items-center lg:sticky lg:top-28">
+          <div class="principles-video-box relative group w-full">
+            <video id="principles-video"
+                   src="assets/media/0909_2.mp4?v=16.0"
+                   autoplay 
+                   loop 
+                   muted 
+                   playsinline 
+                   controls
+                   preload="auto"
+                   class="cursor-pointer">
+              <source src="assets/media/0909_2.mp4?v=16.0" type="video/mp4">
+              Ваш браузер не поддерживает видео HTML5.
+            </video>
+          </div>
+
+          <!-- Video Subtitle Card -->
+          <div class="w-full p-4 bg-black/80 border border-red-500/40 rounded-xl text-slate-200 shadow-xl flex items-center justify-between">
+            <div class="flex items-center gap-2.5">
+              <span class="w-2.5 h-2.5 rounded-full bg-red-500 animate-ping"></span>
+              <span class="text-xs font-heading font-black text-white uppercase tracking-wider">Личное слово адвоката</span>
+            </div>
+            <span class="text-[11px] text-amber-400 font-bold uppercase">Честный диалог</span>
+          </div>
+        </div>
+
+        <!-- Right: Manifesto Lead + 7 Principles + CTA Button (lg:col-span-7) -->
+        <div class="lg:col-span-7 space-y-5">
+          
+          <!-- Manifesto Lead Box -->
+          <div class="p-5 sm:p-6 bg-gradient-to-r from-red-950/40 via-black/80 to-black border-l-4 border-red-500 rounded-2xl shadow-xl space-y-3">
+            <div class="text-slate-100 text-sm sm:text-base leading-relaxed space-y-1.5 font-medium">
+              <p class="font-bold text-white">Я не обещаю клиенту победу в каждом деле.</p>
+              <p class="font-bold text-white">Не обещаю, что суд обязательно примет нашу сторону.</p>
+              <p class="font-bold text-white">И точно не говорю только то, что человек хочет услышать.</p>
+            </div>
+            <div class="pt-2 border-t border-white/10 text-xs sm:text-sm text-red-400 font-semibold leading-relaxed">
+              Моя задача — честно оценить ситуацию, найти наиболее разумное решение и защищать ваши интересы там, где это действительно необходимо.
+            </div>
+          </div>
+
+          <!-- 7 Principles List -->
+          <div class="space-y-3.5">
+            
+            <!-- Principle 1 -->
+            <div class="p-4 sm:p-5 bg-black/60 border border-white/10 rounded-xl space-y-2 hover:border-red-500/70 transition">
+              <div class="flex items-center gap-3">
+                <span class="w-7 h-7 shrink-0 rounded-lg bg-red-600/20 text-red-400 border border-red-500/40 flex items-center justify-center font-black text-xs">1</span>
+                <h3 class="font-heading text-base sm:text-lg font-bold text-white uppercase">Я не начинаю войну там, где можно договориться.</h3>
+              </div>
+              <div class="text-xs sm:text-sm text-slate-300 pl-10 space-y-1 leading-relaxed">
+                <p>Моя первая задача — найти решение, при котором вы получите желаемое без суда, если это возможно.</p>
+                <p class="text-slate-400">Потому что суд — это время, деньги, нервы и отсутствие полной гарантии результата.</p>
+              </div>
+            </div>
+
+            <!-- Principle 2 -->
+            <div class="p-4 sm:p-5 bg-black/60 border border-white/10 rounded-xl space-y-2 hover:border-red-500/70 transition">
+              <div class="flex items-center gap-3">
+                <span class="w-7 h-7 shrink-0 rounded-lg bg-red-600/20 text-red-400 border border-red-500/40 flex items-center justify-center font-black text-xs">2</span>
+                <h3 class="font-heading text-base sm:text-lg font-bold text-white uppercase">Но я не путаю мир с капитуляцией.</h3>
+              </div>
+              <div class="text-xs sm:text-sm text-slate-300 pl-10 space-y-1 leading-relaxed">
+                <p>«Давайте договоримся» не должно означать: «Вы всё отдайте, лишь бы не было конфликта».</p>
+                <p class="text-red-400 font-semibold">Если компромисс нарушает ваши интересы, то я так и скажу.</p>
+              </div>
+            </div>
+
+            <!-- Principle 3 -->
+            <div class="p-4 sm:p-5 bg-black/60 border border-white/10 rounded-xl space-y-2 hover:border-red-500/70 transition">
+              <div class="flex items-center gap-3">
+                <span class="w-7 h-7 shrink-0 rounded-lg bg-red-600/20 text-red-400 border border-red-500/40 flex items-center justify-center font-black text-xs">3</span>
+                <h3 class="font-heading text-base sm:text-lg font-bold text-white uppercase">Я говорю правду, даже когда она неприятная.</h3>
+              </div>
+              <div class="text-xs sm:text-sm text-slate-300 pl-10 space-y-1.5 leading-relaxed">
+                <p>Если у вас слабая позиция, то вы узнаете об этом от меня, а не от суда.</p>
+                <p class="text-slate-300">Если есть риск — я его покажу. Если шансы хорошие — объясню почему.</p>
+                <p class="text-amber-400 font-medium italic">Мне гораздо важнее, чтобы доверитель понимал реальность, иногда неприятную, чем чтобы он уходил от меня счастливым после консультации.</p>
+              </div>
+            </div>
+
+            <!-- Principle 4 -->
+            <div class="p-4 sm:p-5 bg-black/60 border border-white/10 rounded-xl space-y-2 hover:border-red-500/70 transition">
+              <div class="flex items-center gap-3">
+                <span class="w-7 h-7 shrink-0 rounded-lg bg-red-600/20 text-red-400 border border-red-500/40 flex items-center justify-center font-black text-xs">4</span>
+                <h3 class="font-heading text-base sm:text-lg font-bold text-white uppercase">Я не усложняю ради того, чтобы казаться умнее.</h3>
+              </div>
+              <div class="text-xs sm:text-sm text-slate-300 pl-10 space-y-1.5 leading-relaxed">
+                <p>Вы не обязаны знать ГПК, Семейный кодекс, ГК и судебную практику. Это моя работа.</p>
+                <p class="text-slate-200">Ваша работа — принимать решения, понимая, что происходит, понимать риски и сложности, а не ждать гарантий, если спор неоднозначный.</p>
+              </div>
+            </div>
+
+            <!-- Principle 5 -->
+            <div class="p-4 sm:p-5 bg-black/60 border border-white/10 rounded-xl space-y-2 hover:border-red-500/70 transition">
+              <div class="flex items-center gap-3">
+                <span class="w-7 h-7 shrink-0 rounded-lg bg-red-600/20 text-red-400 border border-red-500/40 flex items-center justify-center font-black text-xs">5</span>
+                <h3 class="font-heading text-base sm:text-lg font-bold text-white uppercase">Я не превращаю семейный конфликт в спектакль.</h3>
+              </div>
+              <div class="text-xs sm:text-sm text-slate-300 pl-10 space-y-1.5 leading-relaxed">
+                <p>За каждым делом стоят люди. И я прекрасно понимаю, что бывший муж, жена, родители, дети и наследники — это не просто «истцы» и «ответчики».</p>
+                <p class="text-amber-400 font-semibold">Поэтому я ищу не красивую судебную войну, а решение, с которым вам потом жить.</p>
+              </div>
+            </div>
+
+            <!-- Principle 6 -->
+            <div class="p-4 sm:p-5 bg-black/60 border border-white/10 rounded-xl space-y-2 hover:border-red-500/70 transition">
+              <div class="flex items-center gap-3">
+                <span class="w-7 h-7 shrink-0 rounded-lg bg-red-600/20 text-red-400 border border-red-500/40 flex items-center justify-center font-black text-xs">6</span>
+                <h3 class="font-heading text-base sm:text-lg font-bold text-white uppercase">Если суд неизбежен, то я не боюсь суда.</h3>
+              </div>
+              <div class="text-xs sm:text-sm text-slate-300 pl-10 space-y-1.5 leading-relaxed">
+                <p>Мы готовим доказательства. Выстраиваем позицию. Просчитываем риски.</p>
+                <p class="text-red-400 font-bold uppercase tracking-wider">И идём защищать ваши интересы, а не просто «попробовать подать иск».</p>
+              </div>
+            </div>
+
+            <!-- Principle 7 -->
+            <div class="p-5 bg-gradient-to-br from-black/80 to-red-950/30 border border-red-500/40 rounded-xl space-y-2 hover:border-red-500 transition shadow-lg">
+              <div class="flex items-center gap-3">
+                <span class="w-7 h-7 shrink-0 rounded-lg bg-red-600 text-white flex items-center justify-center font-black text-xs shadow-lg shadow-red-600/50">7</span>
+                <h3 class="font-heading text-base sm:text-lg font-black text-white uppercase text-red-400">И, пожалуй, главное.</h3>
+              </div>
+              <div class="text-xs sm:text-sm text-slate-200 pl-10 space-y-2 leading-relaxed">
+                <p>Я не хочу, чтобы мой доверитель становился полностью зависимым от адвоката.</p>
+                <p class="text-slate-300">По некоторым ситуациям я не скрываю, что есть вопросы, где моя помощь как таковая не нужна, и советую не тратить свои денежные средства на мою работу.</p>
+                <p class="text-amber-400 font-semibold">Потому что хороший адвокат — это не тот, кто найдёт способ взять с вас деньги за любую проблему.</p>
+                <p class="text-white font-bold">Это тот, кто честно скажет, когда вам действительно нужна юридическая помощь, а когда вы можете справиться без неё.</p>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Combat CTA Button -->
+          <div class="pt-3">
+            <button onclick="openConsultModal('Честная оценка ситуации адвокатом')" class="btn-combat w-full py-4 text-center font-black text-xs sm:text-sm uppercase tracking-wider shadow-2xl flex items-center justify-center gap-2">
+              <span>⚖️</span>
+              <span>ОБРАТИТЬСЯ К АДВОКАТУ / ЧЕСТНАЯ ОЦЕНКА ДЕЛА</span>
             </button>
           </div>
 
@@ -797,31 +967,37 @@
         <div class="lg:col-span-7">
           <div class="map-container-box">
             
-            <div class="p-3.5 bg-[#07080a] border-b border-white/10 flex items-center justify-between text-xs">
+            <div class="p-3.5 bg-[#07080a] border-b border-white/10 flex flex-wrap items-center justify-between gap-2 text-xs">
               <div class="flex items-center gap-2">
                 <span class="w-2.5 h-2.5 rounded-full bg-red-500 animate-ping"></span>
                 <span class="font-heading font-bold text-white uppercase">ОФИС: ул. Богенбай батыра, 23а (г. Алматы)</span>
               </div>
-              <a href="https://2gis.kz/almaty/inside/9430047417451853/firm/70000001082633855?m=76.970608%2C43.254842%2F18.89" target="_blank" class="text-[11px] font-bold text-amber-400 hover:text-white uppercase flex items-center gap-1 transition">
-                <span>Открыть в 2ГИС →</span>
-              </a>
+              <div class="flex items-center gap-3">
+                <a href="https://2gis.kz/almaty/inside/9430047417451853/firm/70000001082633855?m=76.970608%2C43.254842%2F18.89" target="_blank" class="text-[11px] font-bold text-amber-400 hover:text-white uppercase flex items-center gap-1 transition">
+                  <span>2ГИС →</span>
+                </a>
+                <span class="text-slate-600">•</span>
+                <a href="https://yandex.kz/maps/?text=43.254842,76.970608" target="_blank" class="text-[11px] font-bold text-red-400 hover:text-white uppercase flex items-center gap-1 transition">
+                  <span>Яндекс Карты →</span>
+                </a>
+              </div>
             </div>
 
-            <!-- Embedded 2GIS Dark Interactive Map (Zero Watermarks) -->
+            <!-- Embedded Yandex Dark Interactive Map -->
             <div class="flex-1 w-full relative min-h-[460px] bg-[#07080a]">
-              <!-- 2GIS Map Container -->
-              <div id="office-2gis-map" class="w-full h-full min-h-[460px] z-0">
-                <!-- Fallback Dark Iframe if JS is disabled -->
+              <!-- Map Container -->
+              <div id="office-yandex-map" class="w-full h-full min-h-[460px] z-0">
+                <!-- 100% Reliable Dark Yandex Map Widget with Exact Office Placemark -->
                 <iframe 
-                  src="https://www.openstreetmap.org/export/embed.html?bbox=76.960608%2C43.249842%2C76.980608%2C43.259842&amp;layer=mapnik&amp;marker=43.254842%2C76.970608" 
-                  title="Карта офиса T&N Law" 
+                  src="https://yandex.ru/map-widget/v1/?ll=76.970608%2C43.254842&z=17&pt=76.970608,43.254842,pm2rdm" 
+                  title="Карта офиса Адвокатской конторы T&N в Алматы" 
                   loading="lazy"
-                  class="map-dark-invert w-full h-full min-h-[460px] border-none">
+                  class="w-full h-full min-h-[460px] border-none map-yandex-dark">
                 </iframe>
               </div>
               
               <!-- Floating Map Location Pin Card -->
-              <div class="absolute bottom-4 left-4 z-[500] bg-black/90 border border-red-500/80 p-3.5 rounded-xl backdrop-blur-md shadow-2xl max-w-xs">
+              <div class="absolute bottom-4 left-4 z-[500] bg-black/90 border border-red-500/80 p-3.5 rounded-xl backdrop-blur-md shadow-2xl max-w-xs pointer-events-auto">
                 <div class="flex items-center gap-2 text-xs font-black text-red-400 uppercase">
                   <span>📍</span>
                   <span>Адвокатская контора «T&N»</span>
@@ -999,8 +1175,7 @@
     </div>
   </div>
 
-  <!-- Leaflet & 2GIS Map JS -->
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-  <script src="js/app.js?v=15.0"></script>
+  <!-- Map JS & Main App Controller -->
+  <script src="js/app.js?v=16.0"></script>
 </body>
 </html>
