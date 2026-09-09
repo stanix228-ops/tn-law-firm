@@ -488,7 +488,7 @@ h1, h2, h3, h4, .heading, .font-heading {
 }
 
 /* ==========================================================================
-   MAP CONTAINER (Dark Interactive Map & Custom Leaflet Controls)
+   2GIS MAP CONTAINER (Pure Dark Luxury 2GIS Without Watermarks)
    ========================================================================== */
 .map-container-box {
   background-color: var(--color-bg-card);
@@ -502,47 +502,76 @@ h1, h2, h3, h4, .heading, .font-heading {
   flex-direction: column;
 }
 
-#office-leaflet-map {
+#office-2gis-map, #office-leaflet-map {
   width: 100%;
   height: 100%;
   min-height: 460px;
-  background-color: #07080a;
+  background-color: #07080a !important;
 }
 
+/* 2GIS Dark Map Layer Inversion */
+#office-2gis-map .dg-pane,
+#office-2gis-map .leaflet-tile-pane,
+#office-2gis-map .leaflet-layer,
 .map-dark-invert {
-  filter: invert(90%) hue-rotate(180deg) brightness(85%) contrast(110%);
+  filter: invert(92%) hue-rotate(180deg) brightness(85%) contrast(115%) !important;
 }
 
-.custom-leaflet-marker {
+/* Protect Markers, Popups, Controls from inversion */
+#office-2gis-map .dg-marker-pane,
+#office-2gis-map .leaflet-marker-pane,
+#office-2gis-map .dg-popup-pane,
+#office-2gis-map .leaflet-popup-pane,
+#office-2gis-map .custom-2gis-marker,
+#office-2gis-map .custom-leaflet-marker,
+#office-2gis-map .dg-control-container,
+#office-2gis-map .leaflet-control-container {
+  filter: none !important;
+}
+
+/* Hide ALL Watermarks & Attribution Bars */
+.leaflet-control-attribution,
+.dg-control-attribution,
+.leaflet-attribution-flag,
+.dg-attribution {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  height: 0 !important;
+  width: 0 !important;
+  pointer-events: none !important;
+}
+
+.custom-2gis-marker, .custom-leaflet-marker {
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
 }
 
-.leaflet-popup-content-wrapper, .leaflet-popup-tip {
+.leaflet-popup-content-wrapper, .leaflet-popup-tip, .dg-popup-content-wrapper, .dg-popup-tip {
   background: #0e1117 !important;
   box-shadow: 0 12px 35px rgba(0, 0, 0, 0.95) !important;
   border: 1px solid rgba(255, 30, 39, 0.6) !important;
 }
 
-.leaflet-popup-content {
+.leaflet-popup-content, .dg-popup-content {
   margin: 0 !important;
   line-height: 1.4 !important;
 }
 
-.leaflet-container {
+.leaflet-container, .dg-container {
   background: #07080a !important;
   font-family: 'Montserrat', sans-serif !important;
 }
 
-.leaflet-bar a {
+.leaflet-bar a, .dg-bar a {
   background-color: #0e1117 !important;
   color: #ffffff !important;
   border-bottom: 1px solid rgba(255, 255, 255, 0.15) !important;
 }
 
-.leaflet-bar a:hover {
+.leaflet-bar a:hover, .dg-bar a:hover {
   background-color: #ff1e27 !important;
   color: #ffffff !important;
 }

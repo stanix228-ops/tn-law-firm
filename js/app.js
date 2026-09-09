@@ -627,70 +627,97 @@ function initMobileMenu() {
   }
 }
 
-// Interactive Dark Map Controller (Leaflet + CartoDB Dark Matter)
-function initDarkOfficeMap() {
-  const mapContainer = document.getElementById('office-leaflet-map');
-  if (!mapContainer || typeof L === 'undefined') return;
+// Official 2GIS Dark Map Controller (Pure Black Theme, Zero Watermarks)
+function init2GisDarkMap() {
+  const container = document.getElementById('office-2gis-map');
+  if (!container) return;
 
   const lat = 43.254842;
   const lng = 76.970608;
 
-  try {
-    // Clear any fallback contents
-    mapContainer.innerHTML = '';
-
-    const map = L.map('office-leaflet-map', {
-      center: [lat, lng],
-      zoom: 17,
-      zoomControl: true,
-      scrollWheelZoom: false
-    });
-
-    // CartoDB Dark Matter Tiles (High contrast dark theme)
-    L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
-      attribution: '&copy; OpenStreetMap &copy; CARTO',
-      subdomains: 'abcd',
-      maxZoom: 19
-    }).addTo(map);
-
-    // Custom Glowing Red Lawyer Marker
-    const customPinIcon = L.divIcon({
-      className: 'custom-leaflet-marker',
-      html: `
-        <div class="relative flex items-center justify-center w-8 h-8">
-          <span class="absolute w-8 h-8 rounded-full bg-red-600/60 animate-ping"></span>
-          <span class="relative w-7 h-7 rounded-full bg-red-600 border-2 border-white shadow-2xl flex items-center justify-center text-xs font-black text-white">⚖️</span>
-        </div>
-      `,
-      iconSize: [32, 32],
-      iconAnchor: [16, 16],
-      popupAnchor: [0, -16]
-    });
-
-    const marker = L.marker([lat, lng], { icon: customPinIcon }).addTo(map);
-
-    const popupContent = `
-      <div style="color: #ffffff; background: #0e1117; padding: 8px 12px; border-radius: 8px; font-family: 'Montserrat', sans-serif;">
-        <div style="font-weight: 900; font-size: 13px; color: #ff1e27; text-transform: uppercase; margin-bottom: 2px;">
-          ⚖️ Контора «T&N»
-        </div>
-        <div style="font-size: 12px; color: #f1f5f9; font-weight: 700;">
-          ул. Богенбай батыра, 23а
-        </div>
-        <div style="font-size: 11px; color: #94a3b8; margin-top: 2px;">
-          г. Алматы • Медеуский район
-        </div>
-        <div style="margin-top: 6px;">
-          <a href="https://2gis.kz/almaty/inside/9430047417451853/firm/70000001082633855?m=76.970608%2C43.254842%2F18.89" target="_blank" style="color: #fbbf24; font-size: 11px; font-weight: 800; text-decoration: underline;">
-            Открыть в 2ГИС →
-          </a>
-        </div>
+  const renderPopup = () => `
+    <div style="color: #ffffff; background: #0e1117; padding: 10px 14px; border-radius: 8px; font-family: 'Montserrat', sans-serif;">
+      <div style="font-weight: 900; font-size: 13px; color: #ff1e27; text-transform: uppercase; margin-bottom: 2px;">
+        ⚖️ Контора «T&N»
       </div>
-    `;
+      <div style="font-size: 12px; color: #f1f5f9; font-weight: 700;">
+        ул. Богенбай батыра, 23а
+      </div>
+      <div style="font-size: 11px; color: #94a3b8; margin-top: 2px;">
+        г. Алматы • Медеуский район
+      </div>
+      <div style="margin-top: 6px;">
+        <a href="https://2gis.kz/almaty/inside/9430047417451853/firm/70000001082633855?m=76.970608%2C43.254842%2F18.89" target="_blank" style="color: #fbbf24; font-size: 11px; font-weight: 800; text-decoration: underline;">
+          Открыть в 2ГИС →
+        </a>
+      </div>
+    </div>
+  `;
 
-    marker.bindPopup(popupContent).openPopup();
-  } catch (err) {
-    console.log('Leaflet init note:', err);
+  // 1. Try 2GIS Official JS API
+  if (typeof DG !== 'undefined' && DG.then) {
+    DG.then(function () {
+      container.innerHTML = '';
+      const map = DG.map('office-2gis-map', {
+        center: [lat, lng],
+        zoom: 17,
+        scrollWheelZoom: false,
+        fullscreenControl: false,
+        attributionControl: false
+      });
+
+      const customPinIcon = DG.divIcon({
+        className: 'custom-2gis-marker',
+        html: `
+          <div class="relative flex items-center justify-center w-8 h-8">
+            <span class="absolute w-8 h-8 rounded-full bg-red-600/60 animate-ping"></span>
+            <span class="relative w-7 h-7 rounded-full bg-red-600 border-2 border-white shadow-2xl flex items-center justify-center text-xs font-black text-white">⚖️</span>
+          </div>
+        `,
+        iconSize: [32, 32],
+        iconAnchor: [16, 16],
+        popupAnchor: [0, -16]
+      });
+
+      const marker = DG.marker([lat, lng], { icon: customPinIcon }).addTo(map);
+      marker.bindPopup(renderPopup()).openPopup();
+    });
+    return;
+  }
+
+  // 2. Leaflet Dark fallback with attributionControl: false (zero watermarks)
+  if (typeof L !== 'undefined') {
+    try {
+      container.innerHTML = '';
+      const map = L.map('office-2gis-map', {
+        center: [lat, lng],
+        zoom: 17,
+        zoomControl: true,
+        scrollWheelZoom: false,
+        attributionControl: false
+      });
+
+      L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+        subdomains: 'abcd',
+        maxZoom: 19
+      }).addTo(map);
+
+      const customPinIcon = L.divIcon({
+        className: 'custom-leaflet-marker',
+        html: `
+          <div class="relative flex items-center justify-center w-8 h-8">
+            <span class="absolute w-8 h-8 rounded-full bg-red-600/60 animate-ping"></span>
+            <span class="relative w-7 h-7 rounded-full bg-red-600 border-2 border-white shadow-2xl flex items-center justify-center text-xs font-black text-white">⚖️</span>
+          </div>
+        `,
+        iconSize: [32, 32],
+        iconAnchor: [16, 16],
+        popupAnchor: [0, -16]
+      });
+
+      const marker = L.marker([lat, lng], { icon: customPinIcon }).addTo(map);
+      marker.bindPopup(renderPopup()).openPopup();
+    } catch (e) {}
   }
 }
 
@@ -698,7 +725,7 @@ function initDarkOfficeMap() {
 document.addEventListener('DOMContentLoaded', () => {
   initVideoSoundController();
   initCaseVideoController();
-  initDarkOfficeMap();
+  init2GisDarkMap();
   initPhoneMasks();
   initArticlesFilter();
   initAllForms();

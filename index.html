@@ -42,10 +42,11 @@
     }
   </script>
 
-  <!-- Leaflet Map CSS -->
+  <!-- Leaflet & 2GIS Maps API -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <script src="https://maps.api.2gis.ru/2.0/loader.js?pkg=full"></script>
 
-  <link rel="stylesheet" href="css/style.css?v=14.0">
+  <link rel="stylesheet" href="css/style.css?v=15.0">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚖️</text></svg>">
 </head>
 <body class="bg-[#07080a] text-slate-100 font-body antialiased selection:bg-red-600 selection:text-white">
@@ -806,10 +807,10 @@
               </a>
             </div>
 
-            <!-- Embedded Dark Interactive Map (Leaflet + CartoDB Dark Matter) -->
+            <!-- Embedded 2GIS Dark Interactive Map (Zero Watermarks) -->
             <div class="flex-1 w-full relative min-h-[460px] bg-[#07080a]">
-              <!-- Leaflet Map Container -->
-              <div id="office-leaflet-map" class="w-full h-full min-h-[460px] z-0">
+              <!-- 2GIS Map Container -->
+              <div id="office-2gis-map" class="w-full h-full min-h-[460px] z-0">
                 <!-- Fallback Dark Iframe if JS is disabled -->
                 <iframe 
                   src="https://www.openstreetmap.org/export/embed.html?bbox=76.960608%2C43.249842%2C76.980608%2C43.259842&amp;layer=mapnik&amp;marker=43.254842%2C76.970608" 
@@ -998,8 +999,8 @@
     </div>
   </div>
 
-  <!-- Leaflet Map JS -->
+  <!-- Leaflet & 2GIS Map JS -->
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-  <script src="js/app.js?v=14.0"></script>
+  <script src="js/app.js?v=15.0"></script>
 </body>
 </html>
