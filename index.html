@@ -74,9 +74,9 @@
           <span>🔥</span>
           <span>+7 (778) 677-51-19</span>
         </a>
-        <a href="admin.html" class="px-3 py-1 rounded bg-amber-500/20 text-amber-400 border border-amber-500/40 font-bold hover:bg-amber-500 hover:text-black transition flex items-center gap-1.5 text-xs">
-          <span>⚙️</span>
-          <span>CRM Кабинет</span>
+        <a href="https://wa.me/77786775119" target="_blank" class="px-3 py-1 rounded bg-emerald-500/20 text-emerald-400 border border-emerald-500/40 font-bold hover:bg-emerald-500 hover:text-white transition flex items-center gap-1.5 text-xs">
+          <span>💬</span>
+          <span>WhatsApp 24/7</span>
         </a>
       </div>
 
@@ -1391,7 +1391,10 @@
       <div class="border-t border-white/10 mt-12 pt-5 flex flex-wrap justify-between items-center gap-4 text-xs text-slate-500">
         <div>© 2026 Адвокатская контора «T&N». Все права защищены. Бескомпромиссная защита.</div>
         <div class="flex items-center gap-4">
-          <a href="admin.html" class="text-amber-400 hover:text-white transition font-bold">Панель администратора CRM</a>
+          <a href="admin.html" class="text-slate-600 hover:text-slate-400 transition text-[11px] flex items-center gap-1">
+            <span>🔒</span>
+            <span>Служебный вход</span>
+          </a>
         </div>
       </div>
 
@@ -1521,24 +1524,38 @@
     </div>
   </div>
 
-  <!-- Success Modal -->
+  <!-- Success Modal (with Direct WhatsApp CTA) -->
   <div id="success-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 hidden">
     <div class="modal-overlay fixed inset-0 bg-black/90 backdrop-blur-sm opacity-0 transition-opacity" onclick="closeSuccessModal()"></div>
-    <div class="modal-content relative bg-[#0e1117] text-white rounded-xl p-8 max-w-md w-full shadow-2xl border-2 border-red-500 z-10 text-center space-y-4 scale-95 opacity-0 transition-all">
+    <div class="modal-content relative bg-[#0e1117] text-white rounded-2xl p-6 sm:p-8 max-w-md w-full shadow-2xl border-2 border-red-500 z-10 text-center space-y-5 scale-95 opacity-0 transition-all">
       
-      <div class="w-16 h-16 rounded-full bg-red-600/20 text-red-500 border-2 border-red-500 flex items-center justify-center mx-auto text-2xl font-bold">
+      <div class="w-16 h-16 rounded-full bg-red-600/20 text-red-500 border-2 border-red-500 flex items-center justify-center mx-auto text-2xl font-bold shadow-lg shadow-red-950/80">
         ⚖️
       </div>
 
-      <h3 class="font-heading text-2xl font-black text-white uppercase">ВЫЗОВ ЗАФИКСИРОВАН</h3>
+      <div class="space-y-1">
+        <h3 class="font-heading text-2xl font-black text-white uppercase">ВЫЗОВ ЗАФИКСИРОВАН</h3>
+        <p class="text-xs text-red-400 font-extrabold uppercase tracking-widest">АДВОКАТ УЖЕ ОПОВЕЩЕН</p>
+      </div>
       
-      <p class="text-sm text-slate-300 leading-relaxed">
+      <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
         Данные переданы дежурному адвокату конторы «T&N». До приезда адвоката или звонка <strong>не давайте никаких показаний</strong> (ст. 77 Конституции РК).
       </p>
 
-      <div class="pt-3">
-        <button onclick="closeSuccessModal()" class="btn-combat w-full">
-          Понятно, жду звонка
+      <!-- WhatsApp CTA Button -->
+      <div class="space-y-2 pt-2">
+        <a id="success-wa-btn" href="https://wa.me/77786775119" target="_blank" class="w-full py-3.5 px-4 bg-emerald-600 hover:bg-emerald-700 text-white font-black text-xs sm:text-sm uppercase tracking-wider rounded-xl transition flex items-center justify-center gap-2 shadow-xl shadow-emerald-950/80 hover:scale-[1.02]">
+          <span>💬</span>
+          <span>Открыть чат WhatsApp с адвокатом →</span>
+        </a>
+        <p class="text-[11px] text-slate-400">
+          Чат WhatsApp с готовым описанием дела открывается автоматически
+        </p>
+      </div>
+
+      <div class="pt-1">
+        <button onclick="closeSuccessModal()" class="w-full py-2.5 bg-white/10 hover:bg-white/20 text-slate-300 text-xs font-bold uppercase rounded-lg transition">
+          Закрыть окно
         </button>
       </div>
 
@@ -1546,6 +1563,6 @@
   </div>
 
   <!-- Map JS & Main App Controller -->
-  <script src="js/app.js?v=24.0"></script>
+  <script src="js/app.js?v=25.0"></script>
 </body>
 </html>

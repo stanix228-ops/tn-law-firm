@@ -355,7 +355,7 @@ function showToast(message, type = 'success') {
   }, 4500);
 }
 
-// Lead Management & Telegram Dispatch
+// Lead Management & WhatsApp / Telegram Dispatch
 async function handleNewLead(leadData) {
   try {
     const existing = JSON.parse(localStorage.getItem('tn_law_leads') || '[]');
@@ -366,35 +366,65 @@ async function handleNewLead(leadData) {
       service: leadData.service || 'Экстренная защита адвоката',
       stage: leadData.stage || 'Срочный выезд',
       urgency: leadData.urgency || 'Срочная 24/7',
-      notes: leadData.notes || 'Обращение через боевой сайт «Адвокат Дьявола».',
+      notes: leadData.notes || 'Обращение через сайт адвокатской конторы «T&N».',
       status: 'new',
       date: new Date().toLocaleString('ru-RU'),
-      source: leadData.source || 'Devil Advocate Landing'
+      source: leadData.source || 'Главный сайт T&N'
     };
 
     existing.unshift(newLead);
     localStorage.setItem('tn_law_leads', JSON.stringify(existing));
 
-    // Telegram Bot API dispatch
+    // 1. WhatsApp Direct Dispatch Formatting
+    const siteSettings = JSON.parse(localStorage.getItem('tn_site_settings') || '{}');
+    const rawWaPhone = siteSettings.whatsappPhone || '77786775119';
+    const cleanWaPhone = rawWaPhone.replace(/\D/g, '') || '77786775119';
+
+    const waMessageText = `⚖️ *СРОЧНЫЙ ВЫЗОВ: АДВОКАТСКАЯ КОНТОРА «T&N»*\n\n` +
+      `👤 *Клиент:* ${newLead.name}\n` +
+      `📞 *Телефон:* ${newLead.phone}\n` +
+      `💼 *Дело / Вопрос:* ${newLead.service}\n` +
+      `⏱ *Срочность:* ${newLead.urgency}\n` +
+      `📝 *Детали:* ${newLead.notes}\n` +
+      `🕒 *Время:* ${newLead.date}\n` +
+      `🌐 *Источник:* ${newLead.source}`;
+
+    const waUrl = `https://wa.me/${cleanWaPhone}?text=${encodeURIComponent(waMessageText)}`;
+
+    // Update WhatsApp button in success modal
+    const successWaBtn = document.getElementById('success-wa-btn');
+    if (successWaBtn) {
+      successWaBtn.href = waUrl;
+    }
+
+    // Automatically open WhatsApp in new window/app
+    try {
+      window.open(waUrl, '_blank');
+    } catch (popupErr) {
+      console.log('Pop-up prevented by browser, accessible via modal button');
+    }
+
+    // 2. Telegram Bot API dispatch
     const tgConfig = JSON.parse(localStorage.getItem('tn_tg_config') || '{}');
     if (tgConfig.botToken && tgConfig.chatId) {
-      const text = `🔥 *СРОЧНЫЙ ВЫЗОВ: АДВОКАТ ДЬЯВОЛА!*\n\n` +
+      const tgText = `🔥 *СРОЧНЫЙ ВЫЗОВ: АДВОКАТСКАЯ КОНТОРА «T&N»!*\n\n` +
         `👤 *Имя:* ${newLead.name}\n` +
         `📞 *Телефон:* ${newLead.phone}\n` +
         `💼 *Дело:* ${newLead.service}\n` +
         `⏱ *Срочность:* ${newLead.urgency}\n` +
         `📝 *Детали:* ${newLead.notes}\n` +
-        `🕒 *Время:* ${newLead.date}`;
+        `🕒 *Время:* ${newLead.date}\n` +
+        `🌐 *Источник:* ${newLead.source}`;
 
       fetch(`https://api.telegram.org/bot${tgConfig.botToken}/sendMessage`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           chat_id: tgConfig.chatId,
-          text: text,
+          text: tgText,
           parse_mode: 'Markdown'
         })
-      }).catch(err => console.log('Telegram note:', err));
+      }).catch(err => console.log('Telegram dispatch note:', err));
     }
 
     return true;

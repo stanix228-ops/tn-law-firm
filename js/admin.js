@@ -1,20 +1,222 @@
 /**
  * T&N Law Firm - Unified Admin CRM & CMS Engine
  * Handles:
- * 1. Lead Lifecycle & CRM
- * 2. Article Publishing & CMS Engine
- * 3. Site Settings & Verdict Counters Editor
- * 4. Telegram Bot Webhook Integration
- * 5. Tab Navigation & Data Sync
+ * 1. Secure Authentication Gate & Password Management (SHA-256 + Salt)
+ * 2. Employee Access Roles (Admin / Editor)
+ * 3. Lead Lifecycle & CRM
+ * 4. Article Publishing & CMS Engine
+ * 5. Site Settings, Verdict Counters & WhatsApp Integration
+ * 6. Telegram Bot Webhook Integration
+ * 7. Tab Navigation & Data Sync
  */
 
 // Global State
+let currentUser = null;
+let adminUsersData = [];
 let leadsData = [];
 let articlesData = [];
 let siteSettingsData = {};
 let activeStatusFilter = 'all';
 let activeSearchQuery = '';
 let currentEditingArticleId = null;
+
+// ==========================================================================
+// SECURITY & CRYPTO HELPERS (SHA-256 + Salt)
+// ==========================================================================
+async function sha256(str) {
+  const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(str));
+  return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2, '0')).join('');
+}
+
+function generateSalt(len = 16) {
+  const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  let res = '';
+  for (let i = 0; i < len; i++) {
+    res += chars.charAt(Math.floor(Math.random() * chars.length));
+  }
+  return res;
+}
+
+// Default Seed Users (Used if localStorage is empty)
+const DEFAULT_SEED_USERS = [
+  {
+    login: 'nurlan',
+    name: 'Ерсаин Нурлан',
+    role: 'admin',
+    salt: 'nurlan_salt_2026',
+    passwordHash: 'b989d41fad8efa06e33c8d648150faf3575be6929c67be1ad1a5fe83823bb5ce', // pass: nurlan2026law
+    createdAt: '10.09.2026',
+    lastLogin: null
+  },
+  {
+    login: 'advocate',
+    name: 'Адвокат / Редактор',
+    role: 'editor',
+    salt: 'advocate_salt_2026',
+    passwordHash: '03b375b9028b50f7fb0ab8ca651f62337f8b88ee08e509482ea8661057fa187f', // pass: advocate2026
+    createdAt: '10.09.2026',
+    lastLogin: null
+  }
+];
+
+function loadAdminUsers() {
+  const raw = localStorage.getItem('tn_admin_users');
+  if (raw) {
+    try {
+      adminUsersData = JSON.parse(raw);
+    } catch (e) {
+      adminUsersData = DEFAULT_SEED_USERS;
+    }
+  } else {
+    adminUsersData = DEFAULT_SEED_USERS;
+    localStorage.setItem('tn_admin_users', JSON.stringify(adminUsersData));
+  }
+}
+
+function saveAdminUsers() {
+  localStorage.setItem('tn_admin_users', JSON.stringify(adminUsersData));
+  renderAdminUsersTable();
+}
+
+// Check session on page load
+function checkAuthStatus() {
+  loadAdminUsers();
+
+  const sessionRaw = sessionStorage.getItem('tn_admin_auth') || localStorage.getItem('tn_admin_auth');
+  if (sessionRaw) {
+    try {
+      const session = JSON.parse(sessionRaw);
+      const user = adminUsersData.find(u => u.login.toLowerCase() === session.login.toLowerCase());
+      if (user && session.expiresAt > Date.now()) {
+        currentUser = user;
+        applyAuthenticatedState();
+        return;
+      }
+    } catch (e) {
+      console.log('Session parse error:', e);
+    }
+  }
+
+  showAuthGate();
+}
+
+function showAuthGate() {
+  const gate = document.getElementById('admin-auth-gate');
+  if (gate) {
+    gate.classList.remove('hidden');
+    document.body.style.overflow = 'hidden';
+  }
+}
+
+function hideAuthGate() {
+  const gate = document.getElementById('admin-auth-gate');
+  if (gate) {
+    gate.classList.add('hidden');
+    document.body.style.overflow = '';
+  }
+}
+
+function togglePasswordVisibility(inputId, btn) {
+  const input = document.getElementById(inputId);
+  if (!input) return;
+  if (input.type === 'password') {
+    input.type = 'text';
+    btn.innerText = '🔒';
+  } else {
+    input.type = 'password';
+    btn.innerText = '👁';
+  }
+}
+
+async function handleAdminLogin(event) {
+  event.preventDefault();
+  const loginInput = document.getElementById('auth-login');
+  const pwdInput = document.getElementById('auth-password');
+  const rememberCheckbox = document.getElementById('auth-remember');
+  const errorBox = document.getElementById('auth-error-box');
+  const errorMsg = document.getElementById('auth-error-msg');
+  const submitBtn = document.getElementById('auth-submit-btn');
+
+  if (!loginInput || !pwdInput) return;
+
+  const login = loginInput.value.trim().toLowerCase();
+  const password = pwdInput.value;
+
+  const user = adminUsersData.find(u => u.login.toLowerCase() === login);
+  if (!user) {
+    if (errorMsg) errorMsg.innerText = 'Пользователь с таким логином не найден';
+    if (errorBox) errorBox.classList.remove('hidden');
+    return;
+  }
+
+  submitBtn.disabled = true;
+  submitBtn.innerHTML = '<span>Проверка...</span>';
+
+  const testHash = await sha256(user.salt + password);
+  if (testHash !== user.passwordHash) {
+    submitBtn.disabled = false;
+    submitBtn.innerHTML = '<span>Войти в личный кабинет →</span>';
+    if (errorMsg) errorMsg.innerText = 'Неверный пароль. Попробуйте еще раз.';
+    if (errorBox) errorBox.classList.remove('hidden');
+    return;
+  }
+
+  // Success!
+  currentUser = user;
+  user.lastLogin = new Date().toLocaleString('ru-RU', { day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit' });
+  saveAdminUsers();
+
+  const sessionPayload = JSON.stringify({
+    login: user.login,
+    name: user.name,
+    role: user.role,
+    expiresAt: Date.now() + (rememberCheckbox && rememberCheckbox.checked ? 30 * 24 * 60 * 60 * 1000 : 8 * 60 * 60 * 1000)
+  });
+
+  if (rememberCheckbox && rememberCheckbox.checked) {
+    localStorage.setItem('tn_admin_auth', sessionPayload);
+  } else {
+    sessionStorage.setItem('tn_admin_auth', sessionPayload);
+    localStorage.removeItem('tn_admin_auth');
+  }
+
+  if (errorBox) errorBox.classList.add('hidden');
+  submitBtn.disabled = false;
+  submitBtn.innerHTML = '<span>Войти в личный кабинет →</span>';
+
+  applyAuthenticatedState();
+  showAdminToast(`Добро пожаловать, ${user.name}!`);
+}
+
+function logoutAdmin() {
+  sessionStorage.removeItem('tn_admin_auth');
+  localStorage.removeItem('tn_admin_auth');
+  currentUser = null;
+  const loginInput = document.getElementById('auth-login');
+  const pwdInput = document.getElementById('auth-password');
+  if (pwdInput) pwdInput.value = '';
+  showAuthGate();
+  showAdminToast('Вы вышли из личного кабинета');
+}
+
+function applyAuthenticatedState() {
+  hideAuthGate();
+
+  // Populate active user badge in header
+  const userNameEl = document.getElementById('current-user-name');
+  const userRoleBadge = document.getElementById('current-user-role-badge');
+  if (userNameEl && currentUser) {
+    userNameEl.innerText = currentUser.name || currentUser.login;
+  }
+  if (userRoleBadge && currentUser) {
+    userRoleBadge.innerText = currentUser.role === 'admin' ? 'Администратор' : 'Юрист / Редактор';
+    userRoleBadge.className = currentUser.role === 'admin' ? 
+      'text-[10px] text-amber-300 bg-amber-500/20 px-1.5 py-0.5 rounded font-mono uppercase font-bold' :
+      'text-[10px] text-blue-300 bg-blue-500/20 px-1.5 py-0.5 rounded font-mono uppercase font-bold';
+  }
+
+  renderAdminUsersTable();
+}
 
 // Status Metadata
 const STATUS_CONFIG = {
@@ -31,9 +233,10 @@ const DEFAULT_SITE_SETTINGS = {
   address: 'г. Алматы, Медеуский район, ул. Богенбай батыра, 23а',
   phone1: '+7 (778) 677-51-19',
   phone2: '+7 (707) 197-15-20',
+  whatsappPhone: '+7 (778) 677-51-19',
   email: 'info@tnlaw.kz',
   schedule: 'Круглосуточно 24/7 (выезд на задержание и обыск)',
-  rating2gis: '5.0 ★ (53 отзыва)',
+  rating2gis: '5.0 ★ (54 отзыва)',
   stat1_val: '500+ Дел',
   stat1_desc: 'Выиграно в судах Казахстана',
   stat2_val: '65 Млн ₸',
@@ -92,6 +295,7 @@ const DEFAULT_SEED_ARTICLES = [
 // INITIALIZATION
 // ==========================================================================
 document.addEventListener('DOMContentLoaded', () => {
+  checkAuthStatus();
   initTabs();
   loadAllData();
   initSearchAndFilters();
@@ -519,6 +723,7 @@ function saveSiteSettingsForm() {
     address: document.getElementById('setting-address')?.value || DEFAULT_SITE_SETTINGS.address,
     phone1: document.getElementById('setting-phone1')?.value || DEFAULT_SITE_SETTINGS.phone1,
     phone2: document.getElementById('setting-phone2')?.value || DEFAULT_SITE_SETTINGS.phone2,
+    whatsappPhone: document.getElementById('setting-whatsappPhone')?.value || DEFAULT_SITE_SETTINGS.whatsappPhone,
     email: document.getElementById('setting-email')?.value || DEFAULT_SITE_SETTINGS.email,
     schedule: document.getElementById('setting-schedule')?.value || DEFAULT_SITE_SETTINGS.schedule,
     rating2gis: document.getElementById('setting-rating2gis')?.value || DEFAULT_SITE_SETTINGS.rating2gis,
@@ -534,7 +739,235 @@ function saveSiteSettingsForm() {
 
   localStorage.setItem('tn_site_settings', JSON.stringify(newSettings));
   siteSettingsData = newSettings;
-  showAdminToast('Настройки сайта и счетчики успешно сохранены!');
+  showAdminToast('Настройки сайта, WhatsApp и счетчики сохранены!');
+}
+
+// ==========================================================================
+// USER & SECURITY MANAGEMENT (Settings Subsystem)
+// ==========================================================================
+async function handleChangeMyPassword() {
+  if (!currentUser) return;
+  const currentPwdInput = document.getElementById('pwd-change-current');
+  const newPwdInput = document.getElementById('pwd-change-new');
+  const confirmPwdInput = document.getElementById('pwd-change-confirm');
+
+  const curPwd = currentPwdInput ? currentPwdInput.value : '';
+  const newPwd = newPwdInput ? newPwdInput.value : '';
+  const confirmPwd = confirmPwdInput ? confirmPwdInput.value : '';
+
+  if (!curPwd) {
+    showAdminToast('Введите текущий пароль', 'error');
+    return;
+  }
+
+  const testHash = await sha256(currentUser.salt + curPwd);
+  if (testHash !== currentUser.passwordHash) {
+    showAdminToast('Текущий пароль указан неверно', 'error');
+    return;
+  }
+
+  if (newPwd.length < 6) {
+    showAdminToast('Новый пароль должен содержать не менее 6 символов', 'error');
+    return;
+  }
+
+  if (newPwd !== confirmPwd) {
+    showAdminToast('Новые пароли не совпадают', 'error');
+    return;
+  }
+
+  // Update password with fresh salt
+  const newSalt = generateSalt(16);
+  currentUser.salt = newSalt;
+  currentUser.passwordHash = await sha256(newSalt + newPwd);
+  saveAdminUsers();
+
+  if (currentPwdInput) currentPwdInput.value = '';
+  if (newPwdInput) newPwdInput.value = '';
+  if (confirmPwdInput) confirmPwdInput.value = '';
+
+  showAdminToast('Ваш пароль успешно обновлен!');
+}
+
+function renderAdminUsersTable() {
+  const tbody = document.getElementById('admin-users-table-body');
+  if (!tbody) return;
+
+  tbody.innerHTML = '';
+
+  adminUsersData.forEach(user => {
+    const isCurrent = currentUser && currentUser.login.toLowerCase() === user.login.toLowerCase();
+    const roleBadge = user.role === 'admin' ? 
+      '<span class="px-2 py-0.5 rounded bg-amber-100 text-amber-800 font-bold text-[10px]">Администратор</span>' :
+      '<span class="px-2 py-0.5 rounded bg-blue-100 text-blue-800 font-bold text-[10px]">Юрист / Редактор</span>';
+
+    const tr = document.createElement('tr');
+    tr.className = 'hover:bg-slate-50 transition';
+    tr.innerHTML = `
+      <td class="p-3">
+        <div class="font-bold text-slate-800">${escapeHTML(user.name)}</div>
+        <div class="text-[11px] text-slate-400 font-mono">@${escapeHTML(user.login)} ${isCurrent ? '<span class="text-emerald-600 font-bold font-sans">(Вы)</span>' : ''}</div>
+      </td>
+      <td class="p-3">
+        ${roleBadge}
+      </td>
+      <td class="p-3 text-slate-500 text-[11px]">
+        ${user.lastLogin || 'Никогда'}
+      </td>
+      <td class="p-3 text-right space-x-2">
+        <button onclick="openEditUserModal('${escapeHTML(user.login)}')" class="text-blue-600 hover:text-blue-800 font-bold text-xs" title="Сменить пароль или данные">
+          Изменить
+        </button>
+        ${!isCurrent ? `
+          <button onclick="deleteAdminUser('${escapeHTML(user.login)}')" class="text-red-500 hover:text-red-700 font-bold text-xs ml-2" title="Удалить сотрудника">
+            Удалить
+          </button>
+        ` : ''}
+      </td>
+    `;
+    tbody.appendChild(tr);
+  });
+}
+
+function openCreateUserModal() {
+  document.getElementById('user-modal-title').innerText = 'Новый сотрудник';
+  document.getElementById('user-edit-original-login').value = '';
+  document.getElementById('user-edit-name').value = '';
+  document.getElementById('user-edit-login').value = '';
+  document.getElementById('user-edit-login').readOnly = false;
+  document.getElementById('user-edit-role').value = 'editor';
+  document.getElementById('user-edit-password').value = '';
+  document.getElementById('user-edit-password').required = true;
+  document.getElementById('user-pwd-label').innerText = 'Пароль *';
+  document.getElementById('user-pwd-hint').classList.add('hidden');
+
+  const modal = document.getElementById('user-modal');
+  if (modal) {
+    modal.classList.remove('hidden');
+    setTimeout(() => {
+      modal.querySelector('.modal-overlay')?.classList.remove('opacity-0');
+      modal.querySelector('.modal-content')?.classList.remove('scale-95', 'opacity-0');
+    }, 10);
+  }
+}
+
+function openEditUserModal(login) {
+  const user = adminUsersData.find(u => u.login.toLowerCase() === login.toLowerCase());
+  if (!user) return;
+
+  document.getElementById('user-modal-title').innerText = `Сотрудник: ${user.name}`;
+  document.getElementById('user-edit-original-login').value = user.login;
+  document.getElementById('user-edit-name').value = user.name;
+  document.getElementById('user-edit-login').value = user.login;
+  document.getElementById('user-edit-login').readOnly = true;
+  document.getElementById('user-edit-role').value = user.role;
+  document.getElementById('user-edit-password').value = '';
+  document.getElementById('user-edit-password').required = false;
+  document.getElementById('user-pwd-label').innerText = 'Новый пароль (опционально)';
+  document.getElementById('user-pwd-hint').classList.remove('hidden');
+
+  const modal = document.getElementById('user-modal');
+  if (modal) {
+    modal.classList.remove('hidden');
+    setTimeout(() => {
+      modal.querySelector('.modal-overlay')?.classList.remove('opacity-0');
+      modal.querySelector('.modal-content')?.classList.remove('scale-95', 'opacity-0');
+    }, 10);
+  }
+}
+
+function closeUserModal() {
+  const modal = document.getElementById('user-modal');
+  if (modal) {
+    modal.querySelector('.modal-overlay')?.classList.add('opacity-0');
+    modal.querySelector('.modal-content')?.classList.add('scale-95', 'opacity-0');
+    setTimeout(() => modal.classList.add('hidden'), 250);
+  }
+}
+
+async function handleSaveUser(e) {
+  e.preventDefault();
+  const origLogin = document.getElementById('user-edit-original-login').value.trim();
+  const name = document.getElementById('user-edit-name').value.trim();
+  const login = document.getElementById('user-edit-login').value.trim().toLowerCase();
+  const role = document.getElementById('user-edit-role').value;
+  const password = document.getElementById('user-edit-password').value;
+
+  if (!name || !login) {
+    showAdminToast('Заполните все обязательные поля', 'error');
+    return;
+  }
+
+  if (origLogin) {
+    // Edit existing user
+    const user = adminUsersData.find(u => u.login.toLowerCase() === origLogin.toLowerCase());
+    if (user) {
+      user.name = name;
+      user.role = role;
+      if (password) {
+        if (password.length < 6) {
+          showAdminToast('Пароль должен содержать минимум 6 символов', 'error');
+          return;
+        }
+        const newSalt = generateSalt(16);
+        user.salt = newSalt;
+        user.passwordHash = await sha256(newSalt + password);
+      }
+      saveAdminUsers();
+      closeUserModal();
+      showAdminToast(`Данные сотрудника ${user.name} обновлены!`);
+      if (currentUser && currentUser.login.toLowerCase() === user.login.toLowerCase()) {
+        currentUser = user;
+        applyAuthenticatedState();
+      }
+    }
+  } else {
+    // Create new user
+    const exists = adminUsersData.some(u => u.login.toLowerCase() === login.toLowerCase());
+    if (exists) {
+      showAdminToast('Пользователь с таким логином уже существует', 'error');
+      return;
+    }
+
+    if (!password || password.length < 6) {
+      showAdminToast('Пароль обязателен и должен содержать минимум 6 символов', 'error');
+      return;
+    }
+
+    const salt = generateSalt(16);
+    const passwordHash = await sha256(salt + password);
+
+    const newUser = {
+      login,
+      name,
+      role,
+      salt,
+      passwordHash,
+      createdAt: new Date().toLocaleDateString('ru-RU'),
+      lastLogin: null
+    };
+
+    adminUsersData.push(newUser);
+    saveAdminUsers();
+    closeUserModal();
+    showAdminToast(`Новый сотрудник ${name} успешно добавлен!`);
+  }
+}
+
+function deleteAdminUser(login) {
+  if (currentUser && currentUser.login.toLowerCase() === login.toLowerCase()) {
+    showAdminToast('Нельзя удалить свою собственную учетную запись', 'error');
+    return;
+  }
+
+  const user = adminUsersData.find(u => u.login.toLowerCase() === login.toLowerCase());
+  if (!user) return;
+
+  if (confirm(`Вы уверены, что хотите удалить доступ для сотрудника "${user.name}" (@${user.login})?`)) {
+    adminUsersData = adminUsersData.filter(u => u.login.toLowerCase() !== login.toLowerCase());
+    saveAdminUsers();
+    showAdminToast(`Сотрудник ${user.name} удален`);
+  }
 }
 
 // ==========================================================================
