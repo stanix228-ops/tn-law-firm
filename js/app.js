@@ -41,11 +41,11 @@ function initVideoSoundController() {
 const TN_ARTICLES = [
   {
     id: 'interrogation-rules',
-    title: 'Вызов на допрос в полицию: 7 правил, которые спасут вас от обвинения и тюрьмы',
+    title: 'Правила которые спасут от фатальных ошибок',
     category: 'Уголовная защита',
     categoryId: 'criminal',
-    author: 'Адвокат Нурлан',
-    authorRole: 'Партнер по уголовным делам конторы «T&N»',
+    author: 'Ерсаин Нурлан',
+    authorRole: 'Старший партнер конторы «T&N»',
     authorPhoto: 'assets/media/advocate_1.jpeg',
     date: 'Февраль 2026',
     readTime: '6 мин чтения',
@@ -84,62 +84,12 @@ const TN_ARTICLES = [
     `
   },
   {
-    id: 'supreme-court-cassation',
-    title: 'Отмена решений судов в Верховном Суде РК: алгоритм слома обвинения на 65 000 000 ₸',
-    category: 'Верховный Суд РК',
-    categoryId: 'supreme',
-    author: 'Адвокат Нурлан',
-    authorRole: 'Партнер судебной практики конторы «T&N»',
-    authorPhoto: 'assets/media/advocate_1.jpeg',
-    date: 'Январь 2026',
-    readTime: '8 мин чтения',
-    image: 'assets/images/article_supreme_court.jpg',
-    summary: 'Реальный разгром оппонентов на 65 000 000 ₸. Как найти критические ошибки судей нижестоящих инстанций и добиться победы в кассации ВС РК.',
-    content: `
-      <p class="lead font-bold text-lg text-amber-400 mb-6">
-        «В суде побеждает не вежливость, а безупречная доказательственная позиция и готовность идти до конца.»
-      </p>
-
-      <p class="mb-4 text-slate-300">
-        90% юристов бросают дело после проигрыша в апелляции, разводя руками: «Ну, таковы суды». Это слабость. Кассационная коллегия Верховного Суда РК — это высшая лига, где мы ломаем ангажированные решения районных судей Алматы.
-      </p>
-
-      <div class="bg-slate-900 border-2 border-red-500/40 p-6 my-6 rounded-lg text-white">
-        <div class="font-heading text-red-400 font-bold text-lg mb-2">🏆 Реальный кейс: Отмена взыскания 65 000 000 ₸</div>
-        <p class="text-sm text-slate-300 leading-relaxed">
-          Суды Алматы двух инстанций присудили нашему клиенту чудовищный фиктивный долг. Мы выявили прямое нарушение норм материального права (ст. 654 ГК РК) и фальсификацию экспертизы. Верховный Суд РК в Астане полностью отменил решения нижестоящих судов и восстановил справедливость.
-        </p>
-      </div>
-    `
-  },
-  {
-    id: 'business-raiding-defense',
-    title: 'Взыскание долгов в СМЭС г. Алматы: арест счетов и победа за 2 заседания',
-    category: 'Защита бизнеса',
-    categoryId: 'business',
-    author: 'Адвокат Нурлан',
-    authorRole: 'Партнер по защите бизнеса конторы «T&N»',
-    authorPhoto: 'assets/media/advocate_1.jpeg',
-    date: 'Январь 2026',
-    readTime: '7 мин чтения',
-    image: 'assets/images/article_business_debt.jpg',
-    summary: 'Как действовать при невозврате средств: наложение обеспечительных мер в день подачи иска, блокировка активов должника и 100% возврат.',
-    content: `
-      <p class="lead font-bold text-lg text-red-400 mb-6">
-        «Если должник выведет активы — исполнительный лист превратится в бесполезную бумажку. Действовать нужно мгновенно.»
-      </p>
-      <p class="mb-4 text-slate-300">
-        Мы подаем ходатайство об аресте всех банковских счетов и имущества ответчика одновременно с исковым заявлением. СМЭС г. Алматы выносит определение за 24 часа. Должник лишается возможности скрыть деньги и вынужден вернуть долг.
-      </p>
-    `
-  },
-  {
     id: 'property-division-defense',
-    title: 'Раздел дорогостоящего бизнеса и недвижимости в Алматы: защита от фиктивных долгов',
+    title: 'Раздел имущества',
     category: 'Защита активов',
     categoryId: 'business',
-    author: 'Адвокат Нурлан',
-    authorRole: 'Партнер судебной практики конторы «T&N»',
+    author: 'Ерсаин Нурлан',
+    authorRole: 'Старший партнер конторы «T&N»',
     authorPhoto: 'assets/media/advocate_1.jpeg',
     date: 'Декабрь 2025',
     readTime: '6 мин чтения',
@@ -156,11 +106,11 @@ const TN_ARTICLES = [
   },
   {
     id: 'bankruptcy-individuals-rk',
-    title: 'Банкротство физических лиц в РК: как законно списать долги и спасти единственное жилье',
+    title: 'Банкротство физических лиц',
     category: 'Банкротство',
     categoryId: 'business',
-    author: 'Адвокат Нурлан',
-    authorRole: 'Партнер конторы «T&N»',
+    author: 'Ерсаин Нурлан',
+    authorRole: 'Старший партнер конторы «T&N»',
     authorPhoto: 'assets/media/advocate_1.jpeg',
     date: 'Ноябрь 2025',
     readTime: '5 мин чтения',
@@ -178,11 +128,9 @@ const TN_ARTICLES = [
 ];
 
 // Reliable Article Image Map (Both WebP and JPG support)
-const TN_ARTICLES_VERSION = 'v8.0';
+const TN_ARTICLES_VERSION = 'v21.0';
 const TN_ARTICLE_IMAGES = {
   'interrogation-rules': 'assets/images/article_interrogation.jpg',
-  'supreme-court-cassation': 'assets/images/article_supreme_court.jpg',
-  'business-raiding-defense': 'assets/images/article_business_debt.jpg',
   'property-division-defense': 'assets/images/article_property_asset.jpg',
   'bankruptcy-individuals-rk': 'assets/images/article_bankruptcy.jpg'
 };
