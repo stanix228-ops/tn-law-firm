@@ -606,43 +606,62 @@ function initMobileMenu() {
   }
 }
 
-// Office Dark 2GIS Map Controller (2GIS JS API 2.0 / DG / Dark Theme)
+// Office Dark Interactive Map Controller (Leaflet Dark Matter / 2GIS Navigation)
 function initOfficeMap() {
-  const container = document.getElementById('office-2gis-map');
+  const container = document.getElementById('office-interactive-map') || document.getElementById('office-2gis-map');
   if (!container) return;
 
   const lat = 43.254842;
   const lng = 76.970608;
 
-  // 1. Try 2GIS Maps JS API 2.0 (DG)
-  if (typeof DG !== 'undefined' && DG.then) {
-    DG.then(function () {
-      // Clear fallback iframe if 2GIS API is ready
+  // 1. Initialize Leaflet Map with CartoDB Dark Matter
+  if (typeof L !== 'undefined') {
+    try {
       container.innerHTML = '';
-      const map = DG.map('office-2gis-map', {
+      const map = L.map(container, {
         center: [lat, lng],
-        zoom: 18,
+        zoom: 17,
         scrollWheelZoom: false,
-        fullscreenControl: false
+        attributionControl: false
       });
 
-      const customIcon = DG.divIcon({
-        className: 'custom-2gis-marker',
-        html: '<div style="background:#ff1e27;color:#fff;width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:20px;box-shadow:0 0 25px rgba(255,30,39,0.9);border:2px solid #fff;cursor:pointer;">⚖️</div>',
-        iconSize: [40, 40],
-        iconAnchor: [20, 20]
+      L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+        maxZoom: 19,
+        subdomains: 'abcd',
+        attribution: ''
+      }).addTo(map);
+
+      const customIcon = L.divIcon({
+        className: 'custom-leaflet-marker',
+        html: `
+          <div style="position:relative;width:44px;height:44px;display:flex;align-items:center;justify-content:center;">
+            <div style="position:absolute;inset:0;background:rgba(255,30,39,0.35);border-radius:50%;animation:ping 2s cubic-bezier(0, 0, 0.2, 1) infinite;"></div>
+            <div style="position:relative;background:linear-gradient(135deg, #ff1e27 0%, #990000 100%);color:#fff;width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:18px;box-shadow:0 0 25px rgba(255,30,39,0.9);border:2px solid #fff;cursor:pointer;">⚖️</div>
+          </div>
+        `,
+        iconSize: [44, 44],
+        iconAnchor: [22, 22]
       });
 
-      const marker = DG.marker([lat, lng], { icon: customIcon }).addTo(map);
+      const marker = L.marker([lat, lng], { icon: customIcon }).addTo(map);
       marker.bindPopup(`
-        <div style="font-family:'Montserrat',sans-serif;padding:6px 2px;background:#0e1117;color:#fff;min-width:200px;">
+        <div style="font-family:'Montserrat',sans-serif;padding:8px 4px;background:#0e1117;color:#fff;min-width:220px;">
           <div style="font-weight:900;color:#ff1e27;text-transform:uppercase;font-size:13px;margin-bottom:4px;">⚖️ Адвокатская контора «T&N»</div>
           <div style="font-size:12px;color:#cbd5e1;line-height:1.4;">г. Алматы, ул. Богенбай батыра, 23а<br><span style="color:#22c55e;font-size:11px;font-weight:bold;">★ 5.0 в 2ГИС • 54 отзыва</span></div>
-          <div style="margin-top:8px;"><a href="https://2gis.kz/almaty/inside/9430047417451853/firm/70000001082633855?m=76.970608%2C43.254842%2F18.89" target="_blank" style="color:#f59e0b;font-weight:800;font-size:11px;text-decoration:underline;">Маршрут в 2ГИС →</a></div>
+          <div style="margin-top:10px;display:flex;gap:6px;flex-direction:column;">
+            <a href="https://2gis.kz/almaty/inside/9430047417451853/firm/70000001082633855?m=76.970608%2C43.254842%2F18.89" target="_blank" style="background:#299400;color:#fff;font-weight:800;font-size:11px;padding:7px 10px;border-radius:6px;text-align:center;text-decoration:none;display:block;">
+              Построить маршрут в 2ГИС →
+            </a>
+            <a href="https://yandex.kz/maps/?text=43.254842,76.970608" target="_blank" style="background:#1e293b;color:#cbd5e1;font-weight:700;font-size:10px;padding:5px 8px;border-radius:6px;text-align:center;text-decoration:none;display:block;">
+              Открыть в Яндекс Картах
+            </a>
+          </div>
         </div>
-      `);
-    });
-    return;
+      `).openPopup();
+      return;
+    } catch (e) {
+      console.warn('Leaflet error:', e);
+    }
   }
 }
 

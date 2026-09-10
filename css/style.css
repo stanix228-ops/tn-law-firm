@@ -503,38 +503,30 @@ h1, h2, h3, h4, .heading, .font-heading {
   flex-direction: column;
 }
 
-#office-yandex-map, #office-2gis-map, #office-leaflet-map {
+#office-yandex-map, #office-2gis-map, #office-leaflet-map, #office-interactive-map {
   width: 100%;
   height: 100%;
   min-height: 460px;
   background-color: #07080a !important;
 }
 
-/* Yandex & 2GIS Dark Map Layer Inversion */
+/* Yandex Map Inversion for dark theme */
 #office-yandex-map [class*="ground-pane"],
 #office-yandex-map [class*="places-pane"] > canvas,
-#office-2gis-map .dg-pane,
-#office-2gis-map .leaflet-tile-pane,
-#office-2gis-map .leaflet-layer,
-.map-yandex-dark,
-.map-dark-invert {
+.map-yandex-dark {
   filter: invert(90%) hue-rotate(180deg) brightness(85%) contrast(115%) !important;
 }
 
-/* Protect Markers, Popups, Controls from inversion */
+/* Protect Markers, Popups, Controls */
 #office-yandex-map [class*="controls__pane"],
 #office-yandex-map [class*="balloon__layout"],
 #office-yandex-map [class*="balloon__content"],
 #office-yandex-map [class*="user-selection-none"],
 #office-yandex-map [class*="events-pane"],
-#office-2gis-map .dg-marker-pane,
-#office-2gis-map .leaflet-marker-pane,
-#office-2gis-map .dg-popup-pane,
-#office-2gis-map .leaflet-popup-pane,
-#office-2gis-map .custom-2gis-marker,
-#office-2gis-map .custom-leaflet-marker,
-#office-2gis-map .dg-control-container,
-#office-2gis-map .leaflet-control-container {
+.leaflet-marker-pane,
+.leaflet-popup-pane,
+.custom-leaflet-marker,
+.leaflet-control-container {
   filter: none !important;
 }
 

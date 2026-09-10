@@ -45,11 +45,11 @@
     }
   </script>
 
-  <!-- 2GIS Maps & Yandex Maps JS API -->
-  <script src="https://maps.api.2gis.ru/2.0/loader.js?pkg=full" type="text/javascript"></script>
-  <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"></script>
+  <!-- Interactive Map API (Leaflet Dark CartoDB) -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
-  <link rel="stylesheet" href="css/style.css?v=26.0">
+  <link rel="stylesheet" href="css/style.css?v=27.0">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚖️</text></svg>">
 </head>
 <body class="bg-[#07080a] text-slate-100 font-body antialiased selection:bg-red-600 selection:text-white">
@@ -1354,18 +1354,10 @@
               </div>
             </div>
 
-            <!-- Embedded 2GIS Dark Interactive Map with Exact Location -->
+            <!-- Embedded Dark Interactive Map with Exact Location -->
             <div class="flex-1 w-full relative min-h-[460px] bg-[#07080a]">
-              <!-- 2GIS Map Container -->
-              <div id="office-2gis-map" class="w-full h-full min-h-[460px] z-0">
-                <!-- 2GIS Dark Widget with Exact Office Coordinates (43.254842, 76.970608, Org: 70000001082633855) -->
-                <iframe 
-                  src="https://widgets.2gis.com/widget?type=firmonmap&options=%7B%22pos%22%3A%7B%22lat%22%3A43.254842%2C%22lon%22%3A76.970608%2C%22zoom%22%3A18%7D%2C%22opt%22%3A%7B%22city%22%3A%22almaty%22%7D%2C%22org%22%3A%2270000001082633855%22%7D" 
-                  title="2ГИС Карта офиса Адвокатской конторы T&N в Алматы" 
-                  loading="lazy"
-                  class="w-full h-full min-h-[460px] border-none map-2gis-dark">
-                </iframe>
-              </div>
+              <!-- Map Container -->
+              <div id="office-interactive-map" class="w-full h-full min-h-[460px] z-0"></div>
               
               <!-- Floating Map Location Pin Card with 2GIS Branding -->
               <div class="absolute bottom-4 left-4 z-[500] bg-black/90 border border-emerald-500/80 p-3.5 rounded-xl backdrop-blur-md shadow-2xl max-w-xs pointer-events-auto">
