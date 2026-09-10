@@ -409,7 +409,7 @@ h1, h2, h3, h4, .heading, .font-heading {
 }
 
 .attorney-img-team {
-  object-position: center top !important;
+  object-position: center 80% !important;
 }
 
 .attorney-img-nurlan {
@@ -417,7 +417,7 @@ h1, h2, h3, h4, .heading, .font-heading {
 }
 
 .attorney-img-partner {
-  object-position: center 4% !important;
+  object-position: center 35% !important;
 }
 
 .attorney-combat-card:hover img {
