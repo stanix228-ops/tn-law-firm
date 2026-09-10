@@ -584,3 +584,43 @@ h1, h2, h3, h4, .heading, .font-heading {
   background-color: #ff1e27 !important;
   color: #ffffff !important;
 }
+
+/* ==========================================================================
+   2GIS REVIEWS HORIZONTAL CAROUSEL & SMOOTH TICKER
+   ========================================================================== */
+.reviews-carousel-track {
+  display: flex;
+  gap: 1.25rem;
+  overflow-x: auto;
+  scroll-behavior: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  cursor: grab;
+  user-select: none;
+  padding: 0.5rem 0.25rem 1rem 0.25rem;
+}
+
+.reviews-carousel-track::-webkit-scrollbar {
+  display: none;
+}
+
+.reviews-carousel-track:active {
+  cursor: grabbing;
+}
+
+.review-card-item {
+  flex: 0 0 390px;
+  width: 390px;
+  max-width: 390px;
+  min-height: 240px;
+}
+
+@media (max-width: 640px) {
+  .review-card-item {
+    flex: 0 0 310px;
+    width: 310px;
+    max-width: 310px;
+    min-height: 250px;
+  }
+}

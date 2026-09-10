@@ -213,10 +213,7 @@ function renderArticlesList(categoryId = 'all') {
         </div>
 
         <div class="pt-4 border-t border-white/10 flex items-center justify-between">
-          <div class="flex items-center gap-2">
-            <img src="${article.authorPhoto || 'assets/media/advocate_1.jpeg'}" alt="${article.author}" class="w-7 h-7 rounded-full object-cover border border-red-500">
-            <span class="text-xs font-bold text-slate-300">${article.author || 'Адвокат'}</span>
-          </div>
+          <span class="text-[11px] font-bold uppercase tracking-wider text-slate-400">Практика «T&N»</span>
           <button onclick="openArticleModal('${article.id}')" class="text-xs font-extrabold uppercase tracking-wider text-red-400 hover:text-white flex items-center gap-1 transition">
             <span>Читать разбор</span>
             <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
@@ -615,12 +612,107 @@ function initOfficeMap() {
   }
 }
 
+// Reviews Smooth Animated Carousel & Touch/Drag Controller
+function initReviewsCarousel() {
+  const track = document.getElementById('reviews-carousel-track');
+  if (!track) return;
+
+  const prevBtn = document.getElementById('reviews-prev-btn');
+  const nextBtn = document.getElementById('reviews-next-btn');
+
+  let isPaused = false;
+  let isDown = false;
+  let startX = 0;
+  let scrollLeft = 0;
+  const speed = 0.7; // Smooth glidespeed in pixels per frame
+
+  // Continuous loop animation using requestAnimationFrame
+  function animate() {
+    if (!isPaused && !isDown) {
+      track.scrollLeft += speed;
+      const halfWidth = track.scrollWidth / 2;
+      if (halfWidth > 0 && track.scrollLeft >= halfWidth) {
+        track.scrollLeft -= halfWidth;
+      }
+    }
+    requestAnimationFrame(animate);
+  }
+  requestAnimationFrame(animate);
+
+  // Pause on hover
+  track.addEventListener('mouseenter', () => { isPaused = true; });
+  track.addEventListener('mouseleave', () => {
+    if (!isDown) isPaused = false;
+  });
+
+  // Touch & Swipe Support
+  track.addEventListener('touchstart', () => { isPaused = true; }, { passive: true });
+  track.addEventListener('touchend', () => {
+    setTimeout(() => { isPaused = false; }, 2500);
+  }, { passive: true });
+
+  // Mouse Drag to Scroll
+  track.addEventListener('mousedown', (e) => {
+    isDown = true;
+    isPaused = true;
+    startX = e.pageX - track.offsetLeft;
+    scrollLeft = track.scrollLeft;
+  });
+
+  window.addEventListener('mouseup', () => {
+    if (isDown) {
+      isDown = false;
+      setTimeout(() => { isPaused = false; }, 1800);
+    }
+  });
+
+  track.addEventListener('mousemove', (e) => {
+    if (!isDown) return;
+    e.preventDefault();
+    const x = e.pageX - track.offsetLeft;
+    const walk = (x - startX) * 1.5;
+    track.scrollLeft = scrollLeft - walk;
+
+    const halfWidth = track.scrollWidth / 2;
+    if (halfWidth > 0) {
+      if (track.scrollLeft >= halfWidth) {
+        track.scrollLeft -= halfWidth;
+      } else if (track.scrollLeft <= 0) {
+        track.scrollLeft += halfWidth;
+      }
+    }
+  });
+
+  // Navigation Arrow Buttons
+  const getCardStep = () => {
+    const card = track.querySelector('.review-card-item');
+    return card ? (card.offsetWidth + 20) : 410;
+  };
+
+  if (prevBtn) {
+    prevBtn.addEventListener('click', () => {
+      isPaused = true;
+      track.scrollBy({ left: -getCardStep(), behavior: 'smooth' });
+      setTimeout(() => { isPaused = false; }, 3500);
+    });
+  }
+
+  if (nextBtn) {
+    nextBtn.addEventListener('click', () => {
+      isPaused = true;
+      track.scrollBy({ left: getCardStep(), behavior: 'smooth' });
+      setTimeout(() => { isPaused = false; }, 3500);
+    });
+  }
+}
+
 // DOM Ready
 document.addEventListener('DOMContentLoaded', () => {
   initVideoSoundController();
   initAllVideosController();
   initOfficeMap();
   initPhoneMasks();
+  initReviewsCarousel();
   initArticlesFilter();
   initAllForms();
   initMobileMenu();

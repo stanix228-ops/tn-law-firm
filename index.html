@@ -48,7 +48,7 @@
   <!-- Yandex Maps & Leaflet API -->
   <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"></script>
 
-  <link rel="stylesheet" href="css/style.css?v=22.0">
+  <link rel="stylesheet" href="css/style.css?v=24.0">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚖️</text></svg>">
 </head>
 <body class="bg-[#07080a] text-slate-100 font-body antialiased selection:bg-red-600 selection:text-white">
@@ -62,7 +62,7 @@
       <!-- Live Indicators Left -->
       <div class="flex items-center flex-wrap gap-3 sm:gap-6 text-xs">
         <div class="flex items-center gap-2 text-slate-300 text-xs">
-          <span class="text-amber-400 font-bold">★ 5.0 2ГИС (53 отзыва)</span>
+          <span class="text-amber-400 font-bold">★ 5.0 2ГИС (54 отзыва)</span>
           <span class="text-slate-600">•</span>
           <span class="text-slate-300">г. Алматы, ул. Богенбай батыра, 23а</span>
         </div>
@@ -266,12 +266,12 @@
   </div>
 
   <!-- ====================================================================
-       SECTION: REVIEWS (2GIS Verified Client Feedback)
+       SECTION: REVIEWS (2GIS Verified Client Feedback - Animated Carousel)
        ==================================================================== -->
-  <section id="reviews" class="py-16 sm:py-20 bg-[#0a0d14] border-b border-red-600/30 relative">
-    <div class="max-w-[1650px] mx-auto px-4 sm:px-6 lg:px-10 space-y-10">
+  <section id="reviews" class="py-16 sm:py-20 bg-[#0a0d14] border-b border-red-600/30 relative overflow-hidden">
+    <div class="max-w-[1650px] mx-auto px-4 sm:px-6 lg:px-10 space-y-8">
       
-      <!-- Reviews Header with 2GIS Rating & Top Right Button -->
+      <!-- Reviews Header with 2GIS Rating, Navigation Arrows & Top Right Button -->
       <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-2 border-b border-white/10">
         <div class="space-y-2 max-w-2xl">
           <div class="inline-flex items-center gap-2 px-3 py-1 bg-amber-500/20 text-amber-400 rounded text-xs font-black uppercase tracking-widest border border-amber-500/30">
@@ -286,8 +286,17 @@
           </p>
         </div>
 
-        <!-- Top Right Action Button to 2GIS -->
-        <div class="shrink-0">
+        <!-- Controls: Prev/Next Buttons + 2GIS Link -->
+        <div class="flex items-center flex-wrap gap-3 shrink-0">
+          <div class="flex items-center gap-2">
+            <button id="reviews-prev-btn" class="w-11 h-11 rounded-xl bg-black/70 border border-white/20 hover:border-emerald-500 text-white flex items-center justify-center font-bold text-lg transition hover:bg-emerald-600/20 active:scale-95 shadow-lg" aria-label="Предыдущий отзыв">
+              ←
+            </button>
+            <button id="reviews-next-btn" class="w-11 h-11 rounded-xl bg-black/70 border border-white/20 hover:border-emerald-500 text-white flex items-center justify-center font-bold text-lg transition hover:bg-emerald-600/20 active:scale-95 shadow-lg" aria-label="Следующий отзыв">
+              →
+            </button>
+          </div>
+
           <a href="https://2gis.kz/almaty/inside/9430047417451853/firm/70000001082633855/tab/reviews?m=76.970169%2C43.255135%2F16" 
              target="_blank" 
              rel="noopener noreferrer"
@@ -298,171 +307,336 @@
         </div>
       </div>
 
-      <!-- Reviews Grid (6 authentic verified reviews from 2GIS) -->
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        
-        <!-- Review 1: DARU ORALBEK -->
-        <div class="p-6 bg-black/60 border border-white/10 rounded-2xl space-y-4 hover:border-emerald-500/60 transition-all flex flex-col justify-between shadow-xl">
-          <div class="space-y-3">
-            <div class="flex items-center justify-between">
-              <div class="flex items-center gap-3">
-                <div class="w-10 h-10 rounded-full bg-emerald-600/20 border border-emerald-500/40 text-emerald-400 font-black text-sm flex items-center justify-center">
-                  DO
+      <!-- Horizontal Carousel Container with Seamless Glide & Touch/Drag Support -->
+      <div class="relative">
+        <div id="reviews-carousel-track" class="reviews-carousel-track">
+          
+          <!-- Card 1: DARU ORALBEK -->
+          <div class="review-card-item p-6 bg-black/70 border border-white/10 rounded-2xl space-y-4 hover:border-emerald-500/60 transition-all flex flex-col justify-between shadow-xl">
+            <div class="space-y-3">
+              <div class="flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                  <div class="w-10 h-10 rounded-full bg-emerald-600/20 border border-emerald-500/40 text-emerald-400 font-black text-sm flex items-center justify-center shrink-0">
+                    DO
+                  </div>
+                  <div>
+                    <div class="font-bold text-white text-sm">DARU ORALBEK</div>
+                    <div class="text-[11px] text-slate-400">8 сентября 2026 • 2ГИС</div>
+                  </div>
                 </div>
-                <div>
-                  <div class="font-bold text-white text-sm">DARU ORALBEK</div>
-                  <div class="text-[11px] text-slate-400">8 сентября 2026 • 2ГИС</div>
-                </div>
+                <div class="text-amber-400 text-sm tracking-widest font-bold">★★★★★</div>
               </div>
-              <div class="text-amber-400 text-sm tracking-widest font-bold">★★★★★</div>
+              <p class="text-xs sm:text-sm text-slate-300 leading-relaxed line-clamp-4">
+                «Хочу выразить благодарность адвокату Ерсаину Нурлану за консультацию. Быстро и оперативно отвечал на все мои вопросы, подробно разъяснил ситуацию и подсказал, на что обратить внимание. Рекомендую!»
+              </p>
             </div>
-            <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
-              «Хочу выразить благодарность адвокату Ерсаину Нурлану за консультацию. Быстро и оперативно отвечал на все мои вопросы, подробно разъяснил ситуацию и подсказал, на что обратить внимание. Видно, что человек действительно разбирается в своей работе и старается помочь. Спасибо за консультацию и профессиональный подход! Рекомендую.»
-            </p>
+            <div class="pt-3 border-t border-white/10 flex items-center justify-between text-[11px]">
+              <span class="text-emerald-400 font-bold flex items-center gap-1">
+                <span>✓</span> Отзыв подтвержден в 2ГИС
+              </span>
+              <span class="text-slate-500 font-semibold">Оценка 5.0</span>
+            </div>
           </div>
-          <div class="pt-3 border-t border-white/10 flex items-center justify-between text-[11px]">
-            <span class="text-emerald-400 font-bold flex items-center gap-1">
-              <span>✓</span> Отзыв подтвержден в 2ГИС
-            </span>
-            <span class="text-slate-500">Оценка 5.0</span>
-          </div>
-        </div>
 
-        <!-- Review 2: Ra Ra -->
-        <div class="p-6 bg-black/60 border border-white/10 rounded-2xl space-y-4 hover:border-emerald-500/60 transition-all flex flex-col justify-between shadow-xl">
-          <div class="space-y-3">
-            <div class="flex items-center justify-between">
-              <div class="flex items-center gap-3">
-                <div class="w-10 h-10 rounded-full bg-red-600/20 border border-red-500/40 text-red-400 font-black text-sm flex items-center justify-center">
-                  RR
+          <!-- Card 2: Ra Ra -->
+          <div class="review-card-item p-6 bg-black/70 border border-white/10 rounded-2xl space-y-4 hover:border-emerald-500/60 transition-all flex flex-col justify-between shadow-xl">
+            <div class="space-y-3">
+              <div class="flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                  <div class="w-10 h-10 rounded-full bg-red-600/20 border border-red-500/40 text-red-400 font-black text-sm flex items-center justify-center shrink-0">
+                    RR
+                  </div>
+                  <div>
+                    <div class="font-bold text-white text-sm">Ra Ra</div>
+                    <div class="text-[11px] text-slate-400">10 июля 2026 • 32 отзыва в 2ГИС</div>
+                  </div>
                 </div>
-                <div>
-                  <div class="font-bold text-white text-sm">Ra Ra</div>
-                  <div class="text-[11px] text-slate-400">10 июля 2026 • 32 отзыва в 2ГИС</div>
-                </div>
+                <div class="text-amber-400 text-sm tracking-widest font-bold">★★★★★</div>
               </div>
-              <div class="text-amber-400 text-sm tracking-widest font-bold">★★★★★</div>
+              <p class="text-xs sm:text-sm text-slate-300 leading-relaxed line-clamp-4">
+                «Получила консультацию от адвоката Ерсаина Нурлана, под огромным впечатлением от такого грамотного и умного специалиста. Очень душевно и по-человечески отнесся к моей проблеме. От всей души благодарю!»
+              </p>
             </div>
-            <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
-              «Получила консультацию от адвоката Ерсаина Нурлана, под огромным впечатлением от такого грамотного и умного специалиста. Очень душевно и по-человечески отнесся к моей проблеме. От всей души благодарю Вас за внимание!»
-            </p>
+            <div class="pt-3 border-t border-white/10 flex items-center justify-between text-[11px]">
+              <span class="text-emerald-400 font-bold flex items-center gap-1">
+                <span>✓</span> Отзыв подтвержден в 2ГИС
+              </span>
+              <span class="text-slate-500 font-semibold">Оценка 5.0</span>
+            </div>
           </div>
-          <div class="pt-3 border-t border-white/10 flex items-center justify-between text-[11px]">
-            <span class="text-emerald-400 font-bold flex items-center gap-1">
-              <span>✓</span> Отзыв подтвержден в 2ГИС
-            </span>
-            <span class="text-slate-500">Оценка 5.0</span>
-          </div>
-        </div>
 
-        <!-- Review 3: Aidyn -->
-        <div class="p-6 bg-black/60 border border-white/10 rounded-2xl space-y-4 hover:border-emerald-500/60 transition-all flex flex-col justify-between shadow-xl">
-          <div class="space-y-3">
-            <div class="flex items-center justify-between">
-              <div class="flex items-center gap-3">
-                <div class="w-10 h-10 rounded-full bg-amber-600/20 border border-amber-500/40 text-amber-400 font-black text-sm flex items-center justify-center">
-                  A
+          <!-- Card 3: Aidyn -->
+          <div class="review-card-item p-6 bg-black/70 border border-white/10 rounded-2xl space-y-4 hover:border-emerald-500/60 transition-all flex flex-col justify-between shadow-xl">
+            <div class="space-y-3">
+              <div class="flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                  <div class="w-10 h-10 rounded-full bg-amber-600/20 border border-amber-500/40 text-amber-400 font-black text-sm flex items-center justify-center shrink-0">
+                    A
+                  </div>
+                  <div>
+                    <div class="font-bold text-white text-sm">Aidyn</div>
+                    <div class="text-[11px] text-slate-400">5 июля 2026 • 2ГИС</div>
+                  </div>
                 </div>
-                <div>
-                  <div class="font-bold text-white text-sm">Aidyn</div>
-                  <div class="text-[11px] text-slate-400">5 июля 2026 • 2ГИС</div>
-                </div>
+                <div class="text-amber-400 text-sm tracking-widest font-bold">★★★★★</div>
               </div>
-              <div class="text-amber-400 text-sm tracking-widest font-bold">★★★★★</div>
+              <p class="text-xs sm:text-sm text-slate-300 leading-relaxed line-clamp-4">
+                «Хочу выразить огромную благодарность за высокий профессионализм и поддержку. С самого начала чувствовалось, что делом занимаются с полной отдачей. Все вопросы решались оперативно, искренне рекомендую всем!»
+              </p>
             </div>
-            <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
-              «Хочу выразить огромную благодарность за высокий профессионализм, внимательное отношение и поддержку на протяжении всего процесса. С самого начала чувствовалось, что моим делом действительно занимаются с полной отдачей. Все вопросы решались оперативно, каждый этап подробно объяснялся. Искренне рекомендую всем!»
-            </p>
+            <div class="pt-3 border-t border-white/10 flex items-center justify-between text-[11px]">
+              <span class="text-emerald-400 font-bold flex items-center gap-1">
+                <span>✓</span> Отзыв подтвержден в 2ГИС
+              </span>
+              <span class="text-slate-500 font-semibold">Оценка 5.0</span>
+            </div>
           </div>
-          <div class="pt-3 border-t border-white/10 flex items-center justify-between text-[11px]">
-            <span class="text-emerald-400 font-bold flex items-center gap-1">
-              <span>✓</span> Отзыв подтвержден в 2ГИС
-            </span>
-            <span class="text-slate-500">Оценка 5.0</span>
-          </div>
-        </div>
 
-        <!-- Review 4: Assel B -->
-        <div class="p-6 bg-black/60 border border-white/10 rounded-2xl space-y-4 hover:border-emerald-500/60 transition-all flex flex-col justify-between shadow-xl">
-          <div class="space-y-3">
-            <div class="flex items-center justify-between">
-              <div class="flex items-center gap-3">
-                <div class="w-10 h-10 rounded-full bg-blue-600/20 border border-blue-500/40 text-blue-400 font-black text-sm flex items-center justify-center">
-                  AB
+          <!-- Card 4: Assel B -->
+          <div class="review-card-item p-6 bg-black/70 border border-white/10 rounded-2xl space-y-4 hover:border-emerald-500/60 transition-all flex flex-col justify-between shadow-xl">
+            <div class="space-y-3">
+              <div class="flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                  <div class="w-10 h-10 rounded-full bg-blue-600/20 border border-blue-500/40 text-blue-400 font-black text-sm flex items-center justify-center shrink-0">
+                    AB
+                  </div>
+                  <div>
+                    <div class="font-bold text-white text-sm">Assel B</div>
+                    <div class="text-[11px] text-slate-400">3 июля 2026 • 13 отзывов в 2ГИС</div>
+                  </div>
                 </div>
-                <div>
-                  <div class="font-bold text-white text-sm">Assel B</div>
-                  <div class="text-[11px] text-slate-400">3 июля 2026 • 13 отзывов в 2ГИС</div>
-                </div>
+                <div class="text-amber-400 text-sm tracking-widest font-bold">★★★★★</div>
               </div>
-              <div class="text-amber-400 text-sm tracking-widest font-bold">★★★★★</div>
+              <p class="text-xs sm:text-sm text-slate-300 leading-relaxed line-clamp-4">
+                «Благодарность адвокату Нурлану за профессиональную консультацию по сложному делу. Внимательно выслушал, ознакомился с доказательной базой, дал четкие перспективы развития дела. Появилось полное понимание!»
+              </p>
             </div>
-            <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
-              «Хочу выразить благодарность адвокату Нурлану за профессиональную консультацию по сложному делу. Нурлан нас внимательно выслушал, задал уточняющие вопросы, ознакомился с доказательной базой, дал возможные перспективы развития дела. Теперь у меня есть четкое понимание процесса и возможного результата.»
-            </p>
+            <div class="pt-3 border-t border-white/10 flex items-center justify-between text-[11px]">
+              <span class="text-emerald-400 font-bold flex items-center gap-1">
+                <span>✓</span> Отзыв подтвержден в 2ГИС
+              </span>
+              <span class="text-slate-500 font-semibold">Оценка 5.0</span>
+            </div>
           </div>
-          <div class="pt-3 border-t border-white/10 flex items-center justify-between text-[11px]">
-            <span class="text-emerald-400 font-bold flex items-center gap-1">
-              <span>✓</span> Отзыв подтвержден в 2ГИС
-            </span>
-            <span class="text-slate-500">Оценка 5.0</span>
-          </div>
-        </div>
 
-        <!-- Review 5: Maxim Kovalski junior -->
-        <div class="p-6 bg-black/60 border border-white/10 rounded-2xl space-y-4 hover:border-emerald-500/60 transition-all flex flex-col justify-between shadow-xl">
-          <div class="space-y-3">
-            <div class="flex items-center justify-between">
-              <div class="flex items-center gap-3">
-                <div class="w-10 h-10 rounded-full bg-purple-600/20 border border-purple-500/40 text-purple-400 font-black text-sm flex items-center justify-center">
-                  MK
+          <!-- Card 5: Maxim Kovalski junior -->
+          <div class="review-card-item p-6 bg-black/70 border border-white/10 rounded-2xl space-y-4 hover:border-emerald-500/60 transition-all flex flex-col justify-between shadow-xl">
+            <div class="space-y-3">
+              <div class="flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                  <div class="w-10 h-10 rounded-full bg-purple-600/20 border border-purple-500/40 text-purple-400 font-black text-sm flex items-center justify-center shrink-0">
+                    MK
+                  </div>
+                  <div>
+                    <div class="font-bold text-white text-sm">Maxim Kovalski junior</div>
+                    <div class="text-[11px] text-slate-400">7 августа 2025 • 8 отзывов в 2ГИС</div>
+                  </div>
                 </div>
-                <div>
-                  <div class="font-bold text-white text-sm">Maxim Kovalski junior</div>
-                  <div class="text-[11px] text-slate-400">7 августа 2025 • 8 отзывов в 2ГИС</div>
-                </div>
+                <div class="text-amber-400 text-sm tracking-widest font-bold">★★★★★</div>
               </div>
-              <div class="text-amber-400 text-sm tracking-widest font-bold">★★★★★</div>
+              <p class="text-xs sm:text-sm text-slate-300 leading-relaxed line-clamp-4">
+                «Из свидетеля очутился в подозреваемых... Доверился следователю. Килибаев Нурлан Айбазович — адвокат от Бога! Благодаря слаженной работе мои проблемы были решены. Всех благ!»
+              </p>
             </div>
-            <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
-              «Не думал что когда-либо воспользуюсь услугами адвокатов. Из свидетеля имеющего право на защиту очутился в подозреваемых. Доверился следователю... Килибаев Нурлан Айбазович — адвокат от Бога! Благодаря слаженной работе мои проблемы были решены. Всех благ!»
-            </p>
+            <div class="pt-3 border-t border-white/10 flex items-center justify-between text-[11px]">
+              <span class="text-emerald-400 font-bold flex items-center gap-1">
+                <span>✓</span> 1 посещение • Подтверждён
+              </span>
+              <span class="text-slate-500 font-semibold">Оценка 5.0</span>
+            </div>
           </div>
-          <div class="pt-3 border-t border-white/10 flex items-center justify-between text-[11px]">
-            <span class="text-emerald-400 font-bold flex items-center gap-1">
-              <span>✓</span> 1 посещение • Отзыв подтверждён
-            </span>
-            <span class="text-slate-500">Оценка 5.0</span>
-          </div>
-        </div>
 
-        <!-- Review 6: Динара Токбаева -->
-        <div class="p-6 bg-black/60 border border-white/10 rounded-2xl space-y-4 hover:border-emerald-500/60 transition-all flex flex-col justify-between shadow-xl">
-          <div class="space-y-3">
-            <div class="flex items-center justify-between">
-              <div class="flex items-center gap-3">
-                <div class="w-10 h-10 rounded-full bg-emerald-600/20 border border-emerald-500/40 text-emerald-400 font-black text-sm flex items-center justify-center">
-                  ДТ
+          <!-- Card 6: Динара Токбаева -->
+          <div class="review-card-item p-6 bg-black/70 border border-white/10 rounded-2xl space-y-4 hover:border-emerald-500/60 transition-all flex flex-col justify-between shadow-xl">
+            <div class="space-y-3">
+              <div class="flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                  <div class="w-10 h-10 rounded-full bg-emerald-600/20 border border-emerald-500/40 text-emerald-400 font-black text-sm flex items-center justify-center shrink-0">
+                    ДТ
+                  </div>
+                  <div>
+                    <div class="font-bold text-white text-sm">Динара Токбаева</div>
+                    <div class="text-[11px] text-slate-400">28 мая 2026 • 2 отзыва в 2ГИС</div>
+                  </div>
                 </div>
-                <div>
-                  <div class="font-bold text-white text-sm">Динара Токбаева</div>
-                  <div class="text-[11px] text-slate-400">28 мая 2026 • 2 отзыва в 2ГИС</div>
-                </div>
+                <div class="text-amber-400 text-sm tracking-widest font-bold">★★★★★</div>
               </div>
-              <div class="text-amber-400 text-sm tracking-widest font-bold">★★★★★</div>
+              <p class="text-xs sm:text-sm text-slate-300 leading-relaxed line-clamp-4">
+                «Благодарю адвоката Килибаева Н.А. за оперативное тщательное рассмотрение моей просьбы и за квалифицированное юридическое сопровождение. Буду рекомендовать контору своим знакомым!»
+              </p>
             </div>
-            <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
-              «Я рада, что нашла здесь отклик на мои проблемы и ответы на мои вопросы. Благодарю адвоката Килибаева Н.А. за оперативное тщательное рассмотрение моей просьбы и за квалифицированное юридическое сопровождение. Буду рекомендовать адвокатскую контору своим знакомым!»
-            </p>
+            <div class="pt-3 border-t border-white/10 flex items-center justify-between text-[11px]">
+              <span class="text-emerald-400 font-bold flex items-center gap-1">
+                <span>✓</span> Отзыв подтвержден в 2ГИС
+              </span>
+              <span class="text-slate-500 font-semibold">Оценка 5.0</span>
+            </div>
           </div>
-          <div class="pt-3 border-t border-white/10 flex items-center justify-between text-[11px]">
-            <span class="text-emerald-400 font-bold flex items-center gap-1">
-              <span>✓</span> Отзыв подтвержден в 2ГИС
-            </span>
-            <span class="text-slate-500">Оценка 5.0</span>
-          </div>
-        </div>
 
+          <!-- Duplicate Set for Seamless Infinite Gliding Marquee -->
+          <!-- Card 1 Dupl -->
+          <div class="review-card-item p-6 bg-black/70 border border-white/10 rounded-2xl space-y-4 hover:border-emerald-500/60 transition-all flex flex-col justify-between shadow-xl">
+            <div class="space-y-3">
+              <div class="flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                  <div class="w-10 h-10 rounded-full bg-emerald-600/20 border border-emerald-500/40 text-emerald-400 font-black text-sm flex items-center justify-center shrink-0">
+                    DO
+                  </div>
+                  <div>
+                    <div class="font-bold text-white text-sm">DARU ORALBEK</div>
+                    <div class="text-[11px] text-slate-400">8 сентября 2026 • 2ГИС</div>
+                  </div>
+                </div>
+                <div class="text-amber-400 text-sm tracking-widest font-bold">★★★★★</div>
+              </div>
+              <p class="text-xs sm:text-sm text-slate-300 leading-relaxed line-clamp-4">
+                «Хочу выразить благодарность адвокату Ерсаину Нурлану за консультацию. Быстро и оперативно отвечал на все мои вопросы, подробно разъяснил ситуацию и подсказал, на что обратить внимание. Рекомендую!»
+              </p>
+            </div>
+            <div class="pt-3 border-t border-white/10 flex items-center justify-between text-[11px]">
+              <span class="text-emerald-400 font-bold flex items-center gap-1">
+                <span>✓</span> Отзыв подтвержден в 2ГИС
+              </span>
+              <span class="text-slate-500 font-semibold">Оценка 5.0</span>
+            </div>
+          </div>
+
+          <!-- Card 2 Dupl -->
+          <div class="review-card-item p-6 bg-black/70 border border-white/10 rounded-2xl space-y-4 hover:border-emerald-500/60 transition-all flex flex-col justify-between shadow-xl">
+            <div class="space-y-3">
+              <div class="flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                  <div class="w-10 h-10 rounded-full bg-red-600/20 border border-red-500/40 text-red-400 font-black text-sm flex items-center justify-center shrink-0">
+                    RR
+                  </div>
+                  <div>
+                    <div class="font-bold text-white text-sm">Ra Ra</div>
+                    <div class="text-[11px] text-slate-400">10 июля 2026 • 32 отзыва в 2ГИС</div>
+                  </div>
+                </div>
+                <div class="text-amber-400 text-sm tracking-widest font-bold">★★★★★</div>
+              </div>
+              <p class="text-xs sm:text-sm text-slate-300 leading-relaxed line-clamp-4">
+                «Получила консультацию от адвоката Ерсаина Нурлана, под огромным впечатлением от такого грамотного и умного специалиста. Очень душевно и по-человечески отнесся к моей проблеме. От всей души благодарю!»
+              </p>
+            </div>
+            <div class="pt-3 border-t border-white/10 flex items-center justify-between text-[11px]">
+              <span class="text-emerald-400 font-bold flex items-center gap-1">
+                <span>✓</span> Отзыв подтвержден в 2ГИС
+              </span>
+              <span class="text-slate-500 font-semibold">Оценка 5.0</span>
+            </div>
+          </div>
+
+          <!-- Card 3 Dupl -->
+          <div class="review-card-item p-6 bg-black/70 border border-white/10 rounded-2xl space-y-4 hover:border-emerald-500/60 transition-all flex flex-col justify-between shadow-xl">
+            <div class="space-y-3">
+              <div class="flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                  <div class="w-10 h-10 rounded-full bg-amber-600/20 border border-amber-500/40 text-amber-400 font-black text-sm flex items-center justify-center shrink-0">
+                    A
+                  </div>
+                  <div>
+                    <div class="font-bold text-white text-sm">Aidyn</div>
+                    <div class="text-[11px] text-slate-400">5 июля 2026 • 2ГИС</div>
+                  </div>
+                </div>
+                <div class="text-amber-400 text-sm tracking-widest font-bold">★★★★★</div>
+              </div>
+              <p class="text-xs sm:text-sm text-slate-300 leading-relaxed line-clamp-4">
+                «Хочу выразить огромную благодарность за высокий профессионализм и поддержку. С самого начала чувствовалось, что делом занимаются с полной отдачей. Все вопросы решались оперативно, искренне рекомендую всем!»
+              </p>
+            </div>
+            <div class="pt-3 border-t border-white/10 flex items-center justify-between text-[11px]">
+              <span class="text-emerald-400 font-bold flex items-center gap-1">
+                <span>✓</span> Отзыв подтвержден в 2ГИС
+              </span>
+              <span class="text-slate-500 font-semibold">Оценка 5.0</span>
+            </div>
+          </div>
+
+          <!-- Card 4 Dupl -->
+          <div class="review-card-item p-6 bg-black/70 border border-white/10 rounded-2xl space-y-4 hover:border-emerald-500/60 transition-all flex flex-col justify-between shadow-xl">
+            <div class="space-y-3">
+              <div class="flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                  <div class="w-10 h-10 rounded-full bg-blue-600/20 border border-blue-500/40 text-blue-400 font-black text-sm flex items-center justify-center shrink-0">
+                    AB
+                  </div>
+                  <div>
+                    <div class="font-bold text-white text-sm">Assel B</div>
+                    <div class="text-[11px] text-slate-400">3 июля 2026 • 13 отзывов в 2ГИС</div>
+                  </div>
+                </div>
+                <div class="text-amber-400 text-sm tracking-widest font-bold">★★★★★</div>
+              </div>
+              <p class="text-xs sm:text-sm text-slate-300 leading-relaxed line-clamp-4">
+                «Благодарность адвокату Нурлану за профессиональную консультацию по сложному делу. Внимательно выслушал, ознакомился с доказательной базой, дал четкие перспективы развития дела. Появилось полное понимание!»
+              </p>
+            </div>
+            <div class="pt-3 border-t border-white/10 flex items-center justify-between text-[11px]">
+              <span class="text-emerald-400 font-bold flex items-center gap-1">
+                <span>✓</span> Отзыв подтвержден в 2ГИС
+              </span>
+              <span class="text-slate-500 font-semibold">Оценка 5.0</span>
+            </div>
+          </div>
+
+          <!-- Card 5 Dupl -->
+          <div class="review-card-item p-6 bg-black/70 border border-white/10 rounded-2xl space-y-4 hover:border-emerald-500/60 transition-all flex flex-col justify-between shadow-xl">
+            <div class="space-y-3">
+              <div class="flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                  <div class="w-10 h-10 rounded-full bg-purple-600/20 border border-purple-500/40 text-purple-400 font-black text-sm flex items-center justify-center shrink-0">
+                    MK
+                  </div>
+                  <div>
+                    <div class="font-bold text-white text-sm">Maxim Kovalski junior</div>
+                    <div class="text-[11px] text-slate-400">7 августа 2025 • 8 отзывов в 2ГИС</div>
+                  </div>
+                </div>
+                <div class="text-amber-400 text-sm tracking-widest font-bold">★★★★★</div>
+              </div>
+              <p class="text-xs sm:text-sm text-slate-300 leading-relaxed line-clamp-4">
+                «Из свидетеля очутился в подозреваемых... Доверился следователю. Килибаев Нурлан Айбазович — адвокат от Бога! Благодаря слаженной работе мои проблемы были решены. Всех благ!»
+              </p>
+            </div>
+            <div class="pt-3 border-t border-white/10 flex items-center justify-between text-[11px]">
+              <span class="text-emerald-400 font-bold flex items-center gap-1">
+                <span>✓</span> 1 посещение • Подтверждён
+              </span>
+              <span class="text-slate-500 font-semibold">Оценка 5.0</span>
+            </div>
+          </div>
+
+          <!-- Card 6 Dupl -->
+          <div class="review-card-item p-6 bg-black/70 border border-white/10 rounded-2xl space-y-4 hover:border-emerald-500/60 transition-all flex flex-col justify-between shadow-xl">
+            <div class="space-y-3">
+              <div class="flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                  <div class="w-10 h-10 rounded-full bg-emerald-600/20 border border-emerald-500/40 text-emerald-400 font-black text-sm flex items-center justify-center shrink-0">
+                    ДТ
+                  </div>
+                  <div>
+                    <div class="font-bold text-white text-sm">Динара Токбаева</div>
+                    <div class="text-[11px] text-slate-400">28 мая 2026 • 2 отзыва в 2ГИС</div>
+                  </div>
+                </div>
+                <div class="text-amber-400 text-sm tracking-widest font-bold">★★★★★</div>
+              </div>
+              <p class="text-xs sm:text-sm text-slate-300 leading-relaxed line-clamp-4">
+                «Благодарю адвоката Килибаева Н.А. за оперативное тщательное рассмотрение моей просьбы и за квалифицированное юридическое сопровождение. Буду рекомендовать контору своим знакомым!»
+              </p>
+            </div>
+            <div class="pt-3 border-t border-white/10 flex items-center justify-between text-[11px]">
+              <span class="text-emerald-400 font-bold flex items-center gap-1">
+                <span>✓</span> Отзыв подтвержден в 2ГИС
+              </span>
+              <span class="text-slate-500 font-semibold">Оценка 5.0</span>
+            </div>
+          </div>
+
+        </div>
       </div>
 
       <!-- Bottom 2GIS Rating Summary Bar -->
@@ -487,8 +661,6 @@
            class="px-6 py-3 bg-[#299400] hover:bg-[#237c00] text-white font-bold text-xs uppercase tracking-wider rounded-xl transition shadow-lg shrink-0">
           Читать все отзывы на 2ГИС →
         </a>
-      </div>
-
     </div>
   </section>
 
@@ -1374,6 +1546,6 @@
   </div>
 
   <!-- Map JS & Main App Controller -->
-  <script src="js/app.js?v=22.0"></script>
+  <script src="js/app.js?v=24.0"></script>
 </body>
 </html>
