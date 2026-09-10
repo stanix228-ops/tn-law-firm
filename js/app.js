@@ -606,37 +606,41 @@ function initMobileMenu() {
   }
 }
 
-// Office Dark Map Controller (Yandex Maps / Interactive Dark Map)
+// Office Dark 2GIS Map Controller (2GIS JS API 2.0 / DG / Dark Theme)
 function initOfficeMap() {
-  const container = document.getElementById('office-yandex-map');
+  const container = document.getElementById('office-2gis-map');
   if (!container) return;
 
   const lat = 43.254842;
   const lng = 76.970608;
 
-  // 1. Try Yandex Maps JS API 2.1
-  if (typeof ymaps !== 'undefined' && ymaps.ready) {
-    ymaps.ready(function () {
-      // Clear fallback iframe if API is ready
+  // 1. Try 2GIS Maps JS API 2.0 (DG)
+  if (typeof DG !== 'undefined' && DG.then) {
+    DG.then(function () {
+      // Clear fallback iframe if 2GIS API is ready
       container.innerHTML = '';
-      const map = new ymaps.Map('office-yandex-map', {
+      const map = DG.map('office-2gis-map', {
         center: [lat, lng],
-        zoom: 17,
-        controls: ['zoomControl']
+        zoom: 18,
+        scrollWheelZoom: false,
+        fullscreenControl: false
       });
 
-      const placemark = new ymaps.Placemark([lat, lng], {
-        hintContent: 'Адвокатская контора «T&N»',
-        balloonContentHeader: '<div style="font-family:\'Montserrat\',sans-serif;font-weight:900;color:#ff1e27;text-transform:uppercase;font-size:14px;">⚖️ Адвокатская контора «T&N»</div>',
-        balloonContentBody: '<div style="font-family:\'Montserrat\',sans-serif;font-size:13px;color:#1e293b;font-weight:700;line-height:1.4;margin-top:4px;">г. Алматы, ул. Богенбай батыра, 23а<br><span style="color:#16a34a;font-size:11px;">✓ Офис 24/7 • Парковка для доверителей</span></div>',
-        balloonContentFooter: '<div style="margin-top:8px;"><a href="https://yandex.kz/maps/?text=43.254842,76.970608" target="_blank" style="color:#d97706;font-weight:800;font-size:11px;text-decoration:underline;">Построить маршрут в Яндекс Картах →</a></div>'
-      }, {
-        preset: 'islands#redDotIconWithCaption',
-        iconCaption: 'Контора «T&N»'
+      const customIcon = DG.divIcon({
+        className: 'custom-2gis-marker',
+        html: '<div style="background:#ff1e27;color:#fff;width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:20px;box-shadow:0 0 25px rgba(255,30,39,0.9);border:2px solid #fff;cursor:pointer;">⚖️</div>',
+        iconSize: [40, 40],
+        iconAnchor: [20, 20]
       });
 
-      map.geoObjects.add(placemark);
-      map.behaviors.disable('scrollZoom');
+      const marker = DG.marker([lat, lng], { icon: customIcon }).addTo(map);
+      marker.bindPopup(`
+        <div style="font-family:'Montserrat',sans-serif;padding:6px 2px;background:#0e1117;color:#fff;min-width:200px;">
+          <div style="font-weight:900;color:#ff1e27;text-transform:uppercase;font-size:13px;margin-bottom:4px;">⚖️ Адвокатская контора «T&N»</div>
+          <div style="font-size:12px;color:#cbd5e1;line-height:1.4;">г. Алматы, ул. Богенбай батыра, 23а<br><span style="color:#22c55e;font-size:11px;font-weight:bold;">★ 5.0 в 2ГИС • 54 отзыва</span></div>
+          <div style="margin-top:8px;"><a href="https://2gis.kz/almaty/inside/9430047417451853/firm/70000001082633855?m=76.970608%2C43.254842%2F18.89" target="_blank" style="color:#f59e0b;font-weight:800;font-size:11px;text-decoration:underline;">Маршрут в 2ГИС →</a></div>
+        </div>
+      `);
     });
     return;
   }
