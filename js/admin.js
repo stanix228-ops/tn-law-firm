@@ -51,8 +51,8 @@ const DEFAULT_SEED_ARTICLES = [
     title: 'Вызов на допрос в полицию или следственные органы: 7 правил защиты, которые спасут от обвинения',
     category: 'Уголовное право',
     categoryId: 'criminal',
-    author: 'Адвокат Нурлан',
-    authorRole: 'Партнер по уголовным делам конторы «T&N»',
+    author: 'Ерсаин Нурлан',
+    authorRole: 'Учредитель адвокатской конторы «T&N»',
     authorPhoto: 'assets/images/nurlan.jpg',
     date: '12 февраля 2026',
     readTime: '6 мин чтения',
@@ -433,7 +433,7 @@ function openArticleEditor(article = null) {
     } else {
       document.getElementById('art-readtime').value = '5 мин чтения';
       document.getElementById('art-image').value = 'assets/images/pa_court.jpg';
-      document.getElementById('art-author-role').value = 'Партнер конторы «T&N»';
+      document.getElementById('art-author-role').value = 'Учредитель адвокатской конторы «T&N»';
     }
   }
 

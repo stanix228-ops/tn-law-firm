@@ -45,7 +45,7 @@ const TN_ARTICLES = [
     category: 'Уголовная защита',
     categoryId: 'criminal',
     author: 'Ерсаин Нурлан',
-    authorRole: 'Старший партнер конторы «T&N»',
+    authorRole: 'Учредитель адвокатской конторы «T&N»',
     authorPhoto: 'assets/media/advocate_1.jpeg',
     date: 'Февраль 2026',
     readTime: '6 мин чтения',
@@ -89,7 +89,7 @@ const TN_ARTICLES = [
     category: 'Защита активов',
     categoryId: 'business',
     author: 'Ерсаин Нурлан',
-    authorRole: 'Старший партнер конторы «T&N»',
+    authorRole: 'Учредитель адвокатской конторы «T&N»',
     authorPhoto: 'assets/media/advocate_1.jpeg',
     date: 'Декабрь 2025',
     readTime: '6 мин чтения',
@@ -110,7 +110,7 @@ const TN_ARTICLES = [
     category: 'Банкротство',
     categoryId: 'business',
     author: 'Ерсаин Нурлан',
-    authorRole: 'Старший партнер конторы «T&N»',
+    authorRole: 'Учредитель адвокатской конторы «T&N»',
     authorPhoto: 'assets/media/advocate_1.jpeg',
     date: 'Ноябрь 2025',
     readTime: '5 мин чтения',
@@ -128,7 +128,7 @@ const TN_ARTICLES = [
 ];
 
 // Reliable Article Image Map (Both WebP and JPG support)
-const TN_ARTICLES_VERSION = 'v21.0';
+const TN_ARTICLES_VERSION = 'v22.0';
 const TN_ARTICLE_IMAGES = {
   'interrogation-rules': 'assets/images/article_interrogation.jpg',
   'property-division-defense': 'assets/images/article_property_asset.jpg',
@@ -266,8 +266,8 @@ function openArticleModal(articleId) {
   if (categoryEl) categoryEl.innerText = article.category;
   if (dateEl) dateEl.innerText = article.date || 'Недавно';
   if (readTimeEl) readTimeEl.innerText = article.readTime || '6 мин';
-  if (authorNameEl) authorNameEl.innerText = article.author || 'Адвокат';
-  if (authorRoleEl) authorRoleEl.innerText = article.authorRole || 'Партнер конторы «T&N»';
+  if (authorNameEl) authorNameEl.innerText = article.author || 'Ерсаин Нурлан';
+  if (authorRoleEl) authorRoleEl.innerText = article.authorRole || 'Учредитель адвокатской конторы «T&N»';
   if (authorPhotoEl) authorPhotoEl.src = article.authorPhoto || 'assets/media/advocate_1.jpeg';
   if (bannerImgEl) {
     const bannerSrc = article.image || TN_ARTICLE_IMAGES[article.id] || 'assets/images/article_interrogation.jpg';
