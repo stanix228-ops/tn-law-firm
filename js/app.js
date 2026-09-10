@@ -85,8 +85,8 @@ const TN_ARTICLES = [
   },
   {
     id: 'property-division-defense',
-    title: 'Раздел имущества',
-    category: 'Защита активов',
+    title: 'Дела гражданского судопроизводства',
+    category: 'Гражданские дела',
     categoryId: 'business',
     author: 'Ерсаин Нурлан',
     authorRole: 'Учредитель адвокатской конторы «T&N»',
@@ -94,13 +94,13 @@ const TN_ARTICLES = [
     date: 'Декабрь 2025',
     readTime: '6 мин чтения',
     image: 'assets/images/article_property_asset.jpg',
-    summary: 'Как защитить доли в ТОО, коммерческие объекты и предотвратить создание искусственных долговых расписок недобросовестными оппонентами.',
+    summary: 'Раздел имущества, бракоразводные дела, подача исков, представительство и так далее.',
     content: `
       <p class="lead font-bold text-lg text-amber-400 mb-6">
-        «В спорах за активы побеждает тот, кто первым заблокирует рейдерские схемы.»
+        «В делах гражданского судопроизводства побеждает тот, кто более подготовлен и действует строго на опережение.»
       </p>
       <p class="mb-4 text-slate-300">
-        При попытках отчуждения коммерческой недвижимости или рейдерского размытия долей мы проводим судебно-бухгалтерскую экспертизу, оспариваем мнимые сделки и сохраняем активы доверителя.
+        Раздел имущества, бракоразводные дела, подача исков, защита прав собственности, оспаривание сделок и комплексное судебное представительство интересов доверителя на всех стадиях гражданского процесса.
       </p>
     `
   },
@@ -128,7 +128,7 @@ const TN_ARTICLES = [
 ];
 
 // Reliable Article Image Map (Both WebP and JPG support)
-const TN_ARTICLES_VERSION = 'v22.0';
+const TN_ARTICLES_VERSION = 'v23.0';
 const TN_ARTICLE_IMAGES = {
   'interrogation-rules': 'assets/images/article_interrogation.jpg',
   'property-division-defense': 'assets/images/article_property_asset.jpg',
