@@ -633,11 +633,11 @@ function applyCustomCategory() {
   if (select) {
     select.value = catName;
     if (select.value !== catName) {
-      // Fallback
       const newOpt = document.createElement('option');
       newOpt.value = catName;
       newOpt.dataset.catid = catId;
       newOpt.innerText = catName;
+      newOpt.className = 'injected-custom-cat';
       select.prepend(newOpt);
       select.value = catName;
     }
@@ -647,7 +647,7 @@ function applyCustomCategory() {
   if (box) box.classList.add('hidden');
   if (input) input.value = '';
 
-  showAdminToast(`Категория "${catName}" добавлена!`);
+  showAdminToast(`Категория "${catName}" успешно добавлена!`);
 }
 
 // ---------------- Author Handlers ----------------
@@ -655,9 +655,9 @@ function toggleNoAuthor(isNoAuthor) {
   const grid = document.getElementById('art-author-inputs-grid');
   if (grid) {
     if (isNoAuthor) {
-      grid.classList.add('opacity-40', 'pointer-events-none');
+      grid.classList.add('opacity-30', 'pointer-events-none');
     } else {
-      grid.classList.remove('opacity-40', 'pointer-events-none');
+      grid.classList.remove('opacity-30', 'pointer-events-none');
     }
   }
 }
@@ -682,37 +682,111 @@ function handleAuthorSelectChange(val) {
   }
 }
 
-// ---------------- Cover Image Upload Handlers ----------------
-function handleArticleImageUpload(input) {
+// ---------------- Cover Image Canvas Compressor & Upload Handlers ----------------
+function compressImageFile(file, maxWidth = 1200, maxHeight = 1200, quality = 0.82) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onerror = reject;
+    reader.onload = function (e) {
+      const img = new Image();
+      img.onerror = reject;
+      img.onload = function () {
+        let width = img.width;
+        let height = img.height;
+
+        if (width > maxWidth || height > maxHeight) {
+          if (width / height > maxWidth / maxHeight) {
+            height = Math.round((height * maxWidth) / width);
+            width = maxWidth;
+          } else {
+            width = Math.round((width * maxHeight) / height);
+            height = maxHeight;
+          }
+        }
+
+        const canvas = document.createElement('canvas');
+        canvas.width = width;
+        canvas.height = height;
+        const ctx = canvas.getContext('2d');
+        ctx.drawImage(img, 0, 0, width, height);
+
+        const compressedDataUrl = canvas.toDataURL('image/jpeg', quality);
+        resolve(compressedDataUrl);
+      };
+      img.src = e.target.result;
+    };
+    reader.readAsDataURL(file);
+  });
+}
+
+async function handleArticleImageUpload(input) {
   const file = input.files && input.files[0];
   if (!file) return;
 
   if (!file.type.startsWith('image/')) {
-    showAdminToast('Пожалуйста, выберите изображение (PNG, JPG, WEBP)', 'error');
+    showAdminToast('Пожалуйста, выберите файл изображения (JPG, PNG, WEBP)', 'error');
     return;
   }
 
-  const reader = new FileReader();
-  reader.onload = function (e) {
-    const dataUrl = e.target.result;
+  try {
+    showAdminToast('Оптимизация и загрузка фото с компьютера...', 'info');
+    const compressedDataUrl = await compressImageFile(file, 1200, 1200, 0.82);
+
     const hiddenImage = document.getElementById('art-image');
     const preview = document.getElementById('art-image-preview');
     const dropzone = document.getElementById('art-image-dropzone');
+    const statusText = document.getElementById('art-image-status-text');
 
-    if (hiddenImage) hiddenImage.value = dataUrl;
-    if (preview) preview.src = dataUrl;
+    if (hiddenImage) hiddenImage.value = compressedDataUrl;
+    if (preview) preview.src = compressedDataUrl;
 
     if (dropzone) {
-      dropzone.classList.remove('border-amber-500/40', 'bg-amber-50/30');
-      dropzone.classList.add('border-emerald-500', 'bg-emerald-50/40');
-      dropzone.querySelector('.text-xs').innerHTML = `
-        <span class="text-emerald-700 font-bold">✓ Фото "${escapeHTML(file.name)}" успешно загружено с компьютера</span>
+      dropzone.classList.remove('border-amber-500/50', 'bg-amber-50/40');
+      dropzone.classList.add('border-emerald-500', 'bg-emerald-50/60');
+    }
+    if (statusText) {
+      statusText.innerHTML = `
+        <div class="text-emerald-800 font-bold text-xs flex items-center justify-center gap-1">
+          <span>✓</span> Фото <strong>«${escapeHTML(file.name)}»</strong> успешно загружено! (${Math.round(compressedDataUrl.length / 1024)} КБ)
+        </div>
+        <button type="button" onclick="document.getElementById('art-file-input').click()" class="mt-1 text-[11px] font-bold text-amber-700 hover:underline inline-block">
+          Выбрать другое фото...
+        </button>
       `;
     }
 
-    showAdminToast(`Изображение "${file.name}" загружено!`);
-  };
-  reader.readAsDataURL(file);
+    showAdminToast(`Фотография "${file.name}" загружена!`);
+  } catch (err) {
+    console.error('Image upload error:', err);
+    showAdminToast('Ошибка обработки фото. Попробуйте другой файл.', 'error');
+  }
+}
+
+function resetArticleImage() {
+  const hiddenImage = document.getElementById('art-image');
+  const preview = document.getElementById('art-image-preview');
+  const dropzone = document.getElementById('art-image-dropzone');
+  const statusText = document.getElementById('art-image-status-text');
+  const presetsSelect = document.getElementById('art-image-presets');
+
+  const defaultImg = 'assets/images/pa_court.jpg';
+  if (hiddenImage) hiddenImage.value = defaultImg;
+  if (preview) preview.src = defaultImg;
+  if (presetsSelect) presetsSelect.value = defaultImg;
+
+  if (dropzone) {
+    dropzone.classList.remove('border-emerald-500', 'bg-emerald-50/60');
+    dropzone.classList.add('border-amber-500/50', 'bg-amber-50/40');
+  }
+  if (statusText) {
+    statusText.innerHTML = `
+      <button type="button" onclick="document.getElementById('art-file-input').click()" class="px-4 py-1.5 bg-amber-500 hover:bg-amber-600 text-black font-extrabold text-xs rounded-lg shadow-sm transition inline-flex items-center gap-1.5 my-1">
+        <span>📁 Выбрать фото с компьютера</span>
+      </button>
+      <div class="text-[11px] text-slate-500 mt-1">или просто перетащите файл картинки сюда</div>
+    `;
+  }
+  showAdminToast('Установлена стандартная обложка');
 }
 
 function selectArticleImagePreset(url) {
@@ -720,15 +794,21 @@ function selectArticleImagePreset(url) {
   const hiddenImage = document.getElementById('art-image');
   const preview = document.getElementById('art-image-preview');
   const dropzone = document.getElementById('art-image-dropzone');
+  const statusText = document.getElementById('art-image-status-text');
 
   if (hiddenImage) hiddenImage.value = url;
   if (preview) preview.src = url;
 
   if (dropzone) {
-    dropzone.classList.remove('border-emerald-500', 'bg-emerald-50/40');
-    dropzone.classList.add('border-amber-500/40', 'bg-amber-50/30');
-    dropzone.querySelector('.text-xs').innerHTML = `
-      <span class="text-amber-700 underline">Загрузить фото с компьютера</span> или перетащите файл сюда
+    dropzone.classList.remove('border-emerald-500', 'bg-emerald-50/60');
+    dropzone.classList.add('border-amber-500/50', 'bg-amber-50/40');
+  }
+  if (statusText) {
+    statusText.innerHTML = `
+      <div class="text-xs font-bold text-slate-700">Выбрано фото из библиотеки: <strong>${url.split('/').pop()}</strong></div>
+      <button type="button" onclick="document.getElementById('art-file-input').click()" class="mt-1 text-[11px] font-bold text-amber-700 hover:underline">
+        Загрузить свое фото с компьютера...
+      </button>
     `;
   }
 }
@@ -741,7 +821,7 @@ document.addEventListener('DOMContentLoaded', () => {
       dropzone.addEventListener(eventName, (e) => {
         e.preventDefault();
         e.stopPropagation();
-        dropzone.classList.add('border-amber-600', 'bg-amber-100/60');
+        dropzone.classList.add('border-amber-600', 'bg-amber-100/70', 'scale-[1.01]');
       }, false);
     });
 
@@ -749,7 +829,7 @@ document.addEventListener('DOMContentLoaded', () => {
       dropzone.addEventListener(eventName, (e) => {
         e.preventDefault();
         e.stopPropagation();
-        dropzone.classList.remove('border-amber-600', 'bg-amber-100/60');
+        dropzone.classList.remove('border-amber-600', 'bg-amber-100/70', 'scale-[1.01]');
       }, false);
     });
 
@@ -766,6 +846,73 @@ document.addEventListener('DOMContentLoaded', () => {
     }, false);
   }
 });
+
+// DEFAULT SEED ARTICLES
+const DEFAULT_SEED_ARTICLES = [
+  {
+    id: 'interrogation-rules',
+    title: 'Правила которые спасут от фатальных ошибок',
+    category: 'Уголовная защита',
+    categoryId: 'criminal',
+    author: 'Ерсаин Нурлан',
+    authorRole: 'Учредитель адвокатской конторы «T&N»',
+    authorPhoto: 'assets/media/advocate_1.jpeg',
+    date: 'Февраль 2026',
+    readTime: '6 мин чтения',
+    image: 'assets/images/article_interrogation.jpg',
+    summary: 'Хватит быть наивной жертвой. Следователю не нужна правда — ему нужна ваша подпись и обвинительный приговор. Как разбить психологическое давление с первых секунд.',
+    content: `
+      <p class="lead font-bold text-lg text-red-400 mb-6">
+        «Чем дольше раздумываешь — тем меньше времени. Чем меньше времени — тем меньше вариантов. Чем меньше вариантов — тем меньше шансов.»
+      </p>
+      <p class="mb-4 text-slate-300">
+        Каждую неделю к нам приходят граждане и предприниматели, которые пошли в РУВД «всего на 10 минут просто побеседовать». Они выходят оттуда через ИВС и СИЗО.
+      </p>
+    `
+  },
+  {
+    id: 'property-division-defense',
+    title: 'Дела гражданского судопроизводства',
+    category: 'Гражданские дела',
+    categoryId: 'business',
+    author: 'Ерсаин Нурлан',
+    authorRole: 'Учредитель адвокатской конторы «T&N»',
+    authorPhoto: 'assets/media/advocate_1.jpeg',
+    date: 'Декабрь 2025',
+    readTime: '6 мин чтения',
+    image: 'assets/images/article_property_asset.jpg',
+    summary: 'Раздел имущества, бракоразводные дела, подача исков, представительство и так далее.',
+    content: `
+      <p class="lead font-bold text-lg text-amber-400 mb-6">
+        «В делах гражданского судопроизводства побеждает тот, кто более подготовлен и действует строго на опережение.»
+      </p>
+      <p class="mb-4 text-slate-300">
+        Раздел имущества, бракоразводные дела, подача исков, защита прав собственности, оспаривание сделок и комплексное судебное представительство.
+      </p>
+    `
+  },
+  {
+    id: 'bankruptcy-individuals-rk',
+    title: 'Банкротство физических лиц',
+    category: 'Банкротство',
+    categoryId: 'business',
+    author: 'Ерсаин Нурлан',
+    authorRole: 'Учредитель адвокатской конторы «T&N»',
+    authorPhoto: 'assets/media/advocate_1.jpeg',
+    date: 'Ноябрь 2025',
+    readTime: '5 мин чтения',
+    image: 'assets/images/article_bankruptcy.jpg',
+    summary: 'Пошаговый правовой алгоритм признания банкротом в Казахстане. Какие кредиты списываются и как не допустить продажу единственного жилья.',
+    content: `
+      <p class="lead font-bold text-lg text-red-400 mb-6">
+        «Закон о банкротстве в РК защищает добросовестных должников при грамотном юридическом сопровождении.»
+      </p>
+      <p class="mb-4 text-slate-300">
+        Полный анализ кредитного портфеля, защита от коллекторов и судебных исполнителей, признание процедуры банкротства завершенной со списанием всех обязательств.
+      </p>
+    `
+  }
+];
 
 // ARTICLES CMS MANAGEMENT
 // ==========================================================================
@@ -865,11 +1012,17 @@ function openArticleEditor(article = null) {
   if (customAuthorInput) customAuthorInput.classList.add('hidden');
 
   const dropzone = document.getElementById('art-image-dropzone');
+  const statusText = document.getElementById('art-image-status-text');
   if (dropzone) {
-    dropzone.classList.remove('border-emerald-500', 'bg-emerald-50/40');
-    dropzone.classList.add('border-amber-500/40', 'bg-amber-50/30');
-    dropzone.querySelector('.text-xs').innerHTML = `
-      <span class="text-amber-700 underline">Загрузить фото с компьютера</span> или перетащите файл сюда
+    dropzone.classList.remove('border-emerald-500', 'bg-emerald-50/60');
+    dropzone.classList.add('border-amber-500/50', 'bg-amber-50/40');
+  }
+  if (statusText) {
+    statusText.innerHTML = `
+      <button type="button" onclick="document.getElementById('art-file-input').click()" class="px-4 py-1.5 bg-amber-500 hover:bg-amber-600 text-black font-extrabold text-xs rounded-lg shadow-sm transition inline-flex items-center gap-1.5 my-1">
+        <span>📁 Выбрать фото с компьютера</span>
+      </button>
+      <div class="text-[11px] text-slate-500 mt-1">или просто перетащите файл картинки сюда</div>
     `;
   }
 

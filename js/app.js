@@ -233,6 +233,29 @@ function renderArticlesList(categoryId = 'all') {
 }
 
 function initArticlesFilter() {
+  const filterContainer = document.getElementById('articles-filter-container');
+  const allArticles = getActiveArticles();
+
+  if (filterContainer && allArticles.length > 0) {
+    const categoriesMap = new Map();
+    categoriesMap.set('all', 'Все статьи');
+
+    allArticles.forEach(art => {
+      if (art.category) {
+        const catKey = art.categoryId || art.category;
+        if (!categoriesMap.has(catKey)) {
+          categoriesMap.set(catKey, art.category);
+        }
+      }
+    });
+
+    filterContainer.innerHTML = Array.from(categoriesMap.entries()).map(([catId, catName], idx) => `
+      <button class="article-filter-btn ${idx === 0 ? 'active bg-red-600 text-white border-red-600' : 'bg-black/60 text-slate-400 hover:text-white border-white/10'} px-3.5 py-1.5 rounded text-xs font-bold uppercase tracking-wider transition border" data-category="${catId}">
+        ${catName}
+      </button>
+    `).join('');
+  }
+
   const filterButtons = document.querySelectorAll('.article-filter-btn');
   filterButtons.forEach(btn => {
     btn.addEventListener('click', function () {
