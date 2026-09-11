@@ -137,30 +137,16 @@ const TN_ARTICLE_IMAGES = {
 
 // Helper to fetch live articles with guaranteed fresh image paths & full list
 function getActiveArticles() {
-  const version = localStorage.getItem('tn_law_articles_version');
   const local = localStorage.getItem('tn_law_articles');
-  
-  if (version === TN_ARTICLES_VERSION && local) {
+  if (local) {
     try {
       const parsed = JSON.parse(local);
-      if (Array.isArray(parsed) && parsed.length >= TN_ARTICLES.length) {
-        // Sync & heal image paths from verified assets
-        const healed = parsed.map(art => {
-          if (TN_ARTICLE_IMAGES[art.id]) {
-            art.image = TN_ARTICLE_IMAGES[art.id];
-          }
-          if (!art.image || art.image.includes('placeholder') || art.image.includes('undefined')) {
-            art.image = TN_ARTICLE_IMAGES[art.id] || 'assets/images/article_interrogation.jpg';
-          }
-          return art;
-        });
-        localStorage.setItem('tn_law_articles', JSON.stringify(healed));
-        return healed;
+      if (Array.isArray(parsed) && parsed.length > 0) {
+        return parsed;
       }
     } catch (e) {}
   }
 
-  // If missing, outdated, or corrupted: store full default articles
   try {
     localStorage.setItem('tn_law_articles', JSON.stringify(TN_ARTICLES));
     localStorage.setItem('tn_law_articles_version', TN_ARTICLES_VERSION);
@@ -176,22 +162,42 @@ function renderArticlesList(categoryId = 'all') {
   const allArticles = getActiveArticles();
   const filtered = categoryId === 'all' ? 
     allArticles : 
-    allArticles.filter(a => a.categoryId === categoryId);
+    allArticles.filter(a => a.categoryId === categoryId || a.category === categoryId);
+
+  if (filtered.length === 0) {
+    container.innerHTML = `
+      <div class="col-span-full py-16 text-center text-slate-400">
+        <div class="text-3xl mb-2">⚖️</div>
+        <div class="text-sm font-bold">В этой категории пока нет опубликованных материалов</div>
+      </div>
+    `;
+    return;
+  }
 
   container.innerHTML = filtered.map(article => {
-    const baseImg = article.image || TN_ARTICLE_IMAGES[article.id] || 'assets/images/article_interrogation.jpg';
-    const webpImg = baseImg.replace('.jpg', '.webp');
+    const baseImg = article.image || 'assets/images/article_interrogation.jpg';
+    const isDataUrl = baseImg.startsWith('data:image');
+    const webpImg = isDataUrl ? baseImg : baseImg.replace('.jpg', '.webp');
+    const hasAuthor = article.author && article.author !== 'none' && article.author !== 'Без автора';
+
     return `
     <article class="group bg-[#0e1117] border border-red-500/20 hover:border-red-500 rounded-xl overflow-hidden shadow-xl hover:shadow-2xl hover:shadow-red-950/40 transition-all duration-300 flex flex-col">
       <div class="relative h-56 overflow-hidden bg-[#07080a]">
-        <picture>
-          <source srcset="${webpImg}?v=6.0" type="image/webp">
-          <img src="${baseImg}?v=6.0" 
+        ${isDataUrl ? `
+          <img src="${baseImg}" 
                alt="${article.title}" 
                loading="lazy"
-               onerror="if(!this.dataset.fallback){this.dataset.fallback='1'; this.src=this.src.includes('assets/images')?this.src.replace('assets/images','assets/media'):'assets/media/materials_bg.jpeg';}"
                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-90 group-hover:opacity-100 block">
-        </picture>
+        ` : `
+          <picture>
+            <source srcset="${webpImg}?v=7.0" type="image/webp">
+            <img src="${baseImg}?v=7.0" 
+                 alt="${article.title}" 
+                 loading="lazy"
+                 onerror="if(!this.dataset.fallback){this.dataset.fallback='1'; this.src='assets/media/materials_bg.jpeg';}"
+                 class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-90 group-hover:opacity-100 block">
+          </picture>
+        `}
         <div class="absolute top-3 left-3 bg-red-600/90 text-white text-[11px] font-extrabold uppercase px-3 py-1 rounded shadow">
           ${article.category}
         </div>
@@ -202,7 +208,7 @@ function renderArticlesList(categoryId = 'all') {
           <div class="flex items-center gap-3 text-xs text-slate-400 mb-2">
             <span>📅 ${article.date || 'Недавно'}</span>
             <span>•</span>
-            <span>⏱ ${article.readTime || '6 мин'}</span>
+            <span>⏱ ${article.readTime || '5 мин'}</span>
           </div>
           <h3 class="font-heading text-lg font-bold text-white group-hover:text-red-400 transition leading-snug line-clamp-2">
             <a href="javascript:void(0)" onclick="openArticleModal('${article.id}')">${article.title}</a>
@@ -213,8 +219,10 @@ function renderArticlesList(categoryId = 'all') {
         </div>
 
         <div class="pt-4 border-t border-white/10 flex items-center justify-between">
-          <span class="text-[11px] font-bold uppercase tracking-wider text-slate-400">Практика «T&N»</span>
-          <button onclick="openArticleModal('${article.id}')" class="text-xs font-extrabold uppercase tracking-wider text-red-400 hover:text-white flex items-center gap-1 transition">
+          <span class="text-[11px] font-bold uppercase tracking-wider text-slate-400 truncate max-w-[150px]">
+            ${hasAuthor ? `Автор: ${article.author}` : 'Практика «T&N»'}
+          </span>
+          <button onclick="openArticleModal('${article.id}')" class="text-xs font-extrabold uppercase tracking-wider text-red-400 hover:text-white flex items-center gap-1 transition shrink-0">
             <span>Читать разбор</span>
             <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
           </button>
@@ -255,6 +263,7 @@ function openArticleModal(articleId) {
   const authorNameEl = document.getElementById('article-modal-author-name');
   const authorRoleEl = document.getElementById('article-modal-author-role');
   const authorPhotoEl = document.getElementById('article-modal-author-photo');
+  const authorContainer = document.getElementById('article-modal-author-container');
   const contentEl = document.getElementById('article-modal-content');
   const bannerImgEl = document.getElementById('article-modal-banner');
   const ctaServiceInput = document.getElementById('article-cta-service');
@@ -262,15 +271,30 @@ function openArticleModal(articleId) {
   if (titleEl) titleEl.innerText = article.title;
   if (categoryEl) categoryEl.innerText = article.category;
   if (dateEl) dateEl.innerText = article.date || 'Недавно';
-  if (readTimeEl) readTimeEl.innerText = article.readTime || '6 мин';
-  if (authorNameEl) authorNameEl.innerText = article.author || 'Ерсаин Нурлан';
-  if (authorRoleEl) authorRoleEl.innerText = article.authorRole || 'Учредитель адвокатской конторы «T&N»';
-  if (authorPhotoEl) authorPhotoEl.src = article.authorPhoto || 'assets/media/advocate_1.jpeg';
+  if (readTimeEl) readTimeEl.innerText = article.readTime || '5 мин';
+
+  // Author visibility handling
+  const hasAuthor = article.author && article.author !== 'none' && article.author !== 'Без автора';
+  if (authorContainer) {
+    if (hasAuthor) {
+      authorContainer.style.display = 'flex';
+      if (authorNameEl) authorNameEl.innerText = article.author;
+      if (authorRoleEl) authorRoleEl.innerText = article.authorRole || 'Адвокат конторы «T&N»';
+      if (authorPhotoEl) {
+        authorPhotoEl.src = article.authorPhoto || 'assets/media/advocate_1.jpeg';
+      }
+    } else {
+      authorContainer.style.display = 'none';
+    }
+  }
+
+  // Cover image
   if (bannerImgEl) {
-    const bannerSrc = article.image || TN_ARTICLE_IMAGES[article.id] || 'assets/images/article_interrogation.jpg';
-    bannerImgEl.onerror = function() { this.onerror = null; this.src = 'assets/images/article_interrogation.jpg'; };
+    const bannerSrc = article.image || 'assets/images/article_interrogation.jpg';
+    bannerImgEl.onerror = function() { this.onerror = null; this.src = 'assets/media/materials_bg.jpeg'; };
     bannerImgEl.src = bannerSrc;
   }
+
   if (contentEl) contentEl.innerHTML = article.content || '';
   if (ctaServiceInput) ctaServiceInput.value = `Разбор по статье: ${article.title}`;
 

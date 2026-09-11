@@ -536,6 +536,237 @@ function exportLeadsCSV() {
 }
 
 // ==========================================================================
+
+// ==========================================================================
+// DYNAMIC CATEGORIES & COVER IMAGE & AUTHOR HELPERS
+// ==========================================================================
+function slugify(text) {
+  const ruMap = {
+    'а':'a','б':'b','в':'v','г':'g','д':'d','е':'e','ё':'yo','ж':'zh','з':'z','и':'i',
+    'й':'y','к':'k','л':'l','м':'m','н':'n','о':'o','п':'p','р':'r','с':'s','т':'t',
+    'у':'u','ф':'f','х':'kh','ц':'ts','ч':'ch','ш':'sh','щ':'shch','ъ':'','ы':'y',
+    'ь':'','э':'e','ю':'yu','я':'ya',' ':'-','&':'-and-'
+  };
+  return text.toLowerCase().split('').map(c => ruMap[c] || (/[a-z0-9\-]/.test(c) ? c : '')).join('').replace(/-+/g, '-').replace(/^-|-$/g, '') || 'general';
+}
+
+function loadCustomCategories() {
+  const select = document.getElementById('art-category');
+  if (!select) return;
+
+  const raw = localStorage.getItem('tn_custom_categories');
+  const customCats = raw ? JSON.parse(raw) : [];
+
+  // Remove previously injected custom options
+  Array.from(select.querySelectorAll('.injected-custom-cat')).forEach(el => el.remove());
+
+  // Find insert position before __custom__
+  const customOpt = select.querySelector('option[value="__custom__"]');
+
+  customCats.forEach(cat => {
+    const opt = document.createElement('option');
+    opt.value = cat.name;
+    opt.dataset.catid = cat.id;
+    opt.innerText = cat.name;
+    opt.className = 'injected-custom-cat';
+    if (customOpt) {
+      select.insertBefore(opt, customOpt);
+    } else {
+      select.appendChild(opt);
+    }
+  });
+}
+
+function showNewCategoryBox() {
+  const box = document.getElementById('art-custom-category-box');
+  const input = document.getElementById('art-custom-category-name');
+  if (box) {
+    box.classList.remove('hidden');
+    if (input) {
+      input.focus();
+    }
+  }
+}
+
+function handleCategorySelectChange(value) {
+  const box = document.getElementById('art-custom-category-box');
+  const hiddenId = document.getElementById('art-category-id');
+  const select = document.getElementById('art-category');
+
+  if (value === '__custom__') {
+    if (box) box.classList.remove('hidden');
+    document.getElementById('art-custom-category-name')?.focus();
+  } else {
+    if (box) box.classList.add('hidden');
+    const selectedOpt = select.options[select.selectedIndex];
+    if (hiddenId && selectedOpt) {
+      hiddenId.value = selectedOpt.dataset.catid || slugify(value);
+    }
+  }
+}
+
+function applyCustomCategory() {
+  const input = document.getElementById('art-custom-category-name');
+  const select = document.getElementById('art-category');
+  const hiddenId = document.getElementById('art-category-id');
+  const box = document.getElementById('art-custom-category-box');
+
+  const catName = input ? input.value.trim() : '';
+  if (!catName) {
+    showAdminToast('Введите название новой категории', 'error');
+    return;
+  }
+
+  const catId = slugify(catName);
+
+  // Save to localStorage
+  const raw = localStorage.getItem('tn_custom_categories');
+  const customCats = raw ? JSON.parse(raw) : [];
+  if (!customCats.some(c => c.name.toLowerCase() === catName.toLowerCase())) {
+    customCats.push({ name: catName, id: catId });
+    localStorage.setItem('tn_custom_categories', JSON.stringify(customCats));
+  }
+
+  loadCustomCategories();
+
+  // Select the newly added category
+  if (select) {
+    select.value = catName;
+    if (select.value !== catName) {
+      // Fallback
+      const newOpt = document.createElement('option');
+      newOpt.value = catName;
+      newOpt.dataset.catid = catId;
+      newOpt.innerText = catName;
+      select.prepend(newOpt);
+      select.value = catName;
+    }
+  }
+
+  if (hiddenId) hiddenId.value = catId;
+  if (box) box.classList.add('hidden');
+  if (input) input.value = '';
+
+  showAdminToast(`Категория "${catName}" добавлена!`);
+}
+
+// ---------------- Author Handlers ----------------
+function toggleNoAuthor(isNoAuthor) {
+  const grid = document.getElementById('art-author-inputs-grid');
+  if (grid) {
+    if (isNoAuthor) {
+      grid.classList.add('opacity-40', 'pointer-events-none');
+    } else {
+      grid.classList.remove('opacity-40', 'pointer-events-none');
+    }
+  }
+}
+
+function handleAuthorSelectChange(val) {
+  const customInput = document.getElementById('art-custom-author-name');
+  const roleInput = document.getElementById('art-author-role');
+  const select = document.getElementById('art-author');
+
+  if (val === '__custom__') {
+    if (customInput) {
+      customInput.classList.remove('hidden');
+      customInput.focus();
+    }
+    if (roleInput) roleInput.value = 'Адвокат / Юрист';
+  } else {
+    if (customInput) customInput.classList.add('hidden');
+    const selectedOpt = select.options[select.selectedIndex];
+    if (roleInput && selectedOpt && selectedOpt.dataset.role) {
+      roleInput.value = selectedOpt.dataset.role;
+    }
+  }
+}
+
+// ---------------- Cover Image Upload Handlers ----------------
+function handleArticleImageUpload(input) {
+  const file = input.files && input.files[0];
+  if (!file) return;
+
+  if (!file.type.startsWith('image/')) {
+    showAdminToast('Пожалуйста, выберите изображение (PNG, JPG, WEBP)', 'error');
+    return;
+  }
+
+  const reader = new FileReader();
+  reader.onload = function (e) {
+    const dataUrl = e.target.result;
+    const hiddenImage = document.getElementById('art-image');
+    const preview = document.getElementById('art-image-preview');
+    const dropzone = document.getElementById('art-image-dropzone');
+
+    if (hiddenImage) hiddenImage.value = dataUrl;
+    if (preview) preview.src = dataUrl;
+
+    if (dropzone) {
+      dropzone.classList.remove('border-amber-500/40', 'bg-amber-50/30');
+      dropzone.classList.add('border-emerald-500', 'bg-emerald-50/40');
+      dropzone.querySelector('.text-xs').innerHTML = `
+        <span class="text-emerald-700 font-bold">✓ Фото "${escapeHTML(file.name)}" успешно загружено с компьютера</span>
+      `;
+    }
+
+    showAdminToast(`Изображение "${file.name}" загружено!`);
+  };
+  reader.readAsDataURL(file);
+}
+
+function selectArticleImagePreset(url) {
+  if (!url) return;
+  const hiddenImage = document.getElementById('art-image');
+  const preview = document.getElementById('art-image-preview');
+  const dropzone = document.getElementById('art-image-dropzone');
+
+  if (hiddenImage) hiddenImage.value = url;
+  if (preview) preview.src = url;
+
+  if (dropzone) {
+    dropzone.classList.remove('border-emerald-500', 'bg-emerald-50/40');
+    dropzone.classList.add('border-amber-500/40', 'bg-amber-50/30');
+    dropzone.querySelector('.text-xs').innerHTML = `
+      <span class="text-amber-700 underline">Загрузить фото с компьютера</span> или перетащите файл сюда
+    `;
+  }
+}
+
+// Drag and drop listeners on dropzone
+document.addEventListener('DOMContentLoaded', () => {
+  const dropzone = document.getElementById('art-image-dropzone');
+  if (dropzone) {
+    ['dragenter', 'dragover'].forEach(eventName => {
+      dropzone.addEventListener(eventName, (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        dropzone.classList.add('border-amber-600', 'bg-amber-100/60');
+      }, false);
+    });
+
+    ['dragleave', 'drop'].forEach(eventName => {
+      dropzone.addEventListener(eventName, (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        dropzone.classList.remove('border-amber-600', 'bg-amber-100/60');
+      }, false);
+    });
+
+    dropzone.addEventListener('drop', (e) => {
+      const dt = e.dataTransfer;
+      const files = dt.files;
+      if (files && files.length > 0) {
+        const fileInput = document.getElementById('art-file-input');
+        if (fileInput) {
+          fileInput.files = files;
+          handleArticleImageUpload(fileInput);
+        }
+      }
+    }, false);
+  }
+});
+
 // ARTICLES CMS MANAGEMENT
 // ==========================================================================
 function loadArticles() {
@@ -593,8 +824,12 @@ function renderArticlesTable() {
         </span>
       </td>
       <td class="py-4 px-4">
-        <div class="text-xs font-semibold text-slate-800">${escapeHTML(article.author || 'Адвокат')}</div>
-        <div class="text-[11px] text-slate-400">${escapeHTML(article.authorRole || 'Партнер')}</div>
+        ${article.author && article.author !== 'none' ? `
+          <div class="text-xs font-semibold text-slate-800">${escapeHTML(article.author)}</div>
+          <div class="text-[11px] text-slate-400">${escapeHTML(article.authorRole || '')}</div>
+        ` : `
+          <span class="inline-block px-2 py-0.5 rounded text-[11px] font-semibold bg-slate-100 text-slate-500">Без автора</span>
+        `}
       </td>
       <td class="py-4 px-4 max-w-xs text-xs text-slate-500 line-clamp-2">
         ${escapeHTML(article.summary || '')}
@@ -615,6 +850,7 @@ function renderArticlesTable() {
 }
 
 function openArticleEditor(article = null) {
+  loadCustomCategories();
   currentEditingArticleId = article ? article.id : null;
   const modal = document.getElementById('article-editor-modal');
   const modalTitle = document.getElementById('article-editor-modal-title');
@@ -622,22 +858,85 @@ function openArticleEditor(article = null) {
 
   if (modalTitle) modalTitle.innerText = article ? 'Редактирование статьи' : 'Новая правовая статья';
 
+  const customCatBox = document.getElementById('art-custom-category-box');
+  if (customCatBox) customCatBox.classList.add('hidden');
+
+  const customAuthorInput = document.getElementById('art-custom-author-name');
+  if (customAuthorInput) customAuthorInput.classList.add('hidden');
+
+  const dropzone = document.getElementById('art-image-dropzone');
+  if (dropzone) {
+    dropzone.classList.remove('border-emerald-500', 'bg-emerald-50/40');
+    dropzone.classList.add('border-amber-500/40', 'bg-amber-50/30');
+    dropzone.querySelector('.text-xs').innerHTML = `
+      <span class="text-amber-700 underline">Загрузить фото с компьютера</span> или перетащите файл сюда
+    `;
+  }
+
   if (form) {
     form.reset();
     if (article) {
       document.getElementById('art-title').value = article.title || '';
-      document.getElementById('art-category').value = article.category || 'Уголовное право';
+
+      // Category
+      const catSelect = document.getElementById('art-category');
+      if (catSelect) {
+        let exists = Array.from(catSelect.options).some(o => o.value === article.category);
+        if (!exists && article.category) {
+          const opt = document.createElement('option');
+          opt.value = article.category;
+          opt.dataset.catid = article.categoryId || slugify(article.category);
+          opt.innerText = article.category;
+          catSelect.prepend(opt);
+        }
+        catSelect.value = article.category || 'Уголовное право';
+      }
       document.getElementById('art-category-id').value = article.categoryId || 'criminal';
-      document.getElementById('art-author').value = article.author || 'Адвокат Тамара';
-      document.getElementById('art-author-role').value = article.authorRole || '';
+
+      // Author
+      const noAuthorCb = document.getElementById('art-no-author');
+      const isNoAuthor = !article.author || article.author === 'none' || article.author === 'Без автора';
+      if (noAuthorCb) noAuthorCb.checked = isNoAuthor;
+      toggleNoAuthor(isNoAuthor);
+
+      if (!isNoAuthor) {
+        const authorSelect = document.getElementById('art-author');
+        let authorExists = Array.from(authorSelect.options).some(o => o.value === article.author);
+        if (!authorExists && article.author) {
+          const aOpt = document.createElement('option');
+          aOpt.value = article.author;
+          aOpt.innerText = article.author;
+          authorSelect.prepend(aOpt);
+        }
+        if (authorSelect) authorSelect.value = article.author;
+        document.getElementById('art-author-role').value = article.authorRole || '';
+      }
+
       document.getElementById('art-readtime').value = article.readTime || '5 мин чтения';
-      document.getElementById('art-image').value = article.image || 'assets/images/pa_court.jpg';
+
+      // Image
+      const imgPath = article.image || 'assets/images/pa_court.jpg';
+      document.getElementById('art-image').value = imgPath;
+      const preview = document.getElementById('art-image-preview');
+      if (preview) preview.src = imgPath;
+
       document.getElementById('art-summary').value = article.summary || '';
       document.getElementById('art-content').value = article.content || '';
     } else {
+      // Default New Article
       document.getElementById('art-readtime').value = '5 мин чтения';
       document.getElementById('art-image').value = 'assets/images/pa_court.jpg';
+      const preview = document.getElementById('art-image-preview');
+      if (preview) preview.src = 'assets/images/pa_court.jpg';
+
+      const noAuthorCb = document.getElementById('art-no-author');
+      if (noAuthorCb) noAuthorCb.checked = false;
+      toggleNoAuthor(false);
+
+      const authorSelect = document.getElementById('art-author');
+      if (authorSelect) authorSelect.value = 'Ерсаин Нурлан';
       document.getElementById('art-author-role').value = 'Учредитель адвокатской конторы «T&N»';
+      document.getElementById('art-category-id').value = 'criminal';
     }
   }
 
@@ -1079,16 +1378,38 @@ function initForms() {
       e.preventDefault();
 
       const title = document.getElementById('art-title').value.trim();
-      const category = document.getElementById('art-category').value;
-      const categoryId = document.getElementById('art-category-id').value;
-      const author = document.getElementById('art-author').value;
-      const authorRole = document.getElementById('art-author-role').value.trim();
-      const readTime = document.getElementById('art-readtime').value.trim();
-      const image = document.getElementById('art-image').value.trim();
+
+      // Category
+      let category = document.getElementById('art-category').value;
+      if (category === '__custom__') {
+        category = document.getElementById('art-custom-category-name')?.value.trim() || 'Практика';
+      }
+      let categoryId = document.getElementById('art-category-id').value;
+      if (!categoryId || categoryId === 'criminal') {
+        const catSelect = document.getElementById('art-category');
+        const selectedOpt = catSelect.options[catSelect.selectedIndex];
+        categoryId = (selectedOpt && selectedOpt.dataset.catid) || slugify(category);
+      }
+
+      // Author & Role
+      const isNoAuthor = document.getElementById('art-no-author')?.checked;
+      let author = '';
+      let authorRole = '';
+      let authorPhoto = '';
+
+      if (!isNoAuthor) {
+        author = document.getElementById('art-author').value;
+        if (author === '__custom__') {
+          author = document.getElementById('art-custom-author-name')?.value.trim() || 'Адвокат';
+        }
+        authorRole = document.getElementById('art-author-role').value.trim();
+        authorPhoto = author.includes('Тамара') ? 'assets/images/tamara.jpg' : 'assets/media/advocate_1.jpeg';
+      }
+
+      const readTime = document.getElementById('art-readtime').value.trim() || '5 мин чтения';
+      const image = document.getElementById('art-image').value.trim() || 'assets/images/pa_court.jpg';
       const summary = document.getElementById('art-summary').value.trim();
       const content = document.getElementById('art-content').value.trim();
-
-      const authorPhoto = author.includes('Тамара') ? 'assets/images/tamara.jpg' : 'assets/images/nurlan.jpg';
 
       if (currentEditingArticleId) {
         // Update existing article
@@ -1111,8 +1432,8 @@ function initForms() {
           authorRole,
           authorPhoto,
           date: new Date().toLocaleDateString('ru-RU', { day: 'numeric', month: 'long', year: 'numeric' }),
-          readTime: readTime || '5 мин чтения',
-          image: image || 'assets/images/pa_court.jpg',
+          readTime,
+          image,
           summary,
           content
         };
