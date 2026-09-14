@@ -45,7 +45,7 @@ const TN_ARTICLES = [
     category: 'Уголовная защита',
     categoryId: 'criminal',
     author: 'Ерсаин Нурлан',
-    authorRole: 'Учредитель адвокатской конторы «T&N»',
+    authorRole: 'Адвокаты Алматы «T&N»',
     authorPhoto: 'assets/media/advocate_1.jpeg',
     date: 'Февраль 2026',
     readTime: '6 мин чтения',
@@ -89,7 +89,7 @@ const TN_ARTICLES = [
     category: 'Гражданские дела',
     categoryId: 'business',
     author: 'Ерсаин Нурлан',
-    authorRole: 'Учредитель адвокатской конторы «T&N»',
+    authorRole: 'Адвокаты Алматы «T&N»',
     authorPhoto: 'assets/media/advocate_1.jpeg',
     date: 'Декабрь 2025',
     readTime: '6 мин чтения',
@@ -110,7 +110,7 @@ const TN_ARTICLES = [
     category: 'Банкротство',
     categoryId: 'business',
     author: 'Ерсаин Нурлан',
-    authorRole: 'Учредитель адвокатской конторы «T&N»',
+    authorRole: 'Адвокаты Алматы «T&N»',
     authorPhoto: 'assets/media/advocate_1.jpeg',
     date: 'Ноябрь 2025',
     readTime: '5 мин чтения',
@@ -302,7 +302,7 @@ function openArticleModal(articleId) {
     if (hasAuthor) {
       authorContainer.style.display = 'flex';
       if (authorNameEl) authorNameEl.innerText = article.author;
-      if (authorRoleEl) authorRoleEl.innerText = article.authorRole || 'Адвокат конторы «T&N»';
+      if (authorRoleEl) authorRoleEl.innerText = article.authorRole || 'Адвокаты Алматы «T&N»';
       if (authorPhotoEl) {
         authorPhotoEl.src = article.authorPhoto || 'assets/media/advocate_1.jpeg';
       }
@@ -413,7 +413,7 @@ async function handleNewLead(leadData) {
       service: leadData.service || 'Экстренная защита адвоката',
       stage: leadData.stage || 'Срочный выезд',
       urgency: leadData.urgency || 'Срочная 24/7',
-      notes: leadData.notes || 'Обращение через сайт адвокатской конторы «T&N».',
+      notes: leadData.notes || 'Обращение через сайт «Адвокаты Алматы T&N».',
       status: 'new',
       date: new Date().toLocaleString('ru-RU'),
       source: leadData.source || 'Главный сайт T&N'
@@ -427,7 +427,7 @@ async function handleNewLead(leadData) {
     const rawWaPhone = siteSettings.whatsappPhone || '77786775119';
     const cleanWaPhone = rawWaPhone.replace(/\D/g, '') || '77786775119';
 
-    const waMessageText = `⚖️ *СРОЧНЫЙ ВЫЗОВ: АДВОКАТСКАЯ КОНТОРА «T&N»*\n\n` +
+    const waMessageText = `⚖️ *СРОЧНЫЙ ВЫЗОВ: АДВОКАТЫ АЛМАТЫ «T&N»*\n\n` +
       `👤 *Клиент:* ${newLead.name}\n` +
       `📞 *Телефон:* ${newLead.phone}\n` +
       `💼 *Дело / Вопрос:* ${newLead.service}\n` +
@@ -454,7 +454,7 @@ async function handleNewLead(leadData) {
     // 2. Telegram Bot API dispatch
     const tgConfig = JSON.parse(localStorage.getItem('tn_tg_config') || '{}');
     if (tgConfig.botToken && tgConfig.chatId) {
-      const tgText = `🔥 *СРОЧНЫЙ ВЫЗОВ: АДВОКАТСКАЯ КОНТОРА «T&N»!*\n\n` +
+      const tgText = `🔥 *СРОЧНЫЙ ВЫЗОВ: АДВОКАТЫ АЛМАТЫ «T&N»!*\n\n` +
         `👤 *Имя:* ${newLead.name}\n` +
         `📞 *Телефон:* ${newLead.phone}\n` +
         `💼 *Дело:* ${newLead.service}\n` +
@@ -673,13 +673,13 @@ function initOfficeMap() {
       });
 
       const placemark = new ymaps.Placemark([lat, lng], {
-        hintContent: 'Адвокатская контора «T&N»',
-        balloonContentHeader: '<div style="font-family:\'Montserrat\',sans-serif;font-weight:900;color:#ff1e27;text-transform:uppercase;font-size:14px;">⚖️ Адвокатская контора «T&N»</div>',
+        hintContent: 'Адвокаты Алматы «T&N»',
+        balloonContentHeader: '<div style="font-family:\'Montserrat\',sans-serif;font-weight:900;color:#ff1e27;text-transform:uppercase;font-size:14px;">⚖️ Адвокаты Алматы «T&N»</div>',
         balloonContentBody: '<div style="font-family:\'Montserrat\',sans-serif;font-size:13px;color:#1e293b;font-weight:700;line-height:1.4;margin-top:4px;">г. Алматы, ул. Богенбай батыра, 23а<br><span style="color:#16a34a;font-size:11px;">★ 5.0 в 2ГИС • Офис 24/7 • Парковка</span></div>',
         balloonContentFooter: '<div style="margin-top:8px;display:flex;gap:6px;flex-direction:column;"><a href="https://2gis.kz/almaty/inside/9430047417451853/firm/70000001082633855?m=76.970232%2C43.255123%2F19" target="_blank" style="background:#299400;color:#fff;font-weight:800;font-size:11px;padding:6px 8px;border-radius:6px;text-align:center;text-decoration:none;">Построить маршрут в 2ГИС →</a><a href="https://yandex.kz/maps/?text=43.255123,76.970232" target="_blank" style="color:#64748b;font-weight:700;font-size:10px;text-decoration:underline;text-align:center;margin-top:2px;">Открыть в Яндекс Картах</a></div>'
       }, {
         preset: 'islands#redDotIconWithCaption',
-        iconCaption: 'Контора «T&N»'
+        iconCaption: 'Адвокаты Алматы «T&N»'
       });
 
       map.geoObjects.add(placemark);

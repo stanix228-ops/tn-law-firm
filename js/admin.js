@@ -229,7 +229,7 @@ const STATUS_CONFIG = {
 
 // Default Site Settings
 const DEFAULT_SITE_SETTINGS = {
-  firmName: 'Адвокатская контора «T&N»',
+  firmName: 'Адвокаты Алматы «T&N»',
   address: 'г. Алматы, Медеуский район, ул. Богенбай батыра, 23а',
   phone1: '+7 (778) 677-51-19',
   phone2: '+7 (707) 197-15-20',
@@ -255,7 +255,7 @@ const DEFAULT_SEED_ARTICLES = [
     category: 'Уголовное право',
     categoryId: 'criminal',
     author: 'Ерсаин Нурлан',
-    authorRole: 'Учредитель адвокатской конторы «T&N»',
+    authorRole: 'Адвокаты Алматы «T&N»',
     authorPhoto: 'assets/images/nurlan.jpg',
     date: '12 февраля 2026',
     readTime: '6 мин чтения',
@@ -855,7 +855,7 @@ const DEFAULT_SEED_ARTICLES = [
     category: 'Уголовная защита',
     categoryId: 'criminal',
     author: 'Ерсаин Нурлан',
-    authorRole: 'Учредитель адвокатской конторы «T&N»',
+    authorRole: 'Адвокаты Алматы «T&N»',
     authorPhoto: 'assets/media/advocate_1.jpeg',
     date: 'Февраль 2026',
     readTime: '6 мин чтения',
@@ -876,7 +876,7 @@ const DEFAULT_SEED_ARTICLES = [
     category: 'Гражданские дела',
     categoryId: 'business',
     author: 'Ерсаин Нурлан',
-    authorRole: 'Учредитель адвокатской конторы «T&N»',
+    authorRole: 'Адвокаты Алматы «T&N»',
     authorPhoto: 'assets/media/advocate_1.jpeg',
     date: 'Декабрь 2025',
     readTime: '6 мин чтения',
@@ -897,7 +897,7 @@ const DEFAULT_SEED_ARTICLES = [
     category: 'Банкротство',
     categoryId: 'business',
     author: 'Ерсаин Нурлан',
-    authorRole: 'Учредитель адвокатской конторы «T&N»',
+    authorRole: 'Адвокаты Алматы «T&N»',
     authorPhoto: 'assets/media/advocate_1.jpeg',
     date: 'Ноябрь 2025',
     readTime: '5 мин чтения',
@@ -1088,7 +1088,7 @@ function openArticleEditor(article = null) {
 
       const authorSelect = document.getElementById('art-author');
       if (authorSelect) authorSelect.value = 'Ерсаин Нурлан';
-      document.getElementById('art-author-role').value = 'Учредитель адвокатской конторы «T&N»';
+      document.getElementById('art-author-role').value = 'Адвокаты Алматы «T&N»';
       document.getElementById('art-category-id').value = 'criminal';
     }
   }
@@ -1467,7 +1467,7 @@ async function testTelegramNotification() {
   }
 
   const text = `🔔 *Тестовое уведомление из CRM «T&N Law»*\n\n` +
-    `✅ Бот успешно подключен к сайту адвокатской конторы в Алматы.\n` +
+    `✅ Бот успешно подключен к сайту Адвокаты Алматы.\n` +
     `🕒 Время проверки: ${new Date().toLocaleString('ru-RU')}`;
 
   try {
