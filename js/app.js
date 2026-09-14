@@ -498,9 +498,15 @@ function initAllForms() {
       const name = document.getElementById('input_devil_name')?.value || '';
       const phone = document.getElementById('input_devil_phone')?.value || '';
       const message = document.getElementById('input_devil_message')?.value || '';
+      const privacyCheck = document.getElementById('input_devil_privacy');
 
       if (phone.length < 16) {
         showToast('Введите корректный номер телефона', 'error');
+        return;
+      }
+
+      if (privacyCheck && !privacyCheck.checked) {
+        showToast('Необходимо подтвердить согласие с политикой конфиденциальности', 'error');
         return;
       }
 
@@ -513,6 +519,7 @@ function initAllForms() {
       });
 
       mainForm.reset();
+      if (privacyCheck) privacyCheck.checked = true;
       openSuccessModal();
       showToast('Запрос принят! Адвокат свяжется с вами незамедлительно.');
     });
@@ -527,9 +534,15 @@ function initAllForms() {
       const name = document.getElementById('modal-name');
       const service = document.getElementById('modal-service');
       const msg = document.getElementById('modal-message');
+      const privacyCheck = document.getElementById('modal-privacy-agree');
 
       if (!phone || phone.value.length < 16) {
         showToast('Укажите корректный номер телефона', 'error');
+        return;
+      }
+
+      if (privacyCheck && !privacyCheck.checked) {
+        showToast('Необходимо подтвердить согласие с политикой конфиденциальности', 'error');
         return;
       }
 
@@ -614,6 +627,27 @@ function openSuccessModal() {
 
 function closeSuccessModal() {
   const modal = document.getElementById('success-modal');
+  if (modal) {
+    modal.querySelector('.modal-overlay')?.classList.add('opacity-0');
+    modal.querySelector('.modal-content')?.classList.add('scale-95', 'opacity-0');
+    setTimeout(() => modal.classList.add('hidden'), 250);
+  }
+}
+
+// Privacy Policy Modal Controller (RK Law)
+function openPrivacyModal() {
+  const modal = document.getElementById('privacy-modal');
+  if (modal) {
+    modal.classList.remove('hidden');
+    setTimeout(() => {
+      modal.querySelector('.modal-overlay')?.classList.remove('opacity-0');
+      modal.querySelector('.modal-content')?.classList.remove('scale-95', 'opacity-0');
+    }, 10);
+  }
+}
+
+function closePrivacyModal() {
+  const modal = document.getElementById('privacy-modal');
   if (modal) {
     modal.querySelector('.modal-overlay')?.classList.add('opacity-0');
     modal.querySelector('.modal-content')?.classList.add('scale-95', 'opacity-0');
