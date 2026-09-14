@@ -422,19 +422,26 @@ async function handleNewLead(leadData) {
     existing.unshift(newLead);
     localStorage.setItem('tn_law_leads', JSON.stringify(existing));
 
-    // 1. WhatsApp Direct Dispatch Formatting
+    // 1. WhatsApp Direct Dispatch Formatting (Natural user message style)
     const siteSettings = JSON.parse(localStorage.getItem('tn_site_settings') || '{}');
     const rawWaPhone = siteSettings.whatsappPhone || '77786775119';
     const cleanWaPhone = rawWaPhone.replace(/\D/g, '') || '77786775119';
 
-    const waMessageText = `⚖️ *СРОЧНЫЙ ВЫЗОВ: АДВОКАТЫ АЛМАТЫ «T&N»*\n\n` +
-      `👤 *Клиент:* ${newLead.name}\n` +
-      `📞 *Телефон:* ${newLead.phone}\n` +
-      `💼 *Дело / Вопрос:* ${newLead.service}\n` +
-      `⏱ *Срочность:* ${newLead.urgency}\n` +
-      `📝 *Детали:* ${newLead.notes}\n` +
-      `🕒 *Время:* ${newLead.date}\n` +
-      `🌐 *Источник:* ${newLead.source}`;
+    const clientName = (newLead.name && !['Доверитель', 'Клиент', 'Читатель материала'].includes(newLead.name.trim())) ? newLead.name.trim() : '';
+    const greeting = clientName ? `Здравствуйте! Меня зовут ${clientName}.` : `Здравствуйте!`;
+
+    const rawNotes = leadData.notes || '';
+    const isDefaultNote = !rawNotes || rawNotes.startsWith('Заявка из') || rawNotes.startsWith('Обращение через') || rawNotes.startsWith('Запрос из');
+    const userQuestion = !isDefaultNote ? rawNotes.trim() : '';
+
+    let waMessageText = '';
+    if (userQuestion) {
+      waMessageText = `${greeting}\n\nМой вопрос: ${userQuestion}`;
+    } else if (newLead.service && !['Экстренная защита', 'Экстренная защита адвоката', 'Запрос на экстренную защиту и слом обвинения'].includes(newLead.service)) {
+      waMessageText = `${greeting}\n\nНужна консультация адвоката по теме: ${newLead.service}.`;
+    } else {
+      waMessageText = `${greeting}\n\nМне требуется срочная помощь и консультация адвоката в Алматы.`;
+    }
 
     const waUrl = `https://wa.me/${cleanWaPhone}?text=${encodeURIComponent(waMessageText)}`;
 
